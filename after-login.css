@@ -1,0 +1,140 @@
+.after-login-container {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+}
+
+button#logoutButton {position: absolute;left:0;bottom: 0;width: 70px;height: 50px;}
+
+iframe#fulliframe {
+    width: 97vw;
+    height: 100vh;
+    box-sizing: border-box;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.right-tools {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    flex-direction: row-reverse;
+    user-select: none;
+    pointer-events: none;
+}
+
+.right-tools-container {
+    background-color: pink;
+    height: 100%;
+    width: 40px;
+    transition: 1s all;
+    margin: 0;
+    padding: 0;
+    isolation: isolate;
+    gap: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.right-tools-container::-webkit-scrollbar {width: 0;}
+
+.right-tools-container:hover {
+    width: 80px;
+}
+
+.right-tools-container>:first-child {
+    position: sticky;
+    height: 100px;
+    flex-shrink: 0;
+    visibility: hidden;
+    margin-bottom: 0;
+}
+
+.right-tools-container>* {box-sizing: border-box;padding:15%;margin-bottom:50px;}
+
+.a-tool-box {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: aqua;
+}
+
+.right-tools-background {
+    background-color: rgba(127, 255, 212, 0.432);
+    width: 100%;
+    height: 90vh;
+    display: grid;
+    place-items: center;
+}
+
+.Converter_time_container,.My_Note_container {
+    height: auto;
+    width: auto;
+    max-width: 400px;
+    font-size: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 5px solid black;
+    box-shadow: rgb(0,0,0,0.7) 5px 10px 50px ,rgb(0,0,0,0.7) -5px 0px 250px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+    box-shadow: rgb(0,0,0,0.7) 5px 10px 50px ,rgb(0,0,0,0.7) -5px 0px 250px;
+    user-select: none;
+    pointer-events: all;
+    padding: 20px;
+    position: absolute;
+}
+
+#Now-hour-time-in-store, #Now-minute-time-in-store, #store-am-pm, #hour-time-they-choose, #minute-time-they-choose, #customer-am-pm {
+    width: 30px;
+    height: 25px;
+    text-align: center;
+    font-size: 0.8rem;
+    appearance: none;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 7px;
+}
+
+.Converter_time_container input:focus, .Converter_time_container select:focus {outline: none;}
+
+.son_of_Converter_time_container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+}
+
+.time_container {
+    width: auto;
+    height: auto;
+}
+
+.My_Note_subject {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.My_Note_container {
+    display: inline;
+    width: 400px;
+    min-height: 400px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+span#My-Note-Edit-fetch {
+    user-select: text;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+}
