@@ -50,6 +50,8 @@ document.getElementById('submitForm').addEventListener('submit', async function 
         } else if (result.includes("Error: Email is already taken")) {
             document.getElementById('responseMessage').textContent = 'Email is already taken.';
         } else if (result === "Row added successfully!") {
+            text += "NEW";
+            document.getElementById('text').value = text;
             document.getElementById('responseMessage').textContent = 'Create successfully. Wait for approval.';
             document.getElementById('submitForm').reset();
         } else {
