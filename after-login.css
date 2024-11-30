@@ -164,7 +164,7 @@ span#My-Note-Edit-fetch {
 span#My-Note-Edit-fetch >* >* >:nth-child(2) {
     line-height: 2;
     border-bottom: 1px solid white;
-    width: 365px;
+    width: 355px;
     padding-inline: 1px;
     box-sizing: border-box;
     display: inline-block;
@@ -253,7 +253,8 @@ div#note-content {
 
 .note-checkbox {
     background-color: transparent;
-    width: auto;
-    border-radius: 50%;
+    outline: none;
     transform: scale(1.5);
+    padding-inline: 1px;
+    box-sizing: border-box;
 }
