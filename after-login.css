@@ -254,5 +254,6 @@ div#note-content {
 .note-checkbox {
     background-color: transparent;
     width: auto;
+    border-radius: 50%;
     transform: scale(1.5);
 }
