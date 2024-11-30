@@ -250,3 +250,9 @@ div#note-content {
     align-items: center;
     justify-content: start;
 }
+
+.note-checkbox {
+    background-color: transparent;
+    width: auto;
+    transform: scale(1.5);
+}
