@@ -19,7 +19,7 @@ body {
     color: white;
 }
 
-@media (orientation: portrait) {body {display: none;}}
+@media (orientation: portrait) {body {display: ;}}
 
 .form-container {
     padding: 30px;
