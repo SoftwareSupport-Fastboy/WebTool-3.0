@@ -254,7 +254,7 @@ div#note-content {
 .note-checkbox {
     background-color: transparent;
     outline: none;
-    transform: scale(1.5);
-    padding-inline: 1px;
+    transform: scale(1.2);
+    padding-inline: 2px;
     box-sizing: border-box;
 }
