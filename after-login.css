@@ -164,7 +164,7 @@ span#My-Note-Edit-fetch {
 span#My-Note-Edit-fetch >* >* >:nth-child(2) {
     line-height: 2;
     border-bottom: 1px solid white;
-    width: 355px;
+    width: 450px;
     padding-inline: 1px;
     box-sizing: border-box;
     display: inline-block;
