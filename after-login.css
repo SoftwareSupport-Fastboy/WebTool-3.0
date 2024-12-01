@@ -254,6 +254,7 @@ div#note-content {
     display: flex;
     align-items: center;
     justify-content: start;
+    border: none;
 }
 
 .note-checkbox {
