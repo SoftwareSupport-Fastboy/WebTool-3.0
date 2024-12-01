@@ -395,6 +395,17 @@ function createNoteLine(line, index, isChecked) {
     noteContainer.appendChild(divGroup);
 }
 
+/**
+ * Hàm nhận diện URL và chuyển thành thẻ <a>.
+ * @param {string} text - Chuỗi đầu vào.
+ * @returns {string} - Chuỗi đầu ra đã thay thế URL thành thẻ <a>.
+ */
+function parseTextToHTML(text) {
+    const urlRegex = /(https?:\/\/[^\s]+)/g; // Regex nhận diện URL
+    return text.replace(urlRegex, (url) => {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+    });
+}
 
 // Function to save notes
 async function saveNote() {
