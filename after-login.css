@@ -243,8 +243,13 @@ span#My-Note-Edit-fetch >* >:first-child {
         0 0 18px rgb(0, 128, 0, 0.5);
 }
 
-div#note-content {
+div#b4-note-content {
     background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+}
+
+div#note-content {
     color:black!important;
     display: flex;
     align-items: center;
