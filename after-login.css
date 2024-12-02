@@ -192,7 +192,7 @@ span#My-Note-Edit-fetch >* >:first-child {
     isolation: isolate;
     justify-content: center;
     align-items: center;
-    transition: all 1s ease-in;
+    transition: all 0.3s ease-in;
 }
 
 .white-edit-icon, .white-delete-icon, .green-add-icon {position: relative; display: flex;}
