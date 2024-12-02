@@ -424,7 +424,7 @@ function createNoteLine(line, index, isChecked) {
                     <div style="display: inline-block; position: relative;" class="url-container">
                         <a href="${urls[index]}" 
                            target="_blank" 
-                           style="position: absolute; top: -25px; left: 0; display: none; color: white; background-color: blue; text-decoration: none; padding: 2px 4px; border-radius: 4px;"
+                           style="position: absolute; transform: translate(0, -100%); top: 0; left: 0; display: block; color: white; background-color: blue; text-decoration: none; padding: 2px; border-radius: 4px; font-size:10px;"
                            class="hover-access"
                            contenteditable="false">
                             Truy cập
