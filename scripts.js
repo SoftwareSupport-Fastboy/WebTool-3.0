@@ -356,11 +356,11 @@ function createNoteLine(line, index, isChecked) {
         checkbox.checked = false;
     }
 
-    const div = document.createElement('span');
-    div.contentEditable = true;
-    div.textContent = line.replace(/^\((done|not done)\)\s*/, '');
-    div.title = '';
-    div.dataset.index = index;
+    const span = document.createElement('span');
+    span.contentEditable = true;
+    span.textContent = line.replace(/^\((done|not done)\)\s*/, '');
+    span.title = '';
+    span.dataset.index = index;
 
     const smalldiv = document.createElement('div');
 
@@ -372,11 +372,11 @@ function createNoteLine(line, index, isChecked) {
         saveNote();
     };
 
-    div.addEventListener('input', () => {
+    span.addEventListener('input', () => {
         deleteButton.style.display = 'none'; // Hide delete button on edit
         saveButton.style.display = 'flex';
-        div.style.background = 'rgba(144, 238, 144, 0.5)';
-        div.title = "Nhớ lưu chỉnh sửa";
+        span.style.background = 'rgba(144, 238, 144, 0.5)';
+        span.title = "Nhớ lưu chỉnh sửa";
         
         // Process URLs to make them clickable
         processURLs(div);
@@ -389,8 +389,8 @@ function createNoteLine(line, index, isChecked) {
         saveNote(); // Remove the note line from UI
         deleteButton.style.display = 'flex';
         saveButton.style.display = 'none';
-        div.style.background = 'none';
-        div.title = '';
+        span.style.background = 'none';
+        span.title = '';
     };
 
     // Thêm sự kiện lắng nghe cho checkbox để gọi saveNote mỗi khi thay đổi
@@ -399,24 +399,28 @@ function createNoteLine(line, index, isChecked) {
     smalldiv.appendChild(saveButton);
     smalldiv.appendChild(deleteButton);
     divGroup.appendChild(checkbox);
-    divGroup.appendChild(div);
+    divGroup.appendChild(span);
     divGroup.appendChild(smalldiv);
 
     noteContainer.appendChild(divGroup);
 
     // Function to process and convert URLs in the content
-    function processURLs(contentDiv) {
-        let content = contentDiv.innerHTML; // Get the current HTML content of the div
+    function processURLs(contentSpan) {
+        let content = contentSpan.textContent; // Get the current text content of the span
 
         // Regex to match URLs (simple version)
         const urlRegex = /https?:\/\/[^\s]+/g;
 
-        content = content.replace(urlRegex, function(url) {
-            // Wrap the URL in an anchor tag to make it clickable
+        // Convert URLs into clickable links
+        const newContent = content.replace(urlRegex, function(url) {
             return `<a href="${url}" target="_blank" style="color: blue; text-decoration: underline;">${url}</a>`;
         });
 
-        contentDiv.innerHTML = content; // Update the content of the div
+        // Replace content of the span with processed HTML
+        contentSpan.innerHTML = newContent;
+
+        // Re-enable editing without breaking the links
+        contentSpan.contentEditable = true;
     }
 }
 
