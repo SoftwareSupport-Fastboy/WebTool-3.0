@@ -192,15 +192,14 @@ span#My-Note-Edit-fetch >* >:first-child {
     isolation: isolate;
     justify-content: center;
     align-items: center;
-    display: flex;
     transition: all 1s ease-in;
 }
 
-.white-edit-icon, .white-delete-icon, .green-add-icon {position: relative;}
+.white-edit-icon, .white-delete-icon, .green-add-icon {position: relative; display: flex;}
 
 .green-add-icon {background-color: green;box-shadow: 0 1px 5px rgb(0, 128, 0);}
 
-.link-access-icon {background-color: white; border: 1px solid #FCA510;}
+.link-access-icon {display:inline-flex; background-color: white; border: 1px solid #FCA510;}
 
 .link-access-icon:hover {background-color: #FCA510; border: 1px solid #FCA510; box-shadow: 0 1px 5px white;}
 
