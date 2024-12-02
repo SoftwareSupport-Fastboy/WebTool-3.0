@@ -63,21 +63,16 @@ iframe#fulliframe {
     margin-bottom: 0;
 }
 
-.right-tools-container>* {
-    box-sizing: border-box;
-    padding:15%;
-    margin-bottom:50px;
-    user-select: auto;
-    pointer-events: all;
-}
-
 .a-tool-box {
     width: 100%;
     aspect-ratio: 1/1;
     background-color: gray;
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
+    padding: 5%;
+    margin: 0;
+    margin-bottom:50px;
+    user-select: auto;
+    pointer-events: all;
 }
 
 .a-tool-box >* {width:100%}
