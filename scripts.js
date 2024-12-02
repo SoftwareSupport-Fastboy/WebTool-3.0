@@ -374,7 +374,8 @@ function createNoteLine(line, index, isChecked) {
     div.addEventListener('input', () => {
         deleteButton.style.display = 'none'; // Hide delete button on edit
         saveButton.style.display = 'flex';
-        div.style.background = 'rgba(144, 238, 144, 0.5)'; 
+        div.style.background = 'rgba(144, 238, 144, 0.5)';
+        div.title = "Nhớ lưu chỉnh sửa";
     });
 
     const saveButton = document.createElement('div');
@@ -385,6 +386,7 @@ function createNoteLine(line, index, isChecked) {
         deleteButton.style.display = 'flex';
         saveButton.style.display = 'none';
         div.style.background = 'none';
+        div.title = '';
     };
 
     // Thêm sự kiện lắng nghe cho checkbox để gọi saveNote mỗi khi thay đổi
