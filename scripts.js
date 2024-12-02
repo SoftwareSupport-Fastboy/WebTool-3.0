@@ -344,17 +344,12 @@ function createNoteLine(line, index, isChecked) {
     const divGroup = document.createElement('div');
     divGroup.classList.add('note-item');
 
-    // Create a checkbox
+    // Tạo checkbox
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.title = "Check là xong, Uncheck là chưa xong";
     checkbox.classList.add('note-checkbox');
-
-    if (line.startsWith("(done)")) {
-        checkbox.checked = true;
-    } else {
-        checkbox.checked = false;
-    }
+    checkbox.checked = line.startsWith("(done)");
 
     const span = document.createElement('span');
     span.contentEditable = true;
@@ -372,6 +367,7 @@ function createNoteLine(line, index, isChecked) {
         saveNote();
     };
 
+    // Hiển thị nút lưu sau khi người dùng chỉnh sửa
     span.addEventListener('input', () => {
         deleteButton.style.display = 'none'; // Hide delete button on edit
         saveButton.style.display = 'flex';
@@ -391,8 +387,7 @@ function createNoteLine(line, index, isChecked) {
         span.title = '';
     };
 
-    // Thêm sự kiện lắng nghe cho checkbox để gọi saveNote mỗi khi thay đổi
-    checkbox.addEventListener('change', saveNote);
+    checkbox.addEventListener('change', saveNote); // Lưu khi thay đổi trạng thái checkbox
 
     smalldiv.appendChild(saveButton);
     smalldiv.appendChild(deleteButton);
@@ -401,25 +396,48 @@ function createNoteLine(line, index, isChecked) {
     divGroup.appendChild(smalldiv);
 
     noteContainer.appendChild(divGroup);
+    
 
-    // Function to process and convert URLs in the content
+    // Xử lý và thêm các phần tử liên quan đến URL
     function processURLs(contentSpan) {
         let content = contentSpan.textContent.trim(); // Lấy nội dung hiện tại
 
         // Regex để nhận diện URL
         const urlRegex = /https?:\/\/[^\s]+/g;
 
-        // Chuyển đổi URL thành liên kết HTML
-        const newContent = content.replace(urlRegex, function(url) {
-            return `<a href="${url}" target="_blank" style="color: blue; text-decoration: underline;">${url}</a>`;
+        // Chia nội dung thành các phần dựa trên URL
+        const parts = content.split(urlRegex);
+
+        // Lấy các URL từ nội dung
+        const urls = content.match(urlRegex);
+
+        // Nếu không có URL, không cần xử lý
+        if (!urls) return;
+
+        // Tạo nội dung mới với các liên kết và nút "Truy cập"
+        let newContent = '';
+        parts.forEach((part, index) => {
+            newContent += `<span>${part}</span>`;
+            if (urls[index]) {
+                // Tạo nút "Truy cập"
+                newContent += `
+                    <a href="${urls[index]}" 
+                       target="_blank" 
+                       style="position: relative; display: block; margin-bottom: 4px; color: white; background-color: blue; text-decoration: none; padding: 2px 4px; border-radius: 4px;">
+                        Truy cập
+                    </a>
+                    <span style="color: blue; text-decoration: underline;">${urls[index]}</span>`;
+            }
         });
 
+        // Thay thế nội dung trong span
         contentSpan.innerHTML = newContent;
 
-        // Sau khi xử lý, đặt lại trạng thái có thể chỉnh sửa
+        // Đặt lại trạng thái chỉnh sửa cho nội dung
         contentSpan.contentEditable = true;
     }
 }
+
 
 
 // Function to save notes
