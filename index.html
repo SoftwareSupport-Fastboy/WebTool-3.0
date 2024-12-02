@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="after-login.css">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="image/logo icon/new-logo.ico">
-    <!-- CSS của Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div id="loader-if-remember-login"  class="loader-if-remember-login hidden_visibility">
@@ -20,12 +18,12 @@
     </div>
     <div class="clock_container">
         <div class="clocks">
-            <div id="clocks" class="houston_card">
+            <div id="clocks" class="houston_card" title="Giờ hiện tại của Texas">
                 <p id="houstonClock" class="time-text"><span>11:11:11</span></p>
                 <p id="houstonDay" class="day-text">Wednesday, June 15th</p>
                 <p class="location-text">Houston, Texas</p>
             </div>
-            <div id="clocks" class="HCM_card">
+            <div id="clocks" class="HCM_card" title="Giờ hiện tại của TP.HCM">
                 <p id="hcmClock" class="time-text"><span>11:11:11</span></p>
                 <p id="hcmDay" class="day-text">Wednesday, June 15th</p>
                 <p class="location-text">Ho Chi Minh City</p>
@@ -116,13 +114,13 @@
         <nav class="right-tools">
             <nav class="right-tools-container">
                 <div>Ẩn</div>
-                <div id="clock-button-converter" class="a-tool-box" data-toggle="tooltip" data-placement="top" title="Texas Time Converter">
+                <div id="clock-button-converter" class="a-tool-box" title="Chuyển đổi giờ Texas">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="12" cy="12" r="10" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M15 16L12.5858 13.5858C12.2107 13.2107 12 12.702 12 12.1716V6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <div id="My_Note" class="a-tool-box" title="To-Do-List">
+                <div id="My_Note" class="a-tool-box" title="Danh sách việc cần làm">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M4 4V20C4 21.1046 4.89543 22 6 22L18 22C19.1046 22 20 21.1046 20 20V8.34162C20 7.8034 19.7831 7.28789 19.3982 6.91161L14.9579 2.56999C14.5842 2.20459 14.0824 2 13.5597 2L6 2C4.89543 2 4 2.89543 4 4Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M14 2V6C14 7.10457 14.8954 8 16 8H20" stroke="black" stroke-width="2" stroke-linejoin="round"/>
@@ -187,7 +185,7 @@
                                     <div></div>
                                     <div contentEditable="true" id="note-content" type="text"></div>
                                     <div style="margin-inline:10px">
-                                        <div class="green-add-icon" id="save-button" onclick="saveNote()" title="Add"></div>
+                                        <div class="green-add-icon" id="save-button" onclick="saveNote()" title="Thêm vào"></div>
                                     </div>
                                 </div>
                             </div>
@@ -204,15 +202,6 @@
     <script src="scripts.js"></script>
     <script src="clockscripts.js"></script>
     <script src="offline-online-script.js"></script>
-    <!-- JavaScript của Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
-        document.addEventListener('DOMContentLoaded', function () {
-            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
-            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-                new bootstrap.Tooltip(tooltipTriggerEl);
-            });
-        });
-    </script>
 
 </body>
 </html>
