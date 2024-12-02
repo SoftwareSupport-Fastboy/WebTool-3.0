@@ -424,7 +424,7 @@ function createNoteLine(line, index, isChecked) {
             if (urls && urls[index]) {
                 // Bọc URL trong một div để xử lý hover
                 newContent += `
-                    <div style="display: inline-block; position: relative;" class="url-container">
+                    <div style="display: inline; position: relative;" class="url-container">
                         <a href="${urls[index]}" 
                            target="_blank"
                            class="link-access-icon"
