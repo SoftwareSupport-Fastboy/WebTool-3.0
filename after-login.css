@@ -35,7 +35,7 @@ iframe#fulliframe {
 }
 
 .right-tools-container {
-    background-color: pink;
+    background-color: #121212;
     height: 100%;
     width: 40px;
     transition: 1s all;
