@@ -457,13 +457,23 @@ async function saveNote() {
     }
 
     const noteContainer = document.getElementById('note-container');
-    const lines = Array.from(noteContainer.getElementsByClassName('note-item'))  // Lọc các dòng ghi chú có class 'note-item'
+    const lines = Array.from(noteContainer.getElementsByClassName('note-item')) // Lọc các dòng ghi chú có class 'note-item'
         .map(divGroup => {
             const span = divGroup.querySelector('span[contentEditable="true"]'); // Lấy nội dung của div contentEditable
-            const checkbox = divGroup.querySelector('input[type="checkbox"]');  // Lấy checkbox trong dòng ghi chú
-            const isChecked = checkbox ? checkbox.checked : false;  // Kiểm tra trạng thái checkbox
-            const text = span ? span.textContent.trim() : '';  // Lấy nội dung dòng ghi chú
+            const checkbox = divGroup.querySelector('input[type="checkbox"]'); // Lấy checkbox trong dòng ghi chú
+            const isChecked = checkbox ? checkbox.checked : false; // Kiểm tra trạng thái checkbox
+
+            let text = span ? span.innerHTML.trim() : ''; // Lấy nội dung HTML của dòng ghi chú
             
+            // Xử lý `<div>` và `<a>` thành khoảng trắng
+            text = text
+                .replace(/<div>/g, ' ') // Thay thế mở thẻ <div> bằng khoảng trắng
+                .replace(/<\/div>/g, '') // Xóa đóng thẻ </div>
+                .replace(/<a[^>]*>(.*?)<\/a>/g, ' $1 '); // Thay thế <a> với nội dung bên trong bằng khoảng trắng
+            
+            // Xóa mọi thẻ HTML khác (nếu cần)
+            text = text.replace(/<[^>]+>/g, '').trim();
+
             // Nếu checkbox được chọn, prepend "(done)", nếu không prepend "(not done)"
             return (isChecked ? "(done) " : "(not done) ") + text;
         });
@@ -487,6 +497,7 @@ async function saveNote() {
         console.error('Error saving note:', error);
     }
 }
+
 
 
 
