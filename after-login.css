@@ -184,7 +184,7 @@ span#My-Note-Edit-fetch >* >:first-child {
     width: 100%;
 }
 
-.white-edit-icon, .white-delete-icon, .green-add-icon  {
+.white-edit-icon, .white-delete-icon, .green-add-icon, .link-access-icon  {
     width: 20px;
     height: 20px;
     box-sizing: border-box;
@@ -193,14 +193,20 @@ span#My-Note-Edit-fetch >* >:first-child {
     justify-content: center;
     align-items: center;
     display: flex;
-    position: relative;
+    transition: all 1s ease-in;
 }
+
+.white-edit-icon, .white-delete-icon, .green-add-icon {position: relative;}
 
 .green-add-icon {background-color: green;box-shadow: 0 1px 5px rgb(0, 128, 0);}
 
+.link-access-icon {background-color: white; border: 1px solid #FCA510;}
+
+.link-access-icon:hover {background-color: #FCA510; border: 1px solid #FCA510; box-shadow: 0 1px 5px white;}
+
 .white-edit-icon {display:none}
 
-.white-edit-icon::after, .white-delete-icon::after, .green-add-icon::after {
+.white-edit-icon::after, .white-delete-icon::after, .green-add-icon::after, .link-access-icon::after {
     content: '';
     width: 18px;
     height: 18px;
@@ -243,6 +249,10 @@ span#My-Note-Edit-fetch >* >:first-child {
         0 0 18px rgb(0, 128, 0, 0.5);
 }
 
+.link-access-icon::after {
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"%3E%3Cpath d="M13.5 10.5L21 3" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3Cpath d="M16 3L21 3L21 8" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3Cpath d="M21 14V19C21 20.1046 20.1046 21 19 21H12H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H10" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+}
+
 div#b4-note-content {
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 80%, rgba(255, 255, 255, 0.2) 85%, transparent 100%);
     display: flex;
@@ -265,7 +275,4 @@ div#note-content {
     box-sizing: border-box;
 }
 
-/* Khi hover vào container chứa URL */
-.note-item:hover >span >div >a {
-    display: block; /* Hiển thị nút "Truy cập" */
-}
+
