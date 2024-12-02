@@ -423,7 +423,8 @@ function createNoteLine(line, index, isChecked) {
                 newContent += `
                     <a href="${urls[index]}" 
                        target="_blank" 
-                       style="position: relative; display: block; margin-bottom: 4px; color: white; background-color: blue; text-decoration: none; padding: 2px 4px; border-radius: 4px;">
+                       style="width:auto; height:auto; position: absolute; display: block; margin-bottom: 4px; color: white; background-color: blue; text-decoration: none; padding: 2px 4px; border-radius: 4px;"
+                       contenteditable="false">
                         Truy cập
                     </a>
                     <span style="color: blue; text-decoration: underline;">${urls[index]}</span>`;
