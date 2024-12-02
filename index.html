@@ -136,20 +136,10 @@
   <!-- Define the shadow filter -->
   <defs>
     <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-      <!-- Create the shadow layers -->
-      <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur1" />
-      <feOffset dx="0" dy="0" />
-      <feGaussianBlur in="blur1" stdDeviation="10" result="blur2" />
-      <feGaussianBlur in="blur1" stdDeviation="15" result="blur3" />
-      <feGaussianBlur in="blur1" stdDeviation="20" result="blur4" />
-      <!-- Merge the shadow layers -->
-      <feMerge>
-        <feMergeNode in="blur1" />
-        <feMergeNode in="blur2" />
-        <feMergeNode in="blur3" />
-        <feMergeNode in="blur4" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
+      <!-- Create a white shadow -->
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="rgba(255, 255, 255, 0.5)" />
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="rgba(255, 255, 255, 0.5)" />
+      <feDropShadow dx="0" dy="0" stdDeviation="15" flood-color="rgba(255, 255, 255, 0.5)" />
     </filter>
   </defs>
 
