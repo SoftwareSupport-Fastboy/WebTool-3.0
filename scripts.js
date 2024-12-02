@@ -377,16 +377,14 @@ function createNoteLine(line, index, isChecked) {
         saveButton.style.display = 'flex';
         span.style.background = 'rgba(144, 238, 144, 0.5)';
         span.title = "Nhớ lưu chỉnh sửa";
-        
-        // Process URLs to make them clickable
-        processURLs(div);
     });
 
     const saveButton = document.createElement('div');
     saveButton.classList.add('white-edit-icon');
     saveButton.title = "Lưu chỉnh sửa";
     saveButton.onclick = () => {
-        saveNote(); // Remove the note line from UI
+        processURLs(span); // Xử lý URL sau khi lưu
+        saveNote(); // Save the note
         deleteButton.style.display = 'flex';
         saveButton.style.display = 'none';
         span.style.background = 'none';
@@ -406,20 +404,19 @@ function createNoteLine(line, index, isChecked) {
 
     // Function to process and convert URLs in the content
     function processURLs(contentSpan) {
-        let content = contentSpan.textContent; // Get the current text content of the span
+        let content = contentSpan.textContent.trim(); // Lấy nội dung hiện tại
 
-        // Regex to match URLs (simple version)
+        // Regex để nhận diện URL
         const urlRegex = /https?:\/\/[^\s]+/g;
 
-        // Convert URLs into clickable links
+        // Chuyển đổi URL thành liên kết HTML
         const newContent = content.replace(urlRegex, function(url) {
             return `<a href="${url}" target="_blank" style="color: blue; text-decoration: underline;">${url}</a>`;
         });
 
-        // Replace content of the span with processed HTML
         contentSpan.innerHTML = newContent;
 
-        // Re-enable editing without breaking the links
+        // Sau khi xử lý, đặt lại trạng thái có thể chỉnh sửa
         contentSpan.contentEditable = true;
     }
 }
