@@ -423,13 +423,11 @@ function createNoteLine(line, index, isChecked) {
                 newContent += `
                     <div style="display: inline-block; position: relative;" class="url-container">
                         <a href="${urls[index]}" 
-                           target="_blank" 
-                           style="position: absolute; transform: translate(0, -100%); top: 0; left: 0; display: block; color: white; background-color: blue; text-decoration: none; padding: 2px; border-radius: 4px; font-size:10px;"
-                           class="hover-access"
+                           target="_blank"
+                           class="green-add-icon"
                            contenteditable="false">
-                            Truy cập
                         </a>
-                        <span style="color: blue; text-decoration: underline;">${urls[index]}</span>
+                        <span style="text-decoration: underline;">${urls[index]}</span>
                     </div>`;
             }
         });
