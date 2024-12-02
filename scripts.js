@@ -471,6 +471,8 @@ async function saveNote() {
                 .replace(/<\/div>/g, '')     // Xóa thẻ đóng </div>
                 .replace(/<a[^>]*>/g, '')    // Xóa thẻ mở <a>
                 .replace(/<\/a>/g, '')       // Xóa thẻ đóng </a>
+                .replace(/<span[^>]*>/g, '') // Xóa thẻ mở <span>
+                .replace(/<\/span>/g, '')    // Xóa thẻ đóng </span>
                 .replace(/\s+/g, ' ');       // Thay thế nhiều khoảng trắng bằng một khoảng trắng duy nhất
 
             // Nếu checkbox được chọn, prepend "(done)", nếu không prepend "(not done)"
