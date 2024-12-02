@@ -171,12 +171,12 @@ span#My-Note-Edit-fetch >* >* >:nth-child(2) {
     outline: none;
 }
 
-span#My-Note-Edit-fetch >* >:first-child {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+#must-to-do-list-container {
+    background-color: rgba(149, 6, 6, 0.7);
+    font-weight: bold;
+    color: #FCA510;
 }
-
+    
 .My-Note-Edit-fetch div#note-container>*{
     display: flex;
     justify-content: space-between;
