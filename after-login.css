@@ -75,7 +75,12 @@ iframe#fulliframe {
     width: 100%;
     aspect-ratio: 1/1;
     background-color: gray;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+.a-tool-box >* {width:100%}
 
 .right-tools-background {
     width: 100%;
