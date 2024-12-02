@@ -424,10 +424,10 @@ function createNoteLine(line, index, isChecked) {
                     <div style="display: inline-block; position: relative;" class="url-container">
                         <a href="${urls[index]}" 
                            target="_blank"
-                           class="green-add-icon"
+                           class="link-access-icon"
                            contenteditable="false">
                         </a>
-                        <span style="text-decoration: underline;">${urls[index]}</span>
+                        <span style="text-decoration: underline; font-style: italic;">${urls[index]}</span>
                     </div>`;
             }
         });
