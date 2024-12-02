@@ -104,7 +104,7 @@ iframe#fulliframe {
     position: absolute;
     transform: translate(-50%, 0);
     left: 50%;
-    top: 20%;
+    top: 5%;
 }
 
 #Now-hour-time-in-store, #Now-minute-time-in-store, #store-am-pm, #hour-time-they-choose, #minute-time-they-choose, #customer-am-pm {
