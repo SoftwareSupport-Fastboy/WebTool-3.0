@@ -359,6 +359,7 @@ function createNoteLine(line, index, isChecked) {
     const div = document.createElement('div');
     div.contentEditable = true;
     div.textContent = line.replace(/^\((done|not done)\)\s*/, '');
+    div.title = '';
     div.dataset.index = index;
 
     const smalldiv = document.createElement('div');
