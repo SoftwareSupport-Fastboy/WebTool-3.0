@@ -459,10 +459,10 @@ async function saveNote() {
     const noteContainer = document.getElementById('note-container');
     const lines = Array.from(noteContainer.getElementsByClassName('note-item'))  // Lọc các dòng ghi chú có class 'note-item'
         .map(divGroup => {
-            const div = divGroup.querySelector('div[contentEditable="true"]'); // Lấy nội dung của div contentEditable
+            const span = divGroup.querySelector('span[contentEditable="true"]'); // Lấy nội dung của div contentEditable
             const checkbox = divGroup.querySelector('input[type="checkbox"]');  // Lấy checkbox trong dòng ghi chú
             const isChecked = checkbox ? checkbox.checked : false;  // Kiểm tra trạng thái checkbox
-            const text = div ? div.textContent.trim() : '';  // Lấy nội dung dòng ghi chú
+            const text = span ? span.textContent.trim() : '';  // Lấy nội dung dòng ghi chú
             
             // Nếu checkbox được chọn, prepend "(done)", nếu không prepend "(not done)"
             return (isChecked ? "(done) " : "(not done) ") + text;
