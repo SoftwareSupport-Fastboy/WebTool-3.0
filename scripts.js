@@ -396,7 +396,7 @@ function createNoteLine(line, index, isChecked) {
     divGroup.appendChild(smalldiv);
 
     noteContainer.appendChild(divGroup);
-    
+    processURLs(span);
 
     // Xử lý và thêm các phần tử liên quan đến URL
     function processURLs(contentSpan) {
@@ -418,16 +418,19 @@ function createNoteLine(line, index, isChecked) {
         let newContent = '';
         parts.forEach((part, index) => {
             newContent += `<span>${part}</span>`;
-            if (urls[index]) {
-                // Tạo nút "Truy cập"
+            if (urls && urls[index]) {
+                // Bọc URL trong một div để xử lý hover
                 newContent += `
-                    <a href="${urls[index]}" 
-                       target="_blank" 
-                       style="width:auto; height:auto; position: absolute; display: block; margin-bottom: 4px; color: white; background-color: blue; text-decoration: none; padding: 2px 4px; border-radius: 4px;"
-                       contenteditable="false">
-                        Truy cập
-                    </a>
-                    <span style="color: blue; text-decoration: underline;">${urls[index]}</span>`;
+                    <div style="display: inline-block; position: relative;" class="url-container">
+                        <a href="${urls[index]}" 
+                           target="_blank" 
+                           style="position: absolute; top: -25px; left: 0; display: none; color: white; background-color: blue; text-decoration: none; padding: 2px 4px; border-radius: 4px;"
+                           class="hover-access"
+                           contenteditable="false">
+                            Truy cập
+                        </a>
+                        <span style="color: blue; text-decoration: underline;">${urls[index]}</span>
+                    </div>`;
             }
         });
 
