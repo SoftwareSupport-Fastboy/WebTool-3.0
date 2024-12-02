@@ -208,7 +208,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 // Xử lý logout
 document.getElementById('logoutButton').addEventListener('click', function () {
-    saveNote();
     // ngừng chạy function tổng
     setTimeout(function() {
         StopRunFunctionsAfterLogin();
@@ -375,6 +374,7 @@ function createNoteLine(line, index, isChecked) {
     div.addEventListener('input', () => {
         deleteButton.style.display = 'none'; // Hide delete button on edit
         saveButton.style.display = 'flex';
+        div.style.background = 'rgba(144, 238, 144, 0.5)'; 
     });
 
     const saveButton = document.createElement('div');
@@ -384,6 +384,7 @@ function createNoteLine(line, index, isChecked) {
         saveNote(); // Remove the note line from UI
         deleteButton.style.display = 'flex';
         saveButton.style.display = 'none';
+        div.style.background = 'none';
     };
 
     // Thêm sự kiện lắng nghe cho checkbox để gọi saveNote mỗi khi thay đổi
