@@ -379,12 +379,15 @@ function createNoteLine(line, index, isChecked) {
     saveButton.classList.add('white-edit-icon');
     saveButton.title = "Lưu chỉnh sửa";
     saveButton.onclick = () => {
-        processURLs(span); // Xử lý URL sau khi lưu
         saveNote(); // Save the note
         deleteButton.style.display = 'flex';
         saveButton.style.display = 'none';
         span.style.background = 'none';
         span.title = '';
+        // Đảm bảo xử lý URL sau khi các thao tác khác hoàn tất
+        setTimeout(() => {
+            processURLs(span);
+        }, 100); 
     };
 
     checkbox.addEventListener('change', saveNote); // Lưu khi thay đổi trạng thái checkbox
