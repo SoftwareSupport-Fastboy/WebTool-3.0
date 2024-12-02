@@ -465,12 +465,16 @@ async function saveNote() {
 
             let text = span ? span.innerHTML.trim() : ''; // Lấy nội dung HTML của dòng ghi chú
             
-            // Xử lý `<div>` và `<a>` thành khoảng trắng
-             // Lấy tất cả các thẻ <span> trong span cha và ghép nối chúng
-            const allSpans = Array.from(span.querySelectorAll('span')).map(s => s.innerHTML.trim()).join(' ');
+            // Loại bỏ tất cả các thẻ <div> và <a> trong span
+            text = text
+                .replace(/<div[^>]*>/g, '') // Xóa thẻ <div>
+                .replace(/<\/div>/g, '')     // Xóa thẻ đóng </div>
+                .replace(/<a[^>]*>/g, '')    // Xóa thẻ mở <a>
+                .replace(/<\/a>/g, '')       // Xóa thẻ đóng </a>
+                .replace(/\s+/g, ' ');       // Thay thế nhiều khoảng trắng bằng một khoảng trắng duy nhất
 
             // Nếu checkbox được chọn, prepend "(done)", nếu không prepend "(not done)"
-            return (isChecked ? "(done) " : "(not done) ") + allSpans;
+            return (isChecked ? "(done) " : "(not done) ") + text;
         });
 
     const data = {
