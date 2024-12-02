@@ -266,6 +266,6 @@ div#note-content {
 }
 
 /* Khi hover vào container chứa URL */
-.url-container:hover .hover-access {
+.note-item:hover >span >div >a {
     display: block; /* Hiển thị nút "Truy cập" */
 }
