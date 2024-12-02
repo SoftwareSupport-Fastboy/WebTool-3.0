@@ -264,3 +264,8 @@ div#note-content {
     padding-inline: 2px;
     box-sizing: border-box;
 }
+
+/* Khi hover vào container chứa URL */
+.url-container:hover .hover-access {
+    display: block; /* Hiển thị nút "Truy cập" */
+}
