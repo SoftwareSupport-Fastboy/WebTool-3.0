@@ -356,7 +356,7 @@ function createNoteLine(line, index, isChecked) {
         checkbox.checked = false;
     }
 
-    const div = document.createElement('div');
+    const div = document.createElement('span');
     div.contentEditable = true;
     div.textContent = line.replace(/^\((done|not done)\)\s*/, '');
     div.title = '';
