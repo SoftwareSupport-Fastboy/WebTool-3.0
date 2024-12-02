@@ -348,6 +348,7 @@ function createNoteLine(line, index, isChecked) {
     // Create a checkbox
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
+    checkbox.title = "Check là xong, Uncheck là chưa xong";
     checkbox.classList.add('note-checkbox');
 
     if (line.startsWith("(done)")) {
@@ -365,6 +366,7 @@ function createNoteLine(line, index, isChecked) {
 
     const deleteButton = document.createElement('div');
     deleteButton.classList.add('white-delete-icon');
+    deleteButton.title = "Xóa việc làm này";
     deleteButton.onclick = () => {
         divGroup.remove(); // Remove the note line from UI
         saveNote();
@@ -377,6 +379,7 @@ function createNoteLine(line, index, isChecked) {
 
     const saveButton = document.createElement('div');
     saveButton.classList.add('white-edit-icon');
+    saveButton.title = "Lưu chỉnh sửa";
     saveButton.onclick = () => {
         saveNote(); // Remove the note line from UI
         deleteButton.style.display = 'flex';
