@@ -41,7 +41,7 @@
                     <path d="M16 16C15.5 14.5 14.2091 13 12 13C9.79086 13 8.5 14.5 8 16" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 <span>
-                    Disconnect with internet
+                    Internet Disconnected. Please check connection.
                 </span>
             </div>
         </div>
@@ -54,7 +54,7 @@
                     <path d="M16 14C15.5 15.5 14.2091 17 12 17C9.79086 17 8.5 15.5 8 14" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 <span>
-                    Connect with internet
+                    Internet Connected. Connection is active.
                 </span>
             </div>
         </div>
@@ -67,10 +67,10 @@
             <form id="checkForm">
                 <h2>Login Account</h2>
                 <div class="form-group">
-                    <input type="email" id="checkEmail" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Email" onblur="checkEmail_trimSpaces()">
+                    <input type="email" id="checkEmail" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Account Email" onblur="checkEmail_trimSpaces()">
                 </div>
                 <div class="form-group">
-                    <input type="password" id="checkText" name="text" required placeholder="Password">
+                    <input type="password" id="checkText" name="text" required placeholder="Account Password">
                 </div>
                 <div class="form-group" style="display: block;">
                     <input type="checkbox" id="rememberlogin" name="remember" style="background-color: transparent;width: auto;transform: scale(1.5);">
@@ -89,13 +89,13 @@
                 <h2>Create Account</h2>
                 <span><i>Already have an account? </i><button onclick="switchToCheckForm()">Login</button></span>
                 <div class="form-group">
-                    <input type="text" id="name" name="name" aria-label="Enter your nickname" required placeholder="Nickname" onblur="name_trimSpaces()">
+                    <input type="text" id="name" name="name" aria-label="Enter your nickname" required placeholder="Your Nickname" onblur="name_trimSpaces()">
                 </div>
                 <div class="form-group">
-                    <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Email" onblur="email_trimSpaces()">
+                    <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Your Email" onblur="email_trimSpaces()">
                 </div>
                 <div class="form-group">
-                    <input type="password" id="text" name="text" required placeholder="Password">
+                    <input type="password" id="text" name="text" required placeholder="Your Password">
                 </div>
                 <span id="responseMessage">ㅤ</span>
                 <button class="loginandsignupbutton" type="submit">
@@ -114,23 +114,18 @@
         <nav class="right-tools">
             <nav class="right-tools-container">
                 <div>Ẩn</div>
-                <div id="clock-button-converter" class="a-tool-box">
+                <div id="clock-button-converter" class="a-tool-box" title="Texas Time Converter">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="12" cy="12" r="10" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M15 16L12.5858 13.5858C12.2107 13.2107 12 12.702 12 12.1716V6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <div id="My_Note" class="a-tool-box">
+                <div id="My_Note" class="a-tool-box" title="To-Do-List">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M4 4V20C4 21.1046 4.89543 22 6 22L18 22C19.1046 22 20 21.1046 20 20V8.34162C20 7.8034 19.7831 7.28789 19.3982 6.91161L14.9579 2.56999C14.5842 2.20459 14.0824 2 13.5597 2L6 2C4.89543 2 4 2.89543 4 4Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M14 2V6C14 7.10457 14.8954 8 16 8H20" stroke="black" stroke-width="2" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <div class="a-tool-box"></div>
-                <div class="a-tool-box"></div>
-                <div class="a-tool-box"></div>
-                <div class="a-tool-box"></div>
-                <div class="a-tool-box"></div>
                 <div class="a-tool-box"></div>
                 <div class="a-tool-box"></div>
                 <div class="a-tool-box"></div>
@@ -144,7 +139,7 @@
                     <div class="son_of_Converter_time_container">
                         Current store time:
                         <div class="time_container">
-                            <input id="Now-hour-time-in-store" maxlength="2">
+                            <input id="Now-hour-time-in-store" maxlength="2" title="Giờ hiện tại của tiệm">
                             <select id="store-am-pm">
                                 <option value="AM">AM</option>
                                 <option value="PM">PM</option>
@@ -161,7 +156,7 @@
                             <span>customer:</span>
                         </div>
                         <div class="time_container">
-                            <input id="hour-time-they-choose" maxlength="2">
+                            <input id="hour-time-they-choose" maxlength="2" title="Giờ tiệm muốn hẹn">
                             <select id="customer-am-pm">
                                 <option value="AM">AM</option>
                                 <option value="PM">PM</option>
@@ -190,7 +185,7 @@
                                     <div></div>
                                     <div contentEditable="true" id="note-content" type="text"></div>
                                     <div style="margin-inline:10px">
-                                        <div class="green-add-icon" id="save-button" onclick="saveNote()"></div>
+                                        <div class="green-add-icon" id="save-button" onclick="saveNote()" title="Add"></div>
                                     </div>
                                 </div>
                             </div>
