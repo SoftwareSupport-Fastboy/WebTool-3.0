@@ -1,0 +1,300 @@
+/* Loader styles */
+.loader {
+    border: 3px solid #0075ff; /* Light gray */
+    border-top: 3px solid #ffffff; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    aspect-ratio: 1/1;
+    animation: spin 1s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+/* Animation for spinning effect */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.hidden {display: none;}
+
+.flex {display: flex;}
+
+.grid {display: grid;}
+
+.hidden_visibility {visibility: hidden;}
+
+.loader-if-remember-login {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: grid;
+    place-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.after-login-container {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+}
+
+button#logoutButton {
+    position: absolute;
+    left:0;
+    bottom: 0;
+    width: 70px;
+    height: 50px;
+}
+
+iframe#fulliframe {
+    width: 97vw;
+    height: 100vh;
+    box-sizing: border-box;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.right-tools {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    flex-direction: row-reverse;
+    user-select: none;
+    pointer-events: none;
+}
+
+.right-tools-container {
+    background-image: url('image/background/yellow-sky.png');
+    background-size: cover; /* Điều chỉnh kích thước hình nền để bao phủ toàn bộ phần tử */
+    background-position: center; /* Căn giữa hình nền */
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 50px;
+    transition: 0.3s all;
+    margin: 0;
+    padding: 0;
+    isolation: isolate;
+    gap: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    user-select: auto;
+    pointer-events: all;
+}
+
+.right-tools-container::-webkit-scrollbar {width: 0;}
+
+.right-tools-container:hover {
+    width: 80px;
+}
+
+.right-tools-container>:first-child {
+    position: sticky;
+    height: 100px;
+    flex-shrink: 0;
+    margin-bottom: 0;
+    top:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #fffdd0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color:black;
+}
+
+.right-tools-container>:last-child {
+    box-shadow: 4px -8px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.right-tools-container>:last-child::after {
+    content: "End";
+    color: black;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.right-tools-container>:nth-child(2) {
+    margin-top: 20px;
+}
+
+.right-tools-container :not(:first-child) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ToolBar::after {content: "Tools";}
+
+.right-tools-container:hover .ToolBar::after {content: "ToolBar"}
+
+.ToolBar, .ToolBar::after, .right-tools-container:hover .ToolBar::after {
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.a-tool-box {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: transparent;
+    box-sizing: border-box;
+    padding: 5%;
+    margin: 0;
+    margin-bottom:50px;
+    user-select: auto;
+    pointer-events: all;
+}
+
+.a-tool-box >* {width:100%}
+
+.right-tools-background {
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    pointer-events: none;
+}
+
+.Converter_time_container, .My_To-Do-List_container, .toggle-darkmode-lightmode {
+    height: auto;
+    width: auto;
+    max-width: 500px;
+    font-size: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 3px solid rgb(255, 255, 0);
+    box-shadow: rgb(0,0,0,0.7) 5px 10px 50px ,rgb(0,0,0,0.7) -5px 0px 250px;
+    color: black;
+    background-color: rgba(255, 253, 208, 0.9);
+    user-select: none;
+    pointer-events: all;
+    padding: 20px;
+    position: absolute;
+    transform: translate(-50%, 0);
+    left: 50%;
+    top: 5%;
+}
+
+.toggle-darkmode-lightmode {border-radius: 123px}
+
+#Now-hour-time-in-store, #Now-minute-time-in-store, #store-am-pm, #hour-time-they-choose, #minute-time-they-choose, #customer-am-pm {
+    width: 30px;
+    height: 25px;
+    text-align: center;
+    font-size: 0.8rem;
+    appearance: none;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 7px;
+}
+
+.Converter_time_container input:focus, .Converter_time_container select:focus {outline: none;}
+
+.son_of_Converter_time_container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+}
+
+.time_container {
+    width: auto;
+    height: auto;
+}
+
+.My_To-Do-List_subject {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    border-bottom: 3px solid black;
+}
+
+.My_To-Do-List_container {
+    display: none;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+
+
+.My_To-Do-List_content {
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.My_To-Do-List_content >span {user-select: text;}
+
+.My_To-Do-List_content::-webkit-scrollbar {width: 0;}
+
+.My_To-Do-List_content >span >* >* >:nth-child(2) {
+    line-height: 2;
+    border-bottom: 1px solid black;
+    width: 450px;
+    padding-inline: 1px;
+    box-sizing: border-box;
+    display: inline-block;
+    outline: none;
+}
+
+#must-to-do-list-container {
+    background-color: rgba(149, 6, 6, 0.7);
+    font-weight: bold;
+    color: #FCA510;
+}
+    
+.My_To-Do-List_content div#my-To-do-list-personal-fetch-container>*{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+div#b4-To-do-list-content {
+    background: white;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+div#Add-To-do-list-content {
+    color:black!important;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    border: none!important;
+}
+
+.To-do-list_checkbox {
+    background-color: transparent;
+    outline: none;
+    transform: scale(1.2);
+    padding-inline: 2px;
+    box-sizing: border-box;
+}

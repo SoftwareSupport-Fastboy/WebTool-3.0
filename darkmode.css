@@ -1,0 +1,55 @@
+/* .dark-mode */
+.dark-mode .right-tools-container>:first-child,
+.dark-mode .Converter_time_container,
+.dark-mode .My_To-Do-List_container,
+.dark-mode .toggle-darkmode-lightmode
+{
+    background-color: #121212;
+    color:white
+}
+
+.dark-mode .right-tools-container {
+    background-image: url('image/background/dark-sky.png');
+    background-size: cover; /* Điều chỉnh kích thước hình nền để bao phủ toàn bộ phần tử */
+    background-position: center; /* Căn giữa hình nền */
+    background-repeat: no-repeat;
+}
+
+.dark-mode .right-tools-container>:first-child {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .right-tools-container>:last-child {
+    box-shadow: 4px -8px 8px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .right-tools-container>:last-child::after {
+    color: white;
+}
+
+
+.dark-mode .Converter_time_container,
+.dark-mode .My_To-Do-List_container,
+.dark-mode .toggle-darkmode-lightmode
+{
+    border-color: #121212;
+}
+
+.dark-mode .My_To-Do-List_subject,
+.dark-mode .My_To-Do-List_content >span >* >* >:nth-child(2),
+.dark-mode div#b4-To-do-list-content
+{
+    border-color: white;
+}
+
+.dark-mode .clock-icon {
+    background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%2210%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M15%2016L12.5858%2013.5858C12.2107%2013.2107%2012%2012.702%2012%2012.1716V6%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E');
+}
+  
+.dark-mode .To-Do-List-Icon {
+    background-image: url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M4%204V20C4%2021.1046%204.89543%2022%206%2022L18%2022C19.1046%2022%2020%2021.1046%2020%2020V8.34162C20%207.8034%2019.7831%207.28789%2019.3982%206.91161L14.9579%202.56999C14.5842%202.20459%2014.0824%202%2013.5597%202L6%202C4.89543%202%204%202.89543%204%204Z%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M14%202V6C14%207.10457%2014.8954%208%2016%208H20%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+}
+  
+.dark-mode .Logout-icon {
+    background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M13%2012H22M22%2012L18.6667%208M22%2012L18.6667%2016%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M14%207V5.1736C14%204.00352%2012.9999%203.08334%2011.8339%203.18051L3.83391%203.84717C2.79732%203.93356%202%204.80009%202%205.84027V18.1597C2%2019.1999%202.79733%2020.0664%203.83391%2020.1528L11.8339%2020.8195C12.9999%2020.9167%2014%2019.9965%2014%2018.8264V17%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E');
+}
