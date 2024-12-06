@@ -93,6 +93,7 @@ iframe#webtool2 {
     overflow-y: auto;
     user-select: auto;
     pointer-events: all;
+    overflow-x: hidden;
 }
 
 .right-tools-container::-webkit-scrollbar {width: 0;}
