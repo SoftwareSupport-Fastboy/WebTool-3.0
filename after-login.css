@@ -1,0 +1,609 @@
+/* Loader styles */
+.loader {
+    border: 3px solid #0075ff; /* Light gray */
+    border-top: 3px solid #ffffff; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    aspect-ratio: 1/1;
+    animation: spin 1s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+/* Animation for spinning effect */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.hidden {display: none;}
+
+.flex {display: flex;}
+
+.grid {display: grid;}
+
+.hidden_visibility {visibility: hidden;}
+
+.loader-if-remember-login {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: grid;
+    place-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.after-login-container {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+}
+
+button#logoutButton {
+    position: absolute;
+    left:0;
+    bottom: 0;
+    width: 70px;
+    height: 50px;
+}
+
+iframe#webtool2 {
+    width: 97vw;
+    height: 100vh;
+    box-sizing: border-box;
+    border: none;
+    padding: 0;
+    margin: 0;
+    user-select: all;
+    pointer-events:all;
+}
+
+.right-tools {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    flex-direction: row-reverse;
+    user-select: none;
+    pointer-events: none;
+}
+
+.right-tools-container {
+    background-image: url('image/background/yellow-sky.png');
+    background-size: cover; /* Điều chỉnh kích thước hình nền để bao phủ toàn bộ phần tử */
+    background-position: center; /* Căn giữa hình nền */
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 50px;
+    transition: 0.3s all;
+    margin: 0;
+    padding: 0;
+    isolation: isolate;
+    gap: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    user-select: auto;
+    pointer-events: all;
+}
+
+.right-tools-container::-webkit-scrollbar {width: 0;}
+
+.right-tools-container:hover {
+    width: 80px;
+}
+
+.right-tools-container>:first-child, .right-tools-container>:last-child {
+    position: sticky;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    color:black;
+    transition: 0.3s all;
+}
+
+.right-tools-container>:first-child {
+    margin-bottom: 0;
+    top:0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    height: 100px;
+    background-color: #fffdd0;
+}
+
+
+.right-tools-container>:last-child {
+    margin: 0;
+    bottom: 0;
+    box-shadow: 4px -8px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    height: 80px;
+    background-image: url('image/background/yellow-sky.png');
+    background-size: 1000%;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+}
+
+.right-tools-container>:nth-child(2) {
+    margin-top: 20px;
+}
+
+.right-tools-container > :not(:first-child):not(:last-child) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.3s all;
+}
+
+.ToolBar::after {content: "Tools";}
+
+.right-tools-container:hover .ToolBar::after {content: "ToolBar"}
+
+.ToolBar, .ToolBar::after, .right-tools-container:hover .ToolBar::after {
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.a-tool-box {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: transparent;
+    box-sizing: border-box;
+    padding: 5%;
+    margin: 0;
+    margin-bottom:50px;
+    user-select: auto;
+    pointer-events: all;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.a-tool-box >* {width:100%}
+
+.right-tools-background {
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    pointer-events: none;
+}
+
+.Converter_time_container, .My_To-Do-List_container, .toggle-darkmode-lightmode, .calculator_container, .lichtruccuoituan_container {
+    height: auto;
+    width: auto;
+    max-width: 500px;
+    font-size: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 3px solid rgb(255, 255, 0);
+    box-shadow: rgb(0,0,0,0.7) 5px 10px 50px ,rgb(0,0,0,0.7) -5px 0px 250px;
+    color: black;
+    background-color: rgba(255, 253, 208, 0.9);
+    user-select: none;
+    pointer-events: all;
+    padding: 20px;
+    position: absolute;
+    transform: translate(-50%, 0);
+    left: 50%;
+    top: 5%;
+}
+
+.toggle-darkmode-lightmode {border-radius: 123px}
+
+#Now-hour-time-in-store, #Now-minute-time-in-store, #store-am-pm, #hour-time-they-choose, #minute-time-they-choose, #customer-am-pm {
+    width: 30px;
+    height: 25px;
+    text-align: center;
+    font-size: 0.8rem;
+    appearance: none;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 7px;
+}
+
+.Converter_time_container input:focus, .Converter_time_container select:focus {outline: none;}
+
+.son_of_Converter_time_container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+}
+
+.time_container {
+    width: auto;
+    height: auto;
+}
+
+.Converter_time_container_subject, .My_To-Do-List_subject, .Calculator_container_subject, .lichtruccuoituan_container_subject {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    border-bottom: 3px solid black;
+}
+
+.My_To-Do-List_container {
+    display: none;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+
+
+.My_To-Do-List_content {
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.My_To-Do-List_content >span {user-select: text;}
+
+
+.My_To-Do-List_content >span >* >* >:nth-child(2) {
+    line-height: 2;
+    border-bottom: 1px solid black;
+    width: 430px;
+    padding-inline: 1px;
+    padding-right: 0;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+#must-to-do-list-container {
+    background-color: rgba(149, 6, 6, 0.7);
+    font-weight: bold;
+    color: #FCA510;
+}
+    
+.My_To-Do-List_content div#my-To-do-list-personal-fetch-container>*{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+div#b4-To-do-list-content {
+    background: white;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+div#Add-To-do-list-content {
+    color:black!important;
+    display: block;
+    align-items: center;
+    justify-content: start;
+    border: none!important;
+    min-height: 2rem;
+    width: 460px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-inline: 5px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+div#Add-To-do-list-content:focus ~ div > .gray-delete-icon {display: flex; right: 56px!important}
+
+.To-do-list_checkbox {
+    background-color: transparent;
+    outline: none;
+    transform: scale(1.2);
+    padding-inline: 2px;
+    box-sizing: border-box;
+}
+
+.b4smalldiv_in_MyToDoList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.movearea {
+    width: 100%;
+    height: 15px;
+    background-color: yellow;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: move;
+}
+
+.movearea::before, .movearea::after {
+    content: "";
+    height: 3px;
+    margin: 0;
+    background-color: transparent;
+}
+
+.movearea::before {
+    width: calc(100% - 18px);
+    margin-top: 2.5px;
+    border-top: 1px solid black;
+}
+
+.movearea::after {
+    width: calc(100% - 8px);
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+
+
+
+
+
+
+
+
+#calculator {
+    width: 300px;
+    height: 300px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.input_calculator {
+    width: 100%;
+    height: 40px;
+    text-align: right;
+    font-size: 1.5rem;
+    padding: 5px;
+    border: 4px solid orangered;
+    background-color: white;
+    color:black;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.input_calculator:focus {
+    outline: none
+}
+
+.error-message {
+    color: red;
+    text-align: right;
+    min-height: 30px;
+}
+
+.calculator-sign-and-number-big-container {
+    width: 100%;
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    align-items: start;
+}
+
+.calculator-sign-and-number-small-container {
+    width: 100%;
+    display: flex;
+    gap: 2px;
+    flex-direction: column;
+}
+
+.calculator-sign-and-number-small-container > div {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+}
+
+.calculator-sign-and-number-small-container > button, .calculator-sign-and-number-small-container > * > button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: orange;
+    box-shadow: 0 2px 2px black;
+    transition: 0.1s all;
+}
+
+.calculator-sign-and-number-small-container > button:active, .calculator-sign-and-number-small-container > * > button:active {
+    transform: translate(0,5px);
+    box-shadow: none;
+}
+
+.calculation_sign{background-color:orangered!important}
+
+#history-of-calculator {
+    width: 100%;
+    aspect-ratio: 2/1;
+    padding: 0.3vw;
+    border-radius: 0.5vw;
+    border: 0.2vw solid orange;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    color:black;
+    user-select: none;
+    box-sizing: border-box;
+    font-size: 1.5vw;
+    overflow-x:scroll;
+    overflow-y:scroll;
+    text-align: left;
+    text-wrap:wrap;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: wheat;
+    border-radius: 1vw; /* Background of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: orangered; /* Color of the scrollbar thumb */
+    border-radius: 1vw; /* Roundness of the scrollbar thumb */
+}
+
+
+
+
+
+
+
+
+.lichtruccuoituan_container {
+    max-width: 1040px;
+    max-height: 550px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 15px;
+}
+
+.Chinh-sua-cap-nhat-lichtruccuoituan {
+    display: flex;
+    width: 310px;
+    height: auto;
+    gap: 10px;
+}
+
+
+#sua-o-cuoi-cung-trong-sheet, #sua-o-dau-tien-trong-sheet, #sua-ten-sheet, #updateA1Btn, #Show-all-in-lichtruc-container, #refresh-lichtruc {
+    width: 70px;
+    height: 2rem;
+    background-color: rgb(255, 207, 118);
+    border-radius: 10px;
+    padding: 8px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    color: black;
+    text-align: left;
+}
+
+#sua-ten-sheet {width: 100px;}
+
+#updateA1Btn, #Show-all-in-lichtruc-container, #refresh-lichtruc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 60px;
+    font-size: 0.8rem;
+    box-shadow: 5px 5px 0 orangered;
+    transform: translate(-5px,-5px);
+    border: 1px solid orangered;
+}
+
+#Show-all-in-lichtruc-container{margin-left: 10px;}
+
+#updateA1Btn:hover, #Show-all-in-lichtruc-container:hover, #refresh-lichtruc:hover {
+    color: red;
+    box-shadow: 5px 5px 0 red;
+    transition: 0.3s all;
+}
+
+#updateA1Btn:active, #Show-all-in-lichtruc-container:active, #refresh-lichtruc:active {
+    box-shadow: 0 0 0 red;
+    transform: translate(0,0);
+    transition: 0.2s all;
+}
+
+#sua-ten-sheet::placeholder, #sua-o-cuoi-cung-trong-sheet::placeholder, #sua-o-dau-tien-trong-sheet::placeholder {font-size: 0.7rem; text-align: center;}
+
+#status-of-updating-lichtruc-container {
+    width: auto;
+    max-width: 100%;
+    height: 2rem;
+    font-size: 0.8rem;
+    background-color: orangered;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding-inline: 5px;
+}
+
+#lich-truc-cuoi-tuan-view {
+    width: auto;
+    height: 1000px;
+    overflow: auto;
+    align-items: center;
+}
+
+
+#lich-truc-cuoi-tuan-view > table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: auto;
+    height: auto;
+}
+
+
+#lich-truc-cuoi-tuan-view > table > * > * > th, #lich-truc-cuoi-tuan-view > table > * > * > td:is(:first-child) {
+    font-size: 0.8rem;
+    border: 1px solid black;
+    text-align: center;
+    word-wrap: break-word; 
+}
+
+#lich-truc-cuoi-tuan-view > table > * > * > td:not(:first-child) {
+    font-size: 0.7rem;
+    border: 1px solid black;
+    text-align: center;
+    word-wrap: break-word; 
+}
+
+#lich-truc-cuoi-tuan-view > table > * > tr:nth-child(odd) {
+    background-color: rgb(200, 200, 200); height: 2rem;
+}
+
+#lich-truc-cuoi-tuan-view > table > * > tr:nth-child(even) {
+    background-color: #ffffff; height: 2rem;
+}
+
+#lich-truc-cuoi-tuan-view > table > thead, #lich-truc-cuoi-tuan-view > table > thead > * > th  {
+    background-color: #FCA510;
+    position: sticky;
+    top: 0;
+    border: 1px solid black;
+    padding: 2px;
+    padding-top: 5px;
+}
+
+#lich-truc-cuoi-tuan-view > table > * > * > th, #lich-truc-cuoi-tuan-view > table > * > * > td {
+    min-width: 70px;
+    max-width: 80px;
+}

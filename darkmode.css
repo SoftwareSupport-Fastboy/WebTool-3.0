@@ -1,0 +1,99 @@
+/* .dark-mode */
+.dark-mode .right-tools-container>:first-child,
+.dark-mode .right-tools-container>:last-child,
+.dark-mode .Converter_time_container,
+.dark-mode .My_To-Do-List_container,
+.dark-mode .toggle-darkmode-lightmode,
+.dark-mode .calculator_container,
+.dark-mode .lichtruccuoituan_container,
+.dark-mode .movearea
+{
+    background-color: #121212;
+    color:white;
+    border-color: #121212;
+}
+
+.dark-mode .right-tools-container {
+    background-image: url('image/background/dark-sky.png');
+    background-size: cover; /* Điều chỉnh kích thước hình nền để bao phủ toàn bộ phần tử */
+    background-position: center; /* Căn giữa hình nền */
+    background-repeat: no-repeat;
+}
+
+.dark-mode .right-tools-container>:first-child {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .right-tools-container>:last-child {
+    box-shadow: 4px -8px 8px rgba(255, 255, 255, 0.2);
+    background-image: url('image/background/dark-sky.png');
+    background-size: 1000%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.dark-mode .right-tools-container>:last-child::before {
+    color: white;
+}
+
+.dark-mode .toggle-darkmode-lightmode {border-color: #121212;}
+
+.dark-mode .Converter_time_container_subject,
+.dark-mode .My_To-Do-List_subject,
+.dark-mode .Calculator_container_subject,
+.dark-mode .lichtruccuoituan_container_subject,
+.dark-mode .My_To-Do-List_content >span >* >* >:nth-child(2),
+.dark-mode div#b4-To-do-list-content,
+.dark-mode .movearea::before,
+.dark-mode .movearea::after
+{
+    border-color: white;
+}
+
+.dark-mode .clock-icon {
+    background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%2210%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M15%2016L12.5858%2013.5858C12.2107%2013.2107%2012%2012.702%2012%2012.1716V6%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E');
+}
+  
+.dark-mode .To-Do-List-Icon {
+    background-image: url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M4%204V20C4%2021.1046%204.89543%2022%206%2022L18%2022C19.1046%2022%2020%2021.1046%2020%2020V8.34162C20%207.8034%2019.7831%207.28789%2019.3982%206.91161L14.9579%202.56999C14.5842%202.20459%2014.0824%202%2013.5597%202L6%202C4.89543%202%204%202.89543%204%204Z%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3Cpath%20d%3D%22M14%202V6C14%207.10457%2014.8954%208%2016%208H20%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linejoin%3D%22round%22/%3E%3Ccircle%20cx%3D%227%22%20cy%3D%2211%22%20r%3D%221%22%20stroke%3D%22white%22%20stroke-width%3D%220.5%22/%3E%3Cline%20x1%3D%229%22%20y1%3D%2212%22%20x2%3D%2218%22%20y2%3D%2212%22%20stroke%3D%22white%22%20stroke-width%3D%220.5%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%227%22%20cy%3D%2215%22%20r%3D%221%22%20stroke%3D%22white%22%20stroke-width%3D%220.5%22/%3E%3Cline%20x1%3D%229%22%20y1%3D%2216%22%20x2%3D%2218%22%20y2%3D%2216%22%20stroke%3D%22white%22%20stroke-width%3D%220.5%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%227%22%20cy%3D%2219%22%20r%3D%221%22%20stroke%3D%22white%22%20stroke-width%3D%220.5%22/%3E%3Cline%20x1%3D%229%22%20y1%3D%2220%22%20x2%3D%2218%22%20y2%3D%2220%22%20stroke%3D%22white%22%20stroke-width%3D%220.5%22%20stroke-linecap%3D%22round%22/%3E%3Ctext%20x%3D%229.5%22%20y%3D%2211.5%22%20font-size%3D%224%22%20font-family%3D%22Arial%22%20text-anchor%3D%22left%22%20fill%3D%22white%22%3ETo%3C/text%3E%3Ctext%20x%3D%229.5%22%20y%3D%2215.5%22%20font-size%3D%224%22%20font-family%3D%22Arial%22%20text-anchor%3D%22left%22%20fill%3D%22white%22%3EDo%3C/text%3E%3Ctext%20x%3D%229.5%22%20y%3D%2219.5%22%20font-size%3D%224%22%20font-family%3D%22Arial%22%20text-anchor%3D%22left%22%20fill%3D%22white%22%3EList%3C/text%3E%3C/svg%3E");
+}
+  
+.dark-mode .Logout-icon {
+    background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M13%2012H22M22%2012L18.6667%208M22%2012L18.6667%2016%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M14%207V5.1736C14%204.00352%2012.9999%203.08334%2011.8339%203.18051L3.83391%203.84717C2.79732%203.93356%202%204.80009%202%205.84027V18.1597C2%2019.1999%202.79733%2020.0664%203.83391%2020.1528L11.8339%2020.8195C12.9999%2020.9167%2014%2019.9965%2014%2018.8264V17%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E');
+}
+
+.dark-mode .calculator-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6C2 3.79086 3.79086 2 6 2H18C20.2091 2 22 3.79086 22 6V11H2V6Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 16.5L15.5 16.5" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M12 11H22V18C22 20.2091 20.2091 22 18 22H12V11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 11H2V18C2 20.2091 3.79086 22 6 22H12V11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 18L7 16.5M7 16.5L8.49999 15M7 16.5L8.5 18M7 16.5L5.50001 15" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>');
+}
+
+.dark-mode .input_calculator {
+    border: 4px solid orangered;
+    background-color: black;
+    color:white;
+}
+
+.dark-mode #history-of-calculator {
+    border: 0.2vw solid orange;
+    background-color: black;
+    color:white;
+}
+
+.dark-mode .lichtruc-calendar-icon {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220%200%2024%2024%22 fill%3D%22none%22%3E%3Crect x%3D%222%22 y%3D%224%22 width%3D%2220%22 height%3D%2218%22 rx%3D%224%22 stroke%3D%22white%22 stroke-width%3D%222%22 stroke-linecap%3D%22round%22 stroke-linejoin%3D%22round%22/%3E%3Cpath d%3D%22M8%202V6%22 stroke%3D%22white%22 stroke-width%3D%222%22 stroke-linecap%3D%22round%22 stroke-linejoin%3D%22round%22/%3E%3Cpath d%3D%22M16%202V6%22 stroke%3D%22white%22 stroke-width%3D%222%22 stroke-linecap%3D%22round%22 stroke-linejoin%3D%22round%22/%3E%3Cpath d%3D%22M2%2010H22%22 stroke%3D%22white%22 stroke-width%3D%222%22 stroke-linecap%3D%22round%22 stroke-linejoin%3D%22round%22/%3E%3C/svg%3E');
+}
+
+.dark-mode .home-icon {
+    background-image: url('data:image/svg+xml,%3Csvg viewBox%3D%220%200%2024%2024%22 fill%3D%22none%22 xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath d%3D%22M21%2019V12.2672C21%2011.1708%2020.5499%2010.1224%2019.755%209.36725L13.3775%203.30862C12.6056%202.57529%2011.3944%202.57529%2010.6225%203.30863L4.245%209.36725C3.45008%2010.1224%203%2011.1708%203%2012.2672V19C3%2020.1046%203.89543%2021%205%2021H19C20.1046%2021%2021%2020.1046%2021%2019Z%22 stroke%3D%22white%22 stroke-width%3D%222%22 stroke-linecap%3D%22round%22 stroke-linejoin%3D%22round%22/%3E%3Cpath d%3D%22M9%2015C9%2013.8954%209.89543%2013%2011%2013H13C14.1046%2013%2015%2013.8954%2015%2015V21H9V15Z%22 stroke%3D%22white%22 stroke-width%3D%222%22 stroke-linecap%3D%22round%22 stroke-linejoin%3D%22round%22/%3E%3C/svg%3E');
+}  
+
+.dark-mode #lich-truc-cuoi-tuan-view > table > * > tr:nth-child(odd) {
+    background-color: rgb(131, 131, 131);
+}
+
+.dark-mode #lich-truc-cuoi-tuan-view > table > * > tr:nth-child(even) {
+    background-color: #3a3a3a;
+}
+
+.dark-mode #lich-truc-cuoi-tuan-view > table > * > * > th, .dark-mode #lich-truc-cuoi-tuan-view > table > * > * > td, .dark-mode #lich-truc-cuoi-tuan-view > table > thead, .dark-mode #lich-truc-cuoi-tuan-view > table > thead > * > th {
+    border-color: white;
+}
