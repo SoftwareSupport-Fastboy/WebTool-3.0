@@ -57,7 +57,7 @@ button#logoutButton {
 }
 
 iframe#webtool2 {
-    width: 97vw;
+    width: calc(100vw - 80px);
     height: 100vh;
     box-sizing: border-box;
     border: none;
