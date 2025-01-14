@@ -1,0 +1,52 @@
+#clock-container {
+    padding: 3px !important;
+    box-sizing: border-box !important;
+}
+
+.clocks {
+    width: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+    box-sizing: border-box;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.houston_card, .HCM_card, .Victoria_card {
+    width: 120px;
+    height: 100%;
+    border-radius: 15px;
+    border: 2px solid var(--colorblack);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--colorblack);
+    background-color: var(--colorwhite);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.time-text {
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+  
+.day-text, .location-text {
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
