@@ -241,18 +241,14 @@ document.getElementById('logoutButton').addEventListener('click', function () {
     document.getElementById('checkResponseMessage').textContent = '';
     document.getElementById('responseMessage').textContent = '';
     document.getElementById('loader-if-remember-login').classList.add('hidden_visibility');
-    const b4Todolistcontent = document.getElementById('b4-To-do-list-content');
-    const ChatGPTClass = document.getElementById('ChatGPTClass');
-    b4Todolistcontent.style.display = 'flex';
-    ChatGPTClass.style.display = 'flex';
+    document.getElementById('click-to-Web-Tools-Google-Sheets').style.display = 'none';
+    document.getElementById('b4-To-do-list-content').style.display = 'flex';
+    document.getElementById('ChatGPTClass').style.display = 'flex';
     document.getElementById('container-input-edit-new-nickname').style.display = 'none';
     document.getElementById('container-input-edit-new-password').style.display = 'none';
-    const edituserinfomation = document.getElementById('edit-user-infomation');
-    edituserinfomation.style.display = 'flex';
-    const saveuserinfomation = document.getElementById('save-user-infomation');
-    saveuserinfomation.style.display = 'none';
-    const canceluserinfomation = document.getElementById('cancel-user-infomation');
-    canceluserinfomation.style.display = 'none';
+    document.getElementById('edit-user-infomation').style.display = 'flex';
+    document.getElementById('save-user-infomation').style.display = 'none';
+    document.getElementById('cancel-user-infomation').style.display = 'none';
     localStorage.clear();
     sessionStorage.clear();
     document.cookie.split(";").forEach(function (c) {
