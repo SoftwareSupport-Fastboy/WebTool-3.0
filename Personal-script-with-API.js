@@ -1427,23 +1427,30 @@ function checkRoleAndDisplay() {
     // Lấy các phần tử cần hiển thị/ẩn
     const ChatGPTClass = document.getElementById('ChatGPTClass');
     const righttoolscontainer = document.getElementById('right-tools-container');
+    const clicktoWebToolsGoogleSheets = document.getElementById('click-to-Web-Tools-Google-Sheets');
 
     // Kiểm tra giá trị của displayRole và thay đổi display cho các phần tử
     if (role === 'Admin') {
         ChatGPTClass.style.display = 'flex';
         righttoolscontainer.style.display = 'block';
+        clicktoWebToolsGoogleSheets.style.display = 'flex';
 
     } else if (role === 'Manager') {
         ChatGPTClass.style.display = 'none';
         righttoolscontainer.style.display = 'none';
+        clicktoWebToolsGoogleSheets.style.display = 'none';
 
     } else if (role === 'User') {
         ChatGPTClass.style.display = 'none';
         righttoolscontainer.style.display = 'none';
+        clicktoWebToolsGoogleSheets.style.display = 'none';
+
 
     } else {
         ChatGPTClass.style.display = 'none';
         righttoolscontainer.style.display = 'none';
+        clicktoWebToolsGoogleSheets.style.display = 'none';
+
 
     }
 }
