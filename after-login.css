@@ -10,10 +10,6 @@
     --colorgrayrgb: 128, 128, 128;
 }
 
-body {
-    background-color: var(--background-color);
-}
-
 /* Loader styles */
 .loader {
     border: 3px solid #0075ff;
