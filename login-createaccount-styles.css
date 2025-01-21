@@ -17,6 +17,11 @@ body {
     display: grid;
     place-content: center;
     color: white;
+    font-size: 13px;
+    overflow: auto;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
 }
 
 /* @media (orientation: portrait) {body {display: ;}} */
