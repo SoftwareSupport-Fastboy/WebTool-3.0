@@ -2314,8 +2314,10 @@ async function updateNumbersOfRequestInMoreDocumentNEW() {
     }
 }
 
-updateNumbersOfRequestInMoreDocumentNEW();
-setInterval(updateNumbersOfRequestInMoreDocumentNEW, 2000);
+document.addEventListener("DOMContentLoaded", () => {
+    updateNumbersOfRequestInMoreDocumentNEW();
+    setInterval(updateNumbersOfRequestInMoreDocumentNEW, 2000);
+});
 
 
 // Tạo sự đồng nhất cho các ô contenteditable
