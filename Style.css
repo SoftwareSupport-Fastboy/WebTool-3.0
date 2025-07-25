@@ -1587,9 +1587,10 @@ div#Current-Number-of-To-do-list {
 
 #lich-truc-cuoi-tuan-view {
     max-width: 97.5vw;
-    max-height: 80vh;
-    overflow: auto;
+    /* max-height: 80vh; */
+    /* overflow: auto; */
     align-items: center;
+    height: 100%;
 }
 
 #lich-truc-cuoi-tuan-view * {
