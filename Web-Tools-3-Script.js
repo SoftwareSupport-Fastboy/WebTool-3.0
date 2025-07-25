@@ -386,7 +386,7 @@ function ClickVaoThongBao() {
             const title = item.querySelector("div").innerText;
             const message = item.querySelector("p").innerText;
             header.innerText = title;
-            content.innerText = message;
+            content.innerHTML = message;
         });
     });
 }
@@ -1104,13 +1104,13 @@ document.getElementById('updateA1Btn').addEventListener('click', function () {
 
 // Nút Show All
 document.getElementById('Show-all-in-lichtruc-container').addEventListener('click', function () {
-    document.querySelectorAll('thead th').forEach(th => {
+    document.querySelectorAll('#lich-truc-cuoi-tuan-view thead th').forEach(th => {
         th.style.display = 'table-cell';
     });
-    document.querySelectorAll('tbody td').forEach(row => {
+    document.querySelectorAll('#lich-truc-cuoi-tuan-view tbody td').forEach(row => {
         row.style.display = 'table-cell';
     });
-    document.querySelectorAll('tbody tr').forEach(row => {
+    document.querySelectorAll('#lich-truc-cuoi-tuan-view tbody tr').forEach(row => {
         row.style.display = 'table-row';
     });
     StatusUpdateBox("Lịch Trực Cuối Tuần", "Đã hiện tất cả", "green");
@@ -1340,6 +1340,7 @@ function openGoPOSforSellingtocopylink(event) {
             textArea.select();
             document.execCommand("copy");
             document.body.removeChild(textArea);
+            StatusUpdateBox("Web-Tools 3.0", "Đã copy link", "green");
         }, 300);
     } else {
         const inputUrl = document.getElementById("URLDashboardInput").value;
@@ -1353,6 +1354,7 @@ function openGoPOSforSellingtocopylink(event) {
         textArea.select();
         document.execCommand("copy");
         document.body.removeChild(textArea);
+        StatusUpdateBox("Web-Tools 3.0", "Đã copy link", "green");
     }
 }
 
@@ -1396,6 +1398,7 @@ function openGoPOSforSellingtocopylink2(event) {
             textArea.select();
             document.execCommand("copy");
             document.body.removeChild(textArea);
+            StatusUpdateBox("Web-Tools 3.0", "Đã copy link", "green");
         }, 300);
     } else {
         const inputUrl = document.getElementById("URLDashboardInput").value;
@@ -1409,6 +1412,7 @@ function openGoPOSforSellingtocopylink2(event) {
         textArea.select();
         document.execCommand("copy");
         document.body.removeChild(textArea);
+        StatusUpdateBox("Web-Tools 3.0", "Đã copy link", "green");
     }
 }
 
@@ -2383,11 +2387,11 @@ document.addEventListener('DOMContentLoaded', function () {
             checkedTags.push(checkbox.value);
         });
 
-        const rows = document.querySelectorAll('tr');
+        const rows = document.querySelectorAll('#more-document-table_NEW tr');
         const filteredRows = [];
 
         rows.forEach(row => {
-            const buttons = row.querySelectorAll('td button');
+            const buttons = row.querySelectorAll('#more-document-table_NEW td button');
             let isRowVisible = true;
 
             checkedTags.forEach(tag => {
@@ -2470,7 +2474,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Hàm cập nhật hiển thị các dòng sau khi lọc
     function updateVisibleRows() {
-        let rows = Array.from(document.querySelectorAll('tr'));
+        let rows = Array.from(document.querySelectorAll('#more-document-table_NEW tr'));
 
         rows = filterRowsByTags();
         rows = toggleFavoriteRows(rows);
@@ -2479,7 +2483,7 @@ document.addEventListener('DOMContentLoaded', function () {
             row.style.display = '';
         });
 
-        document.querySelectorAll('tr').forEach(row => {
+        document.querySelectorAll('#more-document-table_NEW tr').forEach(row => {
             if (!rows.includes(row)) {
                 row.style.display = 'none';
             }
@@ -2731,7 +2735,7 @@ function addDeleteIconFunctions() {
     });
 
     // Ẩn cột khi click white-delete-icon trong <th>
-    const thIcons = document.querySelectorAll('thead .white-delete-icon');
+    const thIcons = document.querySelectorAll('#lich-truc-cuoi-tuan-view thead .white-delete-icon');
     thIcons.forEach(icon => {
         icon.addEventListener('click', () => {
             const th = icon.closest('th');
@@ -2741,7 +2745,7 @@ function addDeleteIconFunctions() {
             th.style.display = 'none';
 
             // Ẩn tất cả <td> trong cột tương ứng
-            document.querySelectorAll(`tbody tr`).forEach(row => {
+            document.querySelectorAll(`#lich-truc-cuoi-tuan-view tbody tr`).forEach(row => {
                 const td = row.querySelectorAll('td')[colIndex];
                 if (td) td.style.display = 'none';
             });
@@ -2749,7 +2753,7 @@ function addDeleteIconFunctions() {
     });
 
     // Ẩn hàng khi click white-delete-icon trong <td>
-    const tdIcons = document.querySelectorAll('tbody .white-delete-icon');
+    const tdIcons = document.querySelectorAll('#lich-truc-cuoi-tuan-view tbody .white-delete-icon');
     tdIcons.forEach(icon => {
         icon.addEventListener('click', () => {
             const tr = icon.closest('tr');
@@ -4438,7 +4442,6 @@ async function fetchChatGPTAnswer() {
         email = localStorage.getItem('userEmail');
     }
     if (!email) {
-        console.error('Email is missing.');
         return;
     }
 
@@ -5005,7 +5008,6 @@ async function loadPersonalFavoriteRowInMoreDocumentNEW() {
         email = localStorage.getItem('userEmail');
     }
     if (!email) {
-        alert('Please enter an email address.');
         return;
     }
 
