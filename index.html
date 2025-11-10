@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Web-Tools 3.0</title>
+    <link rel="stylesheet" href="Style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="image/logo icon/new-logo.ico">
+</head>
+
+<body>
+    <div id="Background_Loader_If_Remember_Login" class="hidden_visibility">
+        <div class="loader"></div>
+    </div>
+
+    <div id="Offline-Online-Container" class="hidden_visibility">
+        <div id="offline-container">
+            <div id="Offline-box">
+                <svg width="250" height="250" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" fill="currentcolor" stroke="black" stroke-width="1"
+                        stroke-linecap="round" />
+                    <path d="M8 9.05001V8.95001" stroke="black" stroke-width="1" stroke-linecap="round" />
+                    <path d="M16 9.05001V8.95001" stroke="black" stroke-width="1" stroke-linecap="round" />
+                    <path d="M16 16C15.5 14.5 14.2091 13 12 13C9.79086 13 8.5 14.5 8 16" stroke="black" stroke-width="1"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>
+                    Internet Disconnected
+                </span>
+            </div>
+        </div>
+        <div id="online-container">
+            <div id="Online-box">
+                <svg width="250" height="250" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" fill="currentcolor" stroke="black" stroke-width="1"
+                        stroke-linecap="round" />
+                    <path d="M8 9.05001V8.95001" stroke="black" stroke-width="1" stroke-linecap="round" />
+                    <path d="M16 9.05001V8.95001" stroke="black" stroke-width="1" stroke-linecap="round" />
+                    <path d="M16 14C15.5 15.5 14.2091 17 12 17C9.79086 17 8.5 15.5 8 14" stroke="black" stroke-width="1"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>
+                    Connection is active.
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div id="Login_CreateAccount_Container">
+        <div class="form-container" id="checkFormContainer">
+            <form id="checkForm">
+                <h1>Login Account</h1>
+                <div class="form-group">
+                    <input type="email" id="checkEmail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        placeholder="Account Email" onblur="checkEmail_trimSpaces()">
+                    <!-- <input type="email" id="checkEmail" name="email" required
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Account Email"
+                        onblur="checkEmail_trimSpaces()"> -->
+                </div>
+                <div class="form-group">
+                    <input type="password" id="checkText" required placeholder="Account Password">
+                    <!-- <input type="password" id="checkText" name="text" required placeholder="Account Password"> -->
+                </div>
+                <div class="form-group" style="display: block;">
+                    <label for="rememberlogin" class="checkbox-container">
+                        <input class="custom-checkbox" id="rememberlogin" type="checkbox">
+                        <!-- <input class="custom-checkbox" id="rememberlogin" name="remember" type="checkbox"> -->
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                </div>
+                <span id="checkResponseMessage">ㅤ</span>
+                <button class="loginandsignupbutton" type="submit">
+                    <div id="check-loader" class="loader hidden"></div>
+                    <span id="login_text_in_button">Login</span>
+                </button>
+                <span><i>Don't have an account? </i><button onclick="switchTosubmitForm()">Register</button></span>
+            </form>
+        </div>
+        <div class="form-container" id="submitFormContainer">
+            <form id="submitForm">
+                <h1>Create Account</h1>
+                <span><i>Already have an account? </i><button type="button"
+                        onclick="switchToCheckForm()">Login</button></span>
+                <div class="form-group">
+                    <input type="text" id="name" aria-label="Enter your nickname (max 20 letters)" required
+                        placeholder="Your Nickname" onblur="name_trimSpaces()" maxlength="20">
+                    <!-- <input type="text" id="name" name="name" aria-label="Enter your nickname (max 20 letters)" required
+                        placeholder="Your Nickname" onblur="name_trimSpaces()" maxlength="20"> -->
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        placeholder="Your Email" onblur="email_trimSpaces()">
+                    <!-- <input type="email" id="email" name="email" required
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Your Email"
+                        onblur="email_trimSpaces()"> -->
+                </div>
+                <div class="form-group">
+                    <input type="password" id="text" required placeholder="Your Password">
+                    <!-- <input type="password" id="text" name="text" required placeholder="Your Password"> -->
+                </div>
+                <span id="responseMessage">ㅤ</span>
+                <button class="loginandsignupbutton" type="submit">
+                    <span id="Sign-up-text-in-button">Sign up</span>
+                    <div id="submit-loader" class="loader hidden"></div>
+                </button>
+            </form>
+        </div>
+        <div id="div-has-button-guest-login" class="DisplayNoneST">
+            <button id="button-guest-login" type="button" class="button-guest-login">
+                <p class="button__text">
+                    <span style="--index: 0;">L</span>
+                    <span style="--index: 1;">O</span>
+                    <span style="--index: 2;">G</span>
+                    <span style="--index: 3;">I</span>
+                    <span style="--index: 4;">N</span>
+                    <span style="--index: 5;"> </span>
+                    <span style="--index: 6;"> </span>
+                    <span style="--index: 7;">A</span>
+                    <span style="--index: 8;">S</span>
+                    <span style="--index: 9;"> </span>
+                    <span style="--index: 10;"> </span>
+                    <span style="--index: 11;">G</span>
+                    <span style="--index: 12;">U</span>
+                    <span style="--index: 13;">E</span>
+                    <span style="--index: 14;">S</span>
+                    <span style="--index: 15;">T</span>
+                    <span style="--index: 16;"> </span>
+                    <span style="--index: 17;"> </span>
+                </p>
+                <div class="button__circle">
+                    <svg viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="button__icon"
+                        width="1.4rem">
+                        <path
+                            d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                            fill="currentColor"></path>
+                    </svg>
+
+                    <svg viewBox="0 0 14 15" fill="none" width="1.4rem" xmlns="http://www.w3.org/2000/svg"
+                        class="button__icon button__icon--copy">
+                        <path
+                            d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                            fill="currentColor"></path>
+                    </svg>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <div id="Popup_Request_Permission_Container" class="Container_With_Close_Button DisplayNoneST">
+        <div id="Popup_Request_Permission">
+            <div style="position: absolute;top: 1rem;right: 1rem; display: flex;gap: 1.5rem;">
+                <div class="Open-button close-in-container Close_Function_Button" title="Đóng cửa sổ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </div>
+            </div>
+            <div class="gap10 FlexCenter FlexColumn Width100percent UserPointerNone"
+                style="background-color: rgba(var(--colorwhitergb), 0.75);">
+                <h2 style="width: 80%;text-align: center;font-size: 5rem;">Grant Permission For WebTools 3.0</h2>
+                <span style="width: 80%;text-align: left;font-size: 3rem;">Cửa sổ này hiện lên nghĩa là Trình Duyệt của
+                    bạn chưa cho phép các Quyền của WebTools này.</span>
+                <span style="width: 80%;text-align: left;font-size: 3rem;">Bạn cần bấm vào các nút bên dưới để kích hoạt
+                    Quyền cho WebTools.</span>
+            </div>
+            <div class="gap10 FlexCenter Width100percent" style="height: 50%">
+                <div id="USERrequestClipboard" class="Open-button"
+                    style="width: 50%;min-height: 50%;height: fit-content;font-size: 3rem;"
+                    onclick="USERrequestClipboard()">❓ Quyền Đọc Clipboard</div>
+                <div id="USERrequestMultiplePopups" class="Open-button"
+                    style="width: 50%;min-height: 50%;height: fit-content;font-size: 3rem;"
+                    onclick="USERrequestMultiplePopups()">❓ Quyền Mở Nhiều Popups</div>
+            </div>
+            <div id="Open-After-USERrequestMultiplePopups-final"
+                class="Container_With_Close_Button BorderRadius1rem Border3Black ColorBlack BackgroundColorWhite PositionAbso Top50percent Left50percent TranslateMinus50percent FlexCenter DisplayNone"
+                style="width: calc(100% - 5rem);height: calc(100% - 5rem);box-shadow: 0.5rem 0.5rem 0 orangered;">
+                <div style="position: absolute;top: 1rem;right: 1rem; display: flex;gap: 1.5rem;">
+                    <div class="Open-button close-in-container Close_Function_Button" title="Đóng cửa sổ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </div>
+                </div>
+                <div class="UserPointerNone" style="text-align: left; padding-left: 2rem; font-size: 2rem;">
+                    <h2>POP-UPS BỊ CHẶN</h2>
+                    <p>1. Trên trình duyệt của bạn, ở góc phải thanh địa chỉ, sẽ có biểu tượng thông báo <b><u>Pop-ups
+                                bị chặn</u></b>.</p>
+                    <p>2. Click vào biểu tượng đó để mở menu tùy chọn.</p>
+                    <p>3. Chọn <b><u>Luôn luôn cho phép</u></b> hoặc <b><u>Always allow</u></b>.</p>
+                    <p>4. Hoàn thành xong rồi thì <b><u>Refresh lại Web-Tools 3.0</u></b>.</p>
+                    <p>Thank you!</p>
+                </div>
+                <svg width="100%" height="100%" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Nền popup -->
+                    <rect x="13.5" y="28.5" width="83" height="63" rx="5" ry="5" fill="#ffffff" stroke="#555"
+                        stroke-width="3" />
+
+                    <!-- Thanh tiêu đề -->
+                    <path d="M20,30 h70 a5,3 0 0 1 5,3 v10 h-80 v-10 a3,3 0 0 1 3,-3 Z" fill="#ddd" />
+
+                    <!-- Nút đóng -->
+                    <circle cx="20" cy="36.5" r="3" fill="#f44" />
+                    <circle cx="28" cy="36.5" r="3" fill="#fc3" />
+                    <circle cx="36" cy="36.5" r="3" fill="#4c4" />
+
+                    <!-- Icon bị chặn (vòng tròn + gạch chéo) -->
+                    <circle cx="90" cy="30" r="20" fill="none" stroke="#e00" stroke-width="6" />
+                    <line x1="75" y1="15" x2="105" y2="45" stroke="#e00" stroke-width="6" />
+
+                    <!-- Text (tuỳ chọn) -->
+                    <text x="16.5" y="70" font-family="Arial" font-size="12" fill="#333">Popup bị chặn</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div id="Page_after_login" class="DisplayNoneST">
+        <div id="main-container">
+            <div id="header-main-container">
+                <div title="User's Information">
+                    <label for="checkbox-of-displayName" style="align-items: start;flex-direction: column;">
+                        <span style="font-weight: bold;">Xin chào, <span id="displayRole"></span></span>
+                        <span id="displayName"></span>
+                    </label>
+                    <input type="checkbox" id="checkbox-of-displayName">
+                    <div class="header-container gap10" style="width: 30rem;transform: translateX(0);left: 30%;">
+                        <div title="User's Email">Email: <span id="displayEmail"></span></div>
+                        <div title="User's Nickname">Nickname:
+                            <span id="displayName2"></span>
+                            <div class="InputContainer DisplayNoneST" title="Nhập nickname mới"
+                                id="container-input-edit-new-nickname">
+                                <input placeholder="Nhập nickname mới" id="edit-new-nickname" maxlength="50"
+                                    type="text">
+                            </div>
+                        </div>
+                        <div title="User's Password">Password:
+                            <span id="displayPassword"></span>
+                            <div class="InputContainer DisplayNoneST" title="Nhập password mới"
+                                id="container-input-edit-new-password">
+                                <input placeholder="Nhập password mới" id="edit-new-password" type="password">
+                            </div>
+                        </div>
+                        <div id="edit-user-infomation" title="Chỉnh sửa thông tin">
+                            <div style="width: 2.5rem;aspect-ratio: 1;">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M4.33295 16.048L16.5714 3.80952C17.5708 2.81015 19.1911 2.81015 20.1905 3.80952C21.1898 4.8089 21.1898 6.4292 20.1905 7.42857L7.952 19.667C7.6728 19.9462 7.3172 20.1366 6.93002 20.214L3 21L3.786 17.07C3.86344 16.6828 4.05375 16.3272 4.33295 16.048Z"
+                                        stroke="var(--colorblack)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M14.5 6.5L17.5 9.5" stroke="var(--colorblack)" stroke-width="2" />
+                                </svg>
+                            </div>
+                            <span>Edit</span>
+                        </div>
+                        <div class="flex gap10">
+                            <div id="save-user-infomation" title="Lưu chỉnh sửa thông tin">
+                                <div style="width: 2.5rem;aspect-ratio: 1;">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M7 21H17C19.2091 21 21 19.2091 21 17V7.41421C21 7.149 20.8946 6.89464 20.7071 6.70711L17.2929 3.29289C17.1054 3.10536 16.851 3 16.5858 3H7C4.79086 3 3 4.79086 3 7V17C3 19.2091 4.79086 21 7 21Z"
+                                            stroke="var(--colorblack)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M9 3H15V6C15 6.55228 14.5523 7 14 7H10C9.44772 7 9 6.55228 9 6V3Z"
+                                            stroke="var(--colorblack)" stroke-width="2" />
+                                        <path d="M17 21V14C17 13.4477 16.5523 13 16 13H8C7.44772 13 7 13.4477 7 14V21"
+                                            stroke="var(--colorblack)" stroke-width="2" />
+                                        <path d="M11 17H13" stroke="var(--colorblack)" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                                <span>Save</span>
+                            </div>
+                            <div id="cancel-user-infomation" title="Hủy chỉnh sửa thông tin">
+                                <div style="width: 2.5rem;aspect-ratio: 1;">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17 17L7 7.00002M17 7L7.00001 17" stroke="var(--colorblack)"
+                                            stroke-width="2" stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                                <span>Cancel</span>
+                            </div>
+                        </div>
+                        <div id="logoutButton" title="Đăng xuất">
+                            <div style="width: 2.5rem;aspect-ratio: 1;">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13 12H22M22 12L18.6667 8M22 12L18.6667 16" stroke="var(--colorblack)"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M14 7V5.1736C14 4.00352 12.9999 3.08334 11.8339 3.18051L3.83391 3.84717C2.79732 3.93356 2 4.80009 2 5.84027V18.1597C2 19.1999 2.79733 20.0664 3.83391 20.1528L11.8339 20.8195C12.9999 20.9167 14 19.9965 14 18.8264V17"
+                                        stroke="var(--colorblack)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <span>Sign Out</span>
+                        </div>
+                        <div id="Loader-Of-Profile" style="z-index: 2;"
+                            class="DisplayNoneST BackgroundTransparentAndBlur FlexCenter BorderRadius1rem PositionAbso Width100percent Height100percent Top50percent Left50percent TranslateMinus50percent">
+                            <div class="loader" style="width: 3rem; border: 0.95rem solid orangered; border-top: 0.95rem solid transparent;
+                         "></div>
+                        </div>
+                    </div>
+                </div>
+                <div title="Light/Dark Mode">
+                    <label for="Light-Dark-Mode">
+                        <div id="Sun-Moon_icon_ID" class="sun-and-glow-icon"></div>
+                    </label>
+                    <input type="checkbox" id="Light-Dark-Mode">
+                    <div class="header-container SwitchDarkMode">
+                        <label class="theme-switch">
+                            <input type="checkbox" class="theme-switch__checkbox">
+                            <div class="theme-switch__container">
+                                <div class="theme-switch__clouds"></div>
+                                <div class="theme-switch__stars-container">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545ZM136 36.3545C137.111 36.2995 138.055 35.8503 138.831 35.0069C139.607 34.1635 139.996 33.1642 139.996 32C139.996 33.1642 140.384 34.1635 141.16 35.0069C141.936 35.8503 142.88 36.2903 144 36.3545C143.268 36.3911 142.598 36.602 141.98 37.0053C141.372 37.3995 140.886 37.9312 140.525 38.5913C140.172 39.2513 139.996 39.9572 139.996 40.7273C139.996 39.563 139.607 38.5546 138.831 37.7112C138.055 36.8587 137.111 36.4095 136 36.3545ZM101.831 49.0069C101.055 49.8503 100.111 50.2995 99 50.3545C100.111 50.4095 101.055 50.8587 101.831 51.7112C102.607 52.5546 102.996 53.563 102.996 54.7273C102.996 53.9572 103.172 53.2513 103.525 52.5913C103.886 51.9312 104.372 51.3995 104.98 51.0053C105.598 50.602 106.268 50.3911 107 50.3545C105.88 50.2903 104.936 49.8503 104.16 49.0069C103.384 48.1635 102.996 47.1642 102.996 46C102.996 47.1642 102.607 48.1635 101.831 49.0069Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                </div>
+                                <div class="theme-switch__circle-container">
+                                    <div class="theme-switch__sun-moon-container">
+                                        <div class="theme-switch__moon">
+                                            <div class="theme-switch__spot"></div>
+                                            <div class="theme-switch__spot"></div>
+                                            <div class="theme-switch__spot"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div style="cursor: auto;">
+                    <span id="website-title">
+                        <h1 class="WEB-TOOL-SUPPORTING-CUSTOMER"></h1>
+                    </span>
+                </div>
+                <div title="Find Zip Code/Phone">
+                    <label for="Find-Customers-checkbox">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="9" r="5" fill="black" stroke="#af0158" stroke-width="1.5" />
+                            <polygon points="12,7 10,11 14,11" fill="white" />
+                            <path
+                                d="M17 14H17.3517C18.8646 14 20.1408 15.1266 20.3285 16.6279L20.719 19.7519C20.8682 20.9456 19.9374 22 18.7344 22H5.26556C4.06257 22 3.1318 20.9456 3.28101 19.7519L3.67151 16.6279C3.85917 15.1266 5.13538 14 6.64835 14H7L17 14Z"
+                                fill="#af0158" stroke="#af0158" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />\
+                        </svg>
+                    </label>
+                    <input type="checkbox" id="Find-Customers-checkbox">
+                    <div class="header-container">
+                        <div id="Find-Customers">
+                            <div class="small-Find-Customers" style="height: auto !important">
+                                <h2 style="text-align: center;">Find Customers</h2>
+                            </div>
+                            <div class="New-Lock-And-Input-Container" title="Tìm theo Zip Code">
+                                <div class="New_Big_Input_Container">
+                                    <label class="Title_Input_Container">
+                                        <b>Zip Code:</b>
+                                        <span class="Value_Of_Title_Input_Container" id="ZipnumericOutput"></span>
+                                    </label>
+                                    <div class="New_Input_Container">
+                                        <input id="ZiptextInput" type="text" placeholder="Tìm theo Zip Code"
+                                            oninput="initInputEvents()" onkeydown="KeyDownEnterEscFindCustomers(event)">
+                                        <div class="Paste_New_Button"></div>
+                                        <div class="Block_Input_Container"></div>
+                                        <div class="white-delete-icon" title="Bấm Esc"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="New-Lock-And-Input-Container" title="Tìm theo Số Phone">
+                                <div class="New_Big_Input_Container">
+                                    <label class="Title_Input_Container">
+                                        <b>Phone:</b>
+                                        <span class="Value_Of_Title_Input_Container" id="PhonetextOutput"></span>
+                                    </label>
+                                    <div class="New_Input_Container">
+                                        <input id="PhonetextInput" type="text" placeholder="Tìm theo Số Phone"
+                                            class="input-only-take-number-to-Full-numbers-output"
+                                            oninput="initInputEvents()" onkeydown="KeyDownEnterEscFindCustomers(event)">
+                                        <div class="Paste_New_Button"></div>
+                                        <div class="Block_Input_Container"></div>
+                                        <div class="white-delete-icon" title="Bấm Esc"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="small-Find-Customers">
+                                <label>Zip Code: <span id="ZipnumericOutput"></span></label>
+                                <input id="ZiptextInput" placeholder="Find zip code" type="text" maxlength="10"
+                                    onkeydown="KeyDownEnterEscFindCustomers(event)"
+                                    oninput="document.getElementById('ZipnumericOutput').textContent = this.value">
+                            </div> -->
+                            <!-- <div class="small-Find-Customers">
+                                <label>Phone: <span id="PhonetextOutput"></span></label>
+                                <input id="PhonetextInput" placeholder="Find phone" type="text" maxlength="25"
+                                    onkeydown="KeyDownEnterEscFindCustomers(event)"
+                                    oninput="document.getElementById('PhonetextOutput').textContent = this.value.replace(/[^0-9]/g, '')">
+                            </div> -->
+                            <div style="display: flex; flex-direction: row; gap: 1rem;">
+                                <button id="resetButton" class="Open-button" type="reset"
+                                    title="Reset (bấm Esc)">Reset</button>
+                                <button id="findButton" class="Open-button" type="submit"
+                                    title="Find (bấm Enter)">Find</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div title="Other Website">
+                    <label for="Other-Website">
+                        <svg width="80%" height="80%" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="4" cy="4" r="1" transform="rotate(90 4 4)" stroke="var(--colorblack)"
+                                stroke-width="2" />
+                            <circle cx="12" cy="4" r="1" transform="rotate(90 12 4)" stroke="var(--colorblack)"
+                                stroke-width="2" />
+                            <circle cx="20" cy="4" r="1" transform="rotate(90 20 4)" stroke="var(--colorblack)"
+                                stroke-width="2" />
+                            <circle cx="4" cy="12" r="1" transform="rotate(90 4 12)" stroke="var(--colorblack)"
+                                stroke-width="2" />
+                            <circle cx="12" cy="12" r="1" transform="rotate(90 12 12)" stroke="var(--colorblack)"
+                                stroke-width="2" />
+                            <circle cx="20" cy="12" r="1" transform="rotate(90 20 12)" stroke="var(--colorblack)"
+                                stroke-width="2" />
+                            <circle cx="4" cy="20" r="1" transform="rotate(90 4 20)" stroke="var(--colorblack)"
+                                stroke-width="2" />
+                            <circle cx="12" cy="20" r="1" transform="rotate(90 12 20)" stroke="var(--colorblack)"
+                                stroke-width="2" />
+                            <circle cx="20" cy="20" r="1" transform="rotate(90 20 20)" stroke="var(--colorblack)"
+                                stroke-width="2" />
+                        </svg>
+                    </label>
+                    <input type="checkbox" id="Other-Website">
+                    <div class="header-container gap">
+                        <a title="ChangeLog" class="Open-button"
+                            href="https://sites.google.com/view/web-tool-3-changelog/home" target="_blank">ChangeLog</a>
+                        <div class="Open-button" id="open-popup-request-permission">Browsers Permission</div>
+                    </div>
+                </div>
+                <div id="clock-container">
+                    <label class="clocks" id="label-clocks-input" for="clocks-input">
+                        <div id="clocks" class="houston_card" title="Giờ hiện tại của Texas">
+                            <p class="location-text" style="font-weight: bold;"><span class="time-text"
+                                    id="houstonClock">11:11:11</span> TX</p>
+                            <p id="houstonDay" class="day-text">Wednesday, June 15th</p>
+                        </div>
+                        <div id="clocks" class="HCM_card" title="Giờ hiện tại của TP.HCM">
+                            <p class="location-text" style="font-weight: bold;"><span id="hcmClock"
+                                    class="time-text">11:11:11</span> HCM</p>
+                            <p id="hcmDay" class="day-text">Wednesday, June 15th</p>
+                        </div>
+                    </label>
+                    <input type="checkbox" id="clocks-input">
+                    <div class="header-container classforclocks">
+                        <div id="clocks" class="houston_card" title="Giờ hiện tại của Texas">
+                            <p id="houstonClock2" class="time-text"><span>11:11:11</span></p>
+                            <p id="houstonDay2" class="day-text">Wednesday, June 15th</p>
+                            <p class="location-text">Houston, Texas</p>
+                        </div>
+                        <div id="clocks" class="HCM_card" title="Giờ hiện tại của TP.HCM">
+                            <p id="hcmClock2" class="time-text"><span>11:11:11</span></p>
+                            <p id="hcmDay2" class="day-text">Wednesday, June 15th</p>
+                            <p class="location-text">Ho Chi Minh City</p>
+                        </div>
+                        <div id="clocks" class="Victoria_card" title="Giờ hiện tại của Victoria">
+                            <p id="VicClock2" class="time-text"><span>11:11:11</span></p>
+                            <p id="VicDay2" class="day-text">Wednesday, June 15th</p>
+                            <p class="location-text">Victoria, Australia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="body-main-container">
+                <div id="first-body-main-container">
+                    <div class="MD-Icon" id="More-document_ID_NEW" data-target="More-Document_container_NEW"
+                        title="More Documents">
+                        <svg class="svg-hover" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M4 4.22222V19.7778C4 21.0051 5.02335 22 6.28571 22H17.7143C18.9767 22 20 21.0051 20 19.7778V8.44444C20 7.33988 19.1046 6.44444 18 6.44444H6.28571C5.02335 6.44444 4 5.44952 4 4.22222ZM4 4.22222C4 2.99492 5.02335 2 6.28571 2H15.4286C16.6909 2 17.7143 2.99492 17.7143 4.22222V6.44444"
+                                stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="Onboard-Icon" id="Onboard-calendar_ID" data-target="Onboard_container"
+                        title="Lịch Onboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                            <rect x="2" y="4" width="20" height="18" rx="4" stroke="currentcolor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M8 2V6" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M16 2V6" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M2 10H22" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="Truc-Icon" id="lichtruc-calendar_ID" data-target="lichtruccuoituan_container"
+                        title="Lịch trực cuối tuần">
+                        <svg class="svg-hover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                            <rect x="2" y="4" width="20" height="18" rx="4" stroke="currentcolor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M8 2V6" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M16 2V6" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M2 10H22" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="Annoucements-Icon" id="announcement_ID" data-target="Annoucements_container"
+                        title="Annoucements">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="8" y="2" width="8" height="13" rx="4"></rect>
+                            <path d="M18 16.292A7.98 7.98 0 0 1 12 19a7.98 7.98 0 0 1-6-2.708"></path>
+                            <path d="M12 19v3"></path>
+                            <path d="M10 22h4"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div id="second-body-main-container">
+                    <div id="Thanh-Thong-Bao-Container">
+                        <!-- <div class="Thong-Bao-item" data-target="Bang_Thong-Bao_Container">
+                            <div>Ngày 13 đến ngày 19: Kiểm tra Onboard Cá Nhân</div>
+                            <span>13</span>
+                            <span>19</span>
+                            <p>Các bạn vui lòng kiểm tra Onboard cá nhân của mình trước khi Lộc gom Onboard của các bạn nhé. Thanks!</p>
+                        </div>
+                        <div class="Thong-Bao-item" data-target="Bang_Thong-Bao_Container">
+                            <div>Ngày 20 đến ngày 24: Check Onboard</div>
+                            <span>20</span>
+                            <span>24</span>
+                            <p>Ngày 20 Lộc sẽ gom Onboard, Tất cả phát sinh thêm sau ngày 20, các bạn vui lòng nhắn riêng cho Lộc để Lộc biết nhé. Thanks!</p>
+                        </div>
+                        <div class="Thong-Bao-item" data-target="Bang_Thong-Bao_Container">
+                            <div>Cuối tháng: Monthly Report</div>
+                            <span>27</span>
+                            <span>31</span>
+                            <p>Team nhớ làm Monthly Report để tránh trễ lương nhé. Thanks!</p>
+                        </div> -->
+                    </div>
+                    <div name="My_To_Do_List">
+                        <details class="details-in-body-main-container">
+                            <summary>
+                                <span>
+                                    <h2 class="h2-hover" title="To-Do Cá Nhân">To-Do-List
+                                    </h2>
+                                    <span class="hidden-or-visible"></span>
+                                    <div style="position: absolute;right:2rem; top: 0.5rem; width:2rem; height: 2rem;">
+                                        <div id="my-To-do-list-loader" class="loader hidden"></div>
+                                    </div>
+                                </span>
+                                <div id="nguyen-nhan-chan-edit"
+                                    title="Chỉ chỉnh To-Do hiện tại, không di chuyển, đánh dấu, xóa, hoặc tạo reminder">
+                                    Mode
+                                    Điều
+                                    Chỉnh</div>
+                            </summary>
+                            <div class="My_To-Do-List_content">
+                                <div id="must-to-do-list-container">
+                                    <div class="To-Do-Quan-Trong">
+                                        <label class="checkbox-container">
+                                            <input class="custom-checkbox" type="checkbox"
+                                                title="Check là xong, Uncheck là chưa xong">
+                                            <span class="checkmark"></span>
+                                            <span title="Công việc quan trọng" data-index="1">Dialpad?</span>
+                                        </label>
+                                    </div>
+                                    <div class="To-Do-Quan-Trong">
+                                        <label class="checkbox-container">
+                                            <input class="custom-checkbox" type="checkbox"
+                                                title="Check là xong, Uncheck là chưa xong">
+                                            <span class="checkmark"></span>
+                                            <span title="Công việc quan trọng" data-index="1">CRM Chat?</span>
+                                        </label>
+                                    </div>
+                                    <div class="To-Do-Quan-Trong">
+                                        <label class="checkbox-container">
+                                            <input class="custom-checkbox" type="checkbox"
+                                                title="Check là xong, Uncheck là chưa xong">
+                                            <span class="checkmark"></span>
+                                            <span title="Công việc quan trọng" data-index="1">Google Chat?</span>
+                                        </label>
+                                    </div>
+                                    <div class="To-Do-Quan-Trong">
+                                        <label class="checkbox-container">
+                                            <input class="custom-checkbox" type="checkbox"
+                                                title="Check là xong, Uncheck là chưa xong">
+                                            <span class="checkmark"></span>
+                                            <span title="Công việc quan trọng" data-index="1">Ticket View và Setup
+                                                Ticket?</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div id="Current-Number-of-To-do-list">To-Do: 0 / 30</div>
+                                <div id="my-To-do-list-personal-fetch-container">
+                                </div>
+                            </div>
+                            <div id="b4-To-do-list-content">
+                                <div style="display:flex;align-items:center;justify-content: space-between;width:100%;">
+                                    <div></div>
+                                    <input placeholder="Nhập To-Do ở đây..." id="Add-To-do-list-content" type="text"
+                                        maxlength="300">
+                                    <div style="margin-inline:0.5rem">
+                                        <div class="green-add-icon" id="save-button" title="Thêm vào (Enter)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                    <div name="Check_ID_Information">
+                        <details class="details-in-body-main-container">
+                            <summary>
+                                <span>
+                                    <h2>Check ID Information</h2>
+                                    <span class="hidden-or-visible"></span>
+                                </span>
+                            </summary>
+                            <!-- <div class="flex jc-sb ai-c gap5" style="margin-bottom: 2rem;">
+                                <input class="input-lock-combo-activate" type="checkbox" id="lock-combo-activate">
+                                <label class="lock-combo-activate" for="lock-combo-activate"
+                                    title="Khi khóa: bấm trực tiếp vào nút bên dưới, tự động điền Store ID, truy cập vào nơi cần đến">
+                                    <svg id="lock-off" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="10" width="18" height="12" rx="2" fill="orangered"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M6 10V5C6 3.34315 7.34315 2 9 2H15C16.6569 2 18 3.34315 18 5V6"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                    <svg id="lock-on" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="10" width="18" height="12" rx="2" fill="lightgreen"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M6 6C6 4.34315 7.34315 3 9 3H15C16.6569 3 18 4.34315 18 6V10H6V6Z"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </label>
+                                <div class="flex jc-sb ai-c gap5" style="width: 100%;position: relative;">
+                                    <div class="InputContainer" title="Nhập ID">
+                                        <input placeholder="Enter Store ID" id="input-the-text-for-check-info"
+                                            maxlength="50"
+                                            oninput="document.getElementById('id-of-check-id-information').textContent = this.value.match(/\d+/g)?.join(',') || '';">
+                                    </div>
+                                    <div id="paste-button-check-id-information-container" class="paste-button"
+                                        onclick="pasteClipboard()" title="Dán">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M16 18V20C16 21.1046 15.1046 22 14 22H6C4.89543 22 4 21.1046 4 20V9C4 7.89543 4.89543 7 6 7H8"
+                                                fill="var(--colorlightblue)" stroke="var(--colorblue)" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path
+                                                d="M8 4V16C8 17.1046 8.89543 18 10 18L18 18C19.1046 18 20 17.1046 20 16V7.24162C20 6.7034 19.7831 6.18789 19.3982 5.81161L16.0829 2.56999C15.7092 2.2046 15.2074 2 14.6847 2H10C8.89543 2 8 2.89543 8 4Z"
+                                                fill="white" stroke="var(--colorblue)" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="hidden-InputContainer-pastebutton" title="Đã khóa"></div>
+                                </div>
+                                <div class="clear-button" onclick="clearInputAndSpan()" title="Xóa">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M3 4L5.30343 18.0765C5.54671 19.5633 6.60471 20.7872 8.04061 21.2431L8.36905 21.3473C10.7316 22.0973 13.2684 22.0973 15.6309 21.3473L15.9594 21.2431C17.3953 20.7872 18.4533 19.5633 18.6966 18.0765L21 4"
+                                            fill="gray" stroke="var(--colorlightblue)" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <ellipse cx="12" cy="4" rx="9" ry="2" fill="var(--colorwhite)"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </div> -->
+
+                            <div class="New-Lock-And-Input-Container">
+                                <label class="lock-combo-activate">
+                                    <input type="checkbox" id="lock-combo-activate">
+                                    <svg class="lock-off" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="10" width="18" height="12" rx="2" fill="orangered"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"></rect>
+                                        <path d="M6 10V5C6 3.34315 7.34315 2 9 2H15C16.6569 2 18 3.34315 18 5V6"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                    </svg>
+                                    <svg class="lock-on" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="10" width="18" height="12" rx="2" fill="lightgreen"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"></rect>
+                                        <path d="M6 6C6 4.34315 7.34315 3 9 3H15C16.6569 3 18 4.34315 18 6V10H6V6Z"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                    </svg>
+                                </label>
+                                <div class="New_Big_Input_Container">
+                                    <label class="Title_Input_Container">
+                                        <b>Store ID:</b>
+                                        <span id="id-of-check-id-information"
+                                            class="Value_Of_Title_Input_Container"></span>
+                                    </label>
+                                    <div class="New_Input_Container">
+                                        <input id="input-the-text-for-check-info" type="text"
+                                            placeholder="Điền ID tiệm vào đây"
+                                            class="input-only-take-number-to-4-numbers-output"
+                                            oninput="initInputEvents()">
+                                        <div class="Paste_New_Button"></div>
+                                        <div class="Block_Input_Container"></div>
+                                        <div class="white-delete-icon" title="Bấm Esc"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="Open-button combo" id="combo-active-button" title="Kích hoạt Combo">Combo</div>
+                            <div id="fetch-check-id-information" class="nhom4"></div>
+                        </details>
+                    </div>
+                    <div name="Enter_Dashboard_Link">
+                        <details class="details-in-body-main-container">
+                            <summary>
+                                <span>
+                                    <h2>Enter Dashboard Link</h2>
+                                    <span class="hidden-or-visible"></span>
+
+                                </span>
+                            </summary>
+                            <div class="New-Lock-And-Input-Container">
+                                <label class="lock-combo-activate">
+                                    <input type="checkbox" id="lock-combo-activate-dashboard2">
+                                    <svg class="lock-off" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="10" width="18" height="12" rx="2" fill="orangered"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"></rect>
+                                        <path d="M6 10V5C6 3.34315 7.34315 2 9 2H15C16.6569 2 18 3.34315 18 5V6"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                    </svg>
+                                    <svg class="lock-on" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="10" width="18" height="12" rx="2" fill="lightgreen"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"></rect>
+                                        <path d="M6 6C6 4.34315 7.34315 3 9 3H15C16.6569 3 18 4.34315 18 6V10H6V6Z"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                    </svg>
+                                </label>
+                                <div class="New_Big_Input_Container">
+                                    <label class="Title_Input_Container">
+                                        <b>Store ID:</b>
+                                        <span class="Value_Of_Title_Input_Container" id="URLDashboardOutput"></span>
+                                    </label>
+                                    <div class="New_Input_Container">
+                                        <input id="URLDashboardInput" type="text"
+                                            placeholder="https://insight2020.gci.fast-boy.net/"
+                                            class="input-For-Dashboard-Link" oninput="initInputEvents()">
+                                        <div class="Paste_New_Button"></div>
+                                        <div class="Block_Input_Container"></div>
+                                        <div class="white-delete-icon" title="Bấm Esc"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="Open-button" onclick="openToolsLite(event)">Tools Lite<br>(User Code is
+                                330083)
+                            </div> -->
+                            <span>
+                                <h2>POS (Payment) versions</h2>
+                            </span>
+                            <div class="similarclass">
+                                <div class="flex jc-sb ai-c">
+                                    <div class="Open-button ACCESS-Open-Button" onclick="openGoPOSforSelling(event)">
+                                        pos.gocheckin.net</div>
+                                    <div class="Open-button COPY-Open-Button"
+                                        onclick="openGoPOSforSellingtocopylink(event)" title="Copy link POS">
+                                        <svg class="svg-hover" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M8 4V16C8 17.1046 8.89543 18 10 18L18 18C19.1046 18 20 17.1046 20 16V7.24162C20 6.7034 19.7831 6.18789 19.3982 5.81161L16.0829 2.56999C15.7092 2.2046 15.2074 2 14.6847 2H10C8.89543 2 8 2.89543 8 4Z"
+                                                stroke="var(--colorlightblue)" stroke-width="1" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M16 18V20C16 21.1046 15.1046 22 14 22H6C4.89543 22 4 21.1046 4 20V9C4 7.89543 4.89543 7 6 7H8"
+                                                stroke="var(--colorlightblue)" stroke-width="1" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- <div class="flex jc-sb ai-c gap5">
+                                    <div class="Open-button" style="width: 100%;" onclick="openGoPOSforSelling(event)">pos.gocheckin.net</div>
+                                    <div class="Copy-in-Open-button" onclick="openGoPOSforSellingtocopylink(event)"
+                                        title="Copy link POS">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M8 4V16C8 17.1046 8.89543 18 10 18L18 18C19.1046 18 20 17.1046 20 16V7.24162C20 6.7034 19.7831 6.18789 19.3982 5.81161L16.0829 2.56999C15.7092 2.2046 15.2074 2 14.6847 2H10C8.89543 2 8 2.89543 8 4Z"
+                                                stroke="var(--colorlightblue)" stroke-width="1" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M16 18V20C16 21.1046 15.1046 22 14 22H6C4.89543 22 4 21.1046 4 20V9C4 7.89543 4.89543 7 6 7H8"
+                                                stroke="var(--colorlightblue)" stroke-width="1" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </div> -->
+                                <div class="flex jc-sb ai-c">
+                                    <div class="Open-button ACCESS-Open-Button" onclick="openGoPOSforSelling2(event)">
+                                        go-pos-mini-app-staging.pages.dev</div>
+                                    <div class="Open-button COPY-Open-Button"
+                                        onclick="openGoPOSforSellingtocopylink2(event)" title="Copy link POS">
+                                        <svg class="svg-hover" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M8 4V16C8 17.1046 8.89543 18 10 18L18 18C19.1046 18 20 17.1046 20 16V7.24162C20 6.7034 19.7831 6.18789 19.3982 5.81161L16.0829 2.56999C15.7092 2.2046 15.2074 2 14.6847 2H10C8.89543 2 8 2.89543 8 4Z"
+                                                stroke="var(--colorlightblue)" stroke-width="1" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M16 18V20C16 21.1046 15.1046 22 14 22H6C4.89543 22 4 21.1046 4 20V9C4 7.89543 4.89543 7 6 7H8"
+                                                stroke="var(--colorlightblue)" stroke-width="1" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <span>
+                                <h2>Dashboard versions</h2>
+                            </span>
+                            <div class="similarclass">
+                                <div class="Open-button" onclick="openDashboard3(event)">D 3.0</div>
+                                <div class="Open-button" onclick="openDashboard2(event)">D 2.0</div>
+                            </div>
+                            <span>
+                                <h2>Advanced Features</h2>
+                            </span>
+                            <div
+                                style="width:100%;display:flex;flex-direction: row;justify-content: space-between;gap:1rem">
+                                <select id="dropdown"></select>
+                                <select id="mySelect" onchange="handleSelection(event)">
+                                    <option value disabled selected>Click to choose Apps</option>
+                                    <option value="combo_checkin">GCI: Insight (passcode) + GAP + Check In & Out admin
+                                    </option>
+                                    <option value="combo_booking">BK: Insight (passcode) + GAP + Booking admin</option>
+                                    <option value="combo_POS">POS: Insight (passcode) + GAP + POS admin + POS Payment
+                                    </option>
+                                    <option disabled></option>
+                                    <option value="Dashboard_20">Dashboard 2.0</option>
+                                    <option value="Inside_Insight">Insight (passcode)</option>
+                                    <option value="GAP_Setting">GAP Setting</option>
+                                    <option value="Booking_admin">Booking 3.0</option>
+                                    <option value="Go_POS_Payment">Go POS Payment</option>
+                                    <option value="POS_admin_30">POS admin 3.0</option>
+                                    <option value="Check_In_admin_30">Check In admin 3.0</option>
+                                    <option value="Check_Out_admin_30">Check Out 3.0</option>
+                                </select>
+                            </div>
+                        </details>
+                    </div>
+                    <div name="Other_Website">
+                        <details class="details-in-body-main-container">
+                            <summary>
+                                <span>
+                                    <h2>Other Websites</h2>
+                                    <span class="hidden-or-visible"></span>
+                                </span>
+                            </summary>
+                            <h3>Click to open in new tab</h3>
+                            <div class="similarclass" id="fetch-other-documents"></div>
+                        </details>
+                    </div>
+                    <div name="Function_Tools">
+                        <details class="details-in-body-main-container">
+                            <summary>
+                                <span>
+                                    <h2>Function Tools</h2>
+                                    <span class="hidden-or-visible"></span>
+                                </span>
+                            </summary>
+                            <div id="Nhom-tools" class="similarclass nhom4">
+                                <!-- <div class="Open-button column" id="More-document_ID"
+                                    data-target="More-Document_container" title="More Documents">
+                                    <svg class="svg-hover" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M4 4.22222V19.7778C4 21.0051 5.02335 22 6.28571 22H17.7143C18.9767 22 20 21.0051 20 19.7778V8.44444C20 7.33988 19.1046 6.44444 18 6.44444H6.28571C5.02335 6.44444 4 5.44952 4 4.22222ZM4 4.22222C4 2.99492 5.02335 2 6.28571 2H15.4286C16.6909 2 17.7143 2.99492 17.7143 4.22222V6.44444"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                    More Documents
+                                </div> -->
+                                <div class="Open-button column" id="Handy_Tools_Trigger"
+                                    data-target="Handy_Tools_Container" title="Các công cụ hữu ích">
+                                    <svg class="svg-hover" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M18.9999 16L19.8692 4.26538C19.9448 3.24523 19.275 2.31876 18.2826 2.07066C17.0656 1.76642 15.8548 2.58884 15.689 3.83225L15 9"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path
+                                            d="M8 11L7.28683 6.72097C7.12131 5.72788 6.26208 5 5.25529 5C4.0442 5 3.09454 6.03991 3.20418 7.24603L4 16"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path
+                                            d="M12 13V11.5C12 10.3954 11.1046 9.5 10 9.5C8.89543 9.5 8 10.3954 8 11.5V15"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M16 13V11C16 9.89543 15.1046 9 14 9C12.8954 9 12 9.89543 12 11V13"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M19 16C18.4643 20 15.6421 22 11.5 22C7.35786 22 4 20 4 16"
+                                            stroke="var(--colorlightblue)" stroke-width="2" />
+                                        <path
+                                            d="M13.6923 17H11C9.89543 17 9 16.1046 9 15C9 13.8954 9.89543 13 11 13L15 13C17.2091 13 19.5 15 18.5 18"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                    HandyTools
+                                </div>
+                                <a href="https://tool-pos.fast-boy.net/applications/tool-order/home" target="_blank"
+                                    class="Open-button combo" style="width: 100%;"
+                                    title="Tools mới của Tech, import menu/staff, xóa OD">Tool-order</a>
+                            </div>
+                        </details>
+                    </div>
+                    <div id="Manager-Show-Container">
+                        <details class="details-in-body-main-container">
+                            <summary>
+                                <span>
+                                    <h2>Manager Tools</h2>
+                                    <span class="hidden-or-visible"></span>
+                                </span>
+                            </summary>
+                            <div id="Nhom-tools" class="similarclass nhom4">
+                                <div id="Push-Refresh-All-User" class="Open-button column"
+                                    title="Đẩy toàn bộ user làm mới Website">
+                                    <svg class="svg-hover" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M22 12C22 18 17.6095 22 12.1935 22C7.79192 22 4.24063 19.6651 3 16"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M2 12C2 6 6.3905 2 11.8065 2C16.2081 2 19.7594 4.33489 21 8"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M6.99999 17L3.00001 16L2 20" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M17 7L21 8L22 4" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    Push Refresh
+                                </div>
+                                <a class="Open-button column gap5" title="Orders Dashboard"
+                                    href="https://dashboard.gci-monitor.fast-boy.net/" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                                        <!-- Thân hộp với góc bo -->
+                                        <polygon points="8,24 32,40 56,24 32,8" fill="#F4B400" stroke="#E0A800"
+                                            stroke-width="2" stroke-linejoin="round" />
+
+                                        <!-- Nắp hộp trái -->
+                                        <polygon points="8,24 32,40 32,56 8,40" fill="#FFCA28" stroke="#E0A800"
+                                            stroke-width="2" stroke-linejoin="round" />
+
+                                        <!-- Nắp hộp phải -->
+                                        <polygon points="56,24 32,40 32,56 56,40" fill="#FFCA28" stroke="#E0A800"
+                                            stroke-width="2" stroke-linejoin="round" />
+
+                                        <!-- Đường phân nắp -->
+                                        <line x1="32" y1="40" x2="32" y2="56" stroke="#E0A800" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                    Orders Dashboard
+                                </a>
+
+                                Will Be Updated Soon.
+                            </div>
+                        </details>
+                    </div>
+                    <div id="Admin-Show-Container">
+                        <details class="details-in-body-main-container">
+                            <summary>
+                                <span>
+                                    <h2>Admin Tools</h2>
+                                    <span class="hidden-or-visible"></span>
+                                </span>
+                            </summary>
+                            <div id="Nhom-tools" class="similarclass nhom4">
+                                <div id="ChatGPTClass">
+                                    <div id="logo-chat-gpt">
+                                        <svg viewBox='0 0 320 320' xmlns='http://www.w3.org/2000/svg'>
+                                            <path fill="white"
+                                                d='m297.06 130.97c7.26-21.79 4.76-45.66-6.85-65.48-17.46-30.4-52.56-46.04-86.84-38.68-15.25-17.18-37.16-26.95-60.13-26.81-35.04-.08-66.13 22.48-76.91 55.82-22.51 4.61-41.94 18.7-53.31 38.67-17.59 30.32-13.58 68.54 9.92 94.54-7.26 21.79-4.76 45.66 6.85 65.48 17.46 30.4 52.56 46.04 86.84 38.68 15.24 17.18 37.16 26.95 60.13 26.8 35.06.09 66.16-22.49 76.94-55.86 22.51-4.61 41.94-18.7 53.31-38.67 17.57-30.32 13.55-68.51-9.94-94.51zm-120.28 168.11c-14.03.02-27.62-4.89-38.39-13.88.49-.26 1.34-.73 1.89-1.07l63.72-36.8c3.26-1.85 5.26-5.32 5.24-9.07v-89.83l26.93 15.55c.29.14.48.42.52.74v74.39c-.04 33.08-26.83 59.9-59.91 59.97zm-128.84-55.03c-7.03-12.14-9.56-26.37-7.15-40.18.47.28 1.3.79 1.89 1.13l63.72 36.8c3.23 1.89 7.23 1.89 10.47 0l77.79-44.92v31.1c.02.32-.13.63-.38.83l-64.41 37.19c-28.69 16.52-65.33 6.7-81.92-21.95zm-16.77-139.09c7-12.16 18.05-21.46 31.21-26.29 0 .55-.03 1.52-.03 2.2v73.61c-.02 3.74 1.98 7.21 5.23 9.06l77.79 44.91-26.93 15.55c-.27.18-.61.21-.91.08l-64.42-37.22c-28.63-16.58-38.45-53.21-21.95-81.89zm221.26 51.49-77.79-44.92 26.93-15.54c.27-.18.61-.21.91-.08l64.42 37.19c28.68 16.57 38.51 53.26 21.94 81.94-7.01 12.14-18.05 21.44-31.2 26.28v-75.81c.03-3.74-1.96-7.2-5.2-9.06zm26.8-40.34c-.47-.29-1.3-.79-1.89-1.13l-63.72-36.8c-3.23-1.89-7.23-1.89-10.47 0l-77.79 44.92v-31.1c-.02-.32.13-.63.38-.83l64.41-37.16c28.69-16.55 65.37-6.7 81.91 22 6.99 12.12 9.52 26.31 7.15 40.1zm-168.51 55.43-26.94-15.55c-.29-.14-.48-.42-.52-.74v-74.39c.02-33.12 26.89-59.96 60.01-59.94 14.01 0 27.57 4.92 38.34 13.88-.49.26-1.33.73-1.89 1.07l-63.72 36.8c-3.26 1.85-5.26 5.31-5.24 9.06l-.04 89.79zm14.63-31.54 34.65-20.01 34.65 20v40.01l-34.65 20-34.65-20z' />
+                                        </svg>
+                                    </div>
+                                    <div id="ChatGPTClass-container">
+                                        <details>
+                                            <summary>
+                                                <h2>Ask Open AI</h2>
+                                            </summary>
+                                            <span>Phần này chỉ cho phép hỏi một câu mỗi lần. Không lưu trữ các câu hỏi
+                                                hoặc
+                                                câu
+                                                trả
+                                                lời
+                                                trước đó. Nếu câu hỏi phức tạp, bạn có thể vào trang web <a
+                                                    href="chatgpt.com" target="_blank">chatgpt.com</a> để được hỗ trợ
+                                                thêm.</span>
+                                        </details>
+                                        <div>
+                                            <span style="margin-bottom: 1rem;">
+                                                <h3>Your Question: </h3><span id="your-question-for-chat-gpt"></span>
+                                            </span>
+                                            <span>
+                                                <h3>Open AI answers: </h3><span id="chat-gpt-answer"></span>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <select id="select-for-asking-open-AI">
+                                                <option selected disabled>Prompt</option>
+                                                <option id="option1">Bạn có thể làm gì?</option>
+                                                <option id="option2">Soạn tin nhắn</option>
+                                                <!-- <option id="option3">Làm ngắn mẫu tin nhắn</option> -->
+                                            </select>
+                                            <div>
+                                                <input id="ask-more-for-open-ai" type="text" placeholder="...">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <textarea id="write-your-question-to-ask-GPT"
+                                                placeholder="Câu hỏi của bạn là gì? Nhập nội dung ở đây..."></textarea>
+                                            <div style="margin-inline:0.5rem">
+                                                <div class="green-add-icon" id="save-button-Chat-GPT"
+                                                    title="Thêm vào (Enter)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="Open-button column gap5" title="Web-Tools Google Sheets"
+                                    href="https://docs.google.com/spreadsheets/d/1K-QzJTeqntlYhuWB83707_lkiNWRTKrP2kTJzzys58Q/edit?gid=0#gid=0"
+                                    target="_blank">
+                                    <svg class="svg-hover" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M2 6C2 6 3.5 4 7 4C10.5 4 12 6 12 6V20C12 20 10.5 19 7 19C3.5 19 2 20 2 20V6Z"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path
+                                            d="M12 6C12 6 13.5 4 17 4C20.5 4 22 6 22 6V20C22 20 20.5 19 17 19C13.5 19 12 20 12 20V6Z"
+                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                    Web-Tools Google Sheets
+                                </a>
+                                <a class="Open-button column gap10" title="GitHub Software"
+                                    href="https://github.com/SoftwareSupport-Fastboy/" target="_blank">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_100_4)">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5808 20.2773 21.0498 21.7438 19.0074C23.2103 16.9651 23.9994 14.5143 24 12C24 5.37 18.63 0 12 0Z"
+                                                fill="var(--colorlightblue)" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_100_4">
+                                                <rect width="24" height="24" fill="var(--colorlightblue)" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                    GitHub
+                                </a>
+                                <a class="Open-button column gap5" title="Google Script"
+                                    href="https://script.google.com/u/2/home/projects/1U8Wtn7eVAc_U2c8AjZhRgY-nmJvS_jEB24n54fljXDw5Uz1T43mf6bPG/edit"
+                                    target="_blank">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <mask id="cutout">
+                                                <rect x="0.75" y="16" width="18" height="5" fill="white" rx="2.5" />
+                                                <circle cx="16.5" cy="18.5" r="1.5" fill="black" />
+                                                <circle cx="3.5" cy="18.5" r="1.5" fill="black" />
+                                            </mask>
+                                        </defs>
+                                        <rect x="0.75" y="16" width="18" height="5" fill="red" rx="2.5"
+                                            mask="url(#cutout)" />
+                                        <rect x="0.75" y="16" width="18" height="5" fill="#FBBC04" rx="2.5"
+                                            mask="url(#cutout)" transform="rotate(36.6, 16.5, 18.5)" />
+                                        <rect x="0.75" y="16" width="18" height="5" fill="#34A853" rx="2.5"
+                                            mask="url(#cutout)" transform="rotate(73.3, 16.5, 18.5)" />
+                                        <rect x="0.75" y="16" width="18" height="5" fill="#4285F4" rx="2.5"
+                                            mask="url(#cutout)" transform="rotate(110, 16.5, 18.5)" />
+                                    </svg>
+                                    Google Script
+                                </a>
+                            </div>
+                        </details>
+                    </div>
+                    <div id="Solving_Skills_Study_Case_Spending_Time_Case" class="hidden_visibility">
+                        <details class="details-in-body-main-container">
+                            <summary>
+                                <span>
+                                    <h2 class="h2-hover" title="Note Cá Nhân">Note</h2>
+                                    <span class="hidden-or-visible"></span>
+                                    <div style="position: absolute;right:2rem; top: 0.5rem; width:2rem; height: 2rem;">
+                                        <div id="my-Note-loader" class="loader hidden"></div>
+                                    </div>
+                                </span>
+                            </summary>
+                            <div class="My_Note_content">
+                                <span id="My_Note_Content" contenteditable="true"></span>
+                            </div>
+                        </details>
+                    </div>
+                    <div id="Thêm vào mà chưa có ý tưởng gì" class="hidden_visibility Height100percent">
+                        <div class="New-Lock-And-Input-Container">
+                            <label class="lock-combo-activate">
+                                <input type="checkbox">
+                                <svg class="lock-off" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="10" width="18" height="12" rx="2" fill="orangered"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></rect>
+                                    <path d="M6 10V5C6 3.34315 7.34315 2 9 2H15C16.6569 2 18 3.34315 18 5V6"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </svg>
+                                <svg class="lock-on" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="10" width="18" height="12" rx="2" fill="lightgreen"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></rect>
+                                    <path d="M6 6C6 4.34315 7.34315 3 9 3H15C16.6569 3 18 4.34315 18 6V10H6V6Z"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </svg>
+                            </label>
+                            <div class="New_Big_Input_Container">
+                                <label class="Title_Input_Container">
+                                    <b>Store ID:</b>
+                                    <span class="Value_Of_Title_Input_Container"></span>
+                                </label>
+                                <div class="New_Input_Container">
+                                    <input type="text" placeholder="Điền vào"
+                                        class="input-only-take-number-to-4-numbers-output" oninput="initInputEvents()">
+                                    <div class="Paste_New_Button"></div>
+                                    <div class="Block_Input_Container"></div>
+                                    <div class="white-delete-icon" title="Bấm Esc"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="New-Lock-And-Input-Container">
+                            <label class="lock-combo-activate">
+                                <input type="checkbox">
+                                <svg class="lock-off" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="10" width="18" height="12" rx="2" fill="orangered"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></rect>
+                                    <path d="M6 10V5C6 3.34315 7.34315 2 9 2H15C16.6569 2 18 3.34315 18 5V6"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </svg>
+                                <svg class="lock-on" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="10" width="18" height="12" rx="2" fill="lightgreen"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></rect>
+                                    <path d="M6 6C6 4.34315 7.34315 3 9 3H15C16.6569 3 18 4.34315 18 6V10H6V6Z"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </svg>
+                            </label>
+                            <div class="New_Big_Input_Container">
+                                <label class="Title_Input_Container">
+                                    <b>Store ID:</b>
+                                    <span class="Value_Of_Title_Input_Container"></span>
+                                </label>
+                                <div class="New_Input_Container">
+                                    <input type="text" placeholder="Điền vào"
+                                        class="input-only-take-number-to-4-numbers-output" oninput="initInputEvents()">
+                                    <div class="Paste_New_Button"></div>
+                                    <div class="Block_Input_Container"></div>
+                                    <div class="white-delete-icon" title="Bấm Esc"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="New-Lock-And-Input-Container">
+                            <label class="lock-combo-activate">
+                                <input type="checkbox">
+                                <svg class="lock-off" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="10" width="18" height="12" rx="2" fill="orangered"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></rect>
+                                    <path d="M6 10V5C6 3.34315 7.34315 2 9 2H15C16.6569 2 18 3.34315 18 5V6"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </svg>
+                                <svg class="lock-on" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="10" width="18" height="12" rx="2" fill="lightgreen"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></rect>
+                                    <path d="M6 6C6 4.34315 7.34315 3 9 3H15C16.6569 3 18 4.34315 18 6V10H6V6Z"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </svg>
+                            </label>
+                            <div class="New_Big_Input_Container">
+                                <label class="Title_Input_Container">
+                                    <b>Store ID:</b>
+                                    <span class="Value_Of_Title_Input_Container"></span>
+                                </label>
+                                <div class="New_Input_Container">
+                                    <input type="text" placeholder="Điền vào"
+                                        class="input-only-take-number-to-4-numbers-output" oninput="initInputEvents()">
+                                    <div class="Paste_New_Button"></div>
+                                    <div class="Block_Input_Container"></div>
+                                    <div class="white-delete-icon" title="Bấm Esc"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="New-Lock-And-Input-Container">
+                            <label class="lock-combo-activate">
+                                <input type="checkbox">
+                                <svg class="lock-off" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="10" width="18" height="12" rx="2" fill="orangered"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></rect>
+                                    <path d="M6 10V5C6 3.34315 7.34315 2 9 2H15C16.6569 2 18 3.34315 18 5V6"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </svg>
+                                <svg class="lock-on" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="10" width="18" height="12" rx="2" fill="lightgreen"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></rect>
+                                    <path d="M6 6C6 4.34315 7.34315 3 9 3H15C16.6569 3 18 4.34315 18 6V10H6V6Z"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </svg>
+                            </label>
+                            <div class="New_Big_Input_Container">
+                                <label class="Title_Input_Container">
+                                    <b>Store ID:</b>
+                                    <span class="Value_Of_Title_Input_Container"></span>
+                                </label>
+                                <div class="New_Input_Container">
+                                    <input type="text" placeholder="Điền vào"
+                                        class="input-only-take-number-to-4-numbers-output" oninput="initInputEvents()">
+                                    <div class="Paste_New_Button"></div>
+                                    <div class="Block_Input_Container"></div>
+                                    <div class="white-delete-icon" title="Bấm Esc"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="New-Lock-And-Input-Container">
+                            <label class="lock-combo-activate">
+                                <input type="checkbox">
+                                <svg class="lock-off" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="10" width="18" height="12" rx="2" fill="orangered"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></rect>
+                                    <path d="M6 10V5C6 3.34315 7.34315 2 9 2H15C16.6569 2 18 3.34315 18 5V6"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </svg>
+                                <svg class="lock-on" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="10" width="18" height="12" rx="2" fill="lightgreen"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></rect>
+                                    <path d="M6 6C6 4.34315 7.34315 3 9 3H15C16.6569 3 18 4.34315 18 6V10H6V6Z"
+                                        stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </svg>
+                            </label>
+                            <div class="New_Big_Input_Container">
+                                <label class="Title_Input_Container">
+                                    <b>Store ID:</b>
+                                    <span class="Value_Of_Title_Input_Container"></span>
+                                </label>
+                                <div class="New_Input_Container">
+                                    <input type="text" placeholder="Điền vào"
+                                        class="input-only-take-number-to-4-numbers-output" oninput="initInputEvents()">
+                                    <div class="Paste_New_Button"></div>
+                                    <div class="Block_Input_Container"></div>
+                                    <div class="white-delete-icon" title="Bấm Esc"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Thêm vào mà chưa có ý tưởng gì" class="hidden_visibility Height100percent">
+                    </div>
+                </div>
+
+                <nav class="right-tools-background">
+                    <div class="Tools-Container Container_With_Close_Button DisplayNoneST" id="Onboard_container">
+                        <div class="Onboard_container_subject">
+                            LỊCH ONBOARD
+                        </div>
+                        <div style="position: absolute;top: 1rem;right: 1rem; display: flex;gap: 1.5rem;">
+                            <div id="loader-Onboard_container" class="loader hidden" style="right: 17rem;"></div>
+                            <div id="refresh-onboard" class="Open-button refresh-in-container" title="Tải lại cửa sổ">
+                                <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 12C22 18 17.6095 22 12.1935 22C7.79192 22 4.24063 19.6651 3 16"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M2 12C2 6 6.3905 2 11.8065 2C16.2081 2 19.7594 4.33489 21 8"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M6.99999 17L3.00001 16L2 20" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M17 7L21 8L22 4" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="Open-button close-in-container Close_Function_Button" title="Đóng cửa sổ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <iframe id="iframe-onboard" style="width: 100%;height: 100%;border: none;padding: 0;margin: 0;"
+                            src="https://apps.gocheckin.net/pages/login?id=fastboyorder&token=qJGEcWlaw79d-R8FnHGNXfztfCJh0Ul-ftFmLt7y&insight_id=136"
+                            frameborder="0">
+                        </iframe>
+                    </div>
+                    <div class="Tools-Container Container_With_Close_Button DisplayNoneST"
+                        id="lichtruccuoituan_container">
+                        <div style="display: flex; justify-content: space-between; width: 100%;">
+                            <div class="Chinh-sua-cap-nhat-lichtruccuoituan">
+                                <div class="New-Lock-And-Input-Container" style="height: auto;">
+                                    <div class="New_Big_Input_Container">
+                                        <label class="Title_Input_Container" style="top:-1rem;">
+                                            <b>Sheet's Name</b>
+                                        </label>
+                                        <div class="New_Input_Container">
+                                            <input id="sua-ten-sheet" type="text" placeholder="VD: 12.2024" class=""
+                                                title="Tên của Sheet tháng đó. VD: 12.2024" oninput="initInputEvents()">
+                                            <div class="Paste_New_Button"></div>
+                                            <div class="Block_Input_Container"></div>
+                                            <div class="white-delete-icon" title="Bấm Esc"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="New-Lock-And-Input-Container"
+                                    style="min-width: 15rem;width:15rem;height: auto;">
+                                    <div class="New_Big_Input_Container">
+                                        <label class="Title_Input_Container" style="top:-1rem;">
+                                            <b>First Cell</b>
+                                        </label>
+                                        <div class="New_Input_Container">
+                                            <input id="sua-o-dau-tien-trong-sheet" type="text" placeholder="VD: B3"
+                                                class="" title="Vị trí của ô đầu tiên. VD: B3"
+                                                oninput="initInputEvents()">
+                                            <div class="Paste_New_Button"></div>
+                                            <div class="Block_Input_Container"></div>
+                                            <div class="white-delete-icon" title="Bấm Esc"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="New-Lock-And-Input-Container"
+                                    style="min-width: 15rem;width:15rem;height: auto;">
+                                    <div class="New_Big_Input_Container">
+                                        <label class="Title_Input_Container" style="top:-1rem;">
+                                            <b>Last Cell</b>
+                                        </label>
+                                        <div class="New_Input_Container">
+                                            <input id="sua-o-cuoi-cung-trong-sheet" type="text" placeholder="VD: M20"
+                                                class="" title="Vị trí của ô cuối cùng. VD: M20"
+                                                oninput="initInputEvents()">
+                                            <div class="Paste_New_Button"></div>
+                                            <div class="Block_Input_Container"></div>
+                                            <div class="white-delete-icon" title="Bấm Esc"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="updateA1Btn" class="Open-button" title="Bấm để cập nhật lại lịch trực">
+                                    <div id="loader-update-lichtruc" class="loader hidden"></div>
+                                    <div id="update-id-lichtruc">Update</div>
+                                </div>
+                            </div>
+                            <div class="lichtruccuoituan_container_subject">LỊCH TRỰC CUỐI TUẦN</div>
+                            <div style="display: flex;gap: 1.5rem;position: relative;">
+                                <div id="loader-lichtruc" class="loader hidden" style="left:-5rem;"></div>
+                                <div id="Show-all-in-lichtruc-container" class="Open-button"
+                                    title="Bấm để hiện lại tất cả">
+                                    Show All
+                                </div>
+                                <a class="Open-button"
+                                    href="https://docs.google.com/spreadsheets/d/1s2a2QqSHId1XKQTW2dSoBcQ-aBNBiF54VtNKMMZ_ADQ"
+                                    target="_blank">Google Sheet</a>
+                                <div class="Open-button refresh-in-container" title="Tải lại cửa sổ"
+                                    id="refresh-id-lichtruc" onclick="refreshLichTruc()">
+                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M22 12C22 18 17.6095 22 12.1935 22C7.79192 22 4.24063 19.6651 3 16"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M2 12C2 6 6.3905 2 11.8065 2C16.2081 2 19.7594 4.33489 21 8"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M6.99999 17L3.00001 16L2 20" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M17 7L21 8L22 4" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <div class="Open-button close-in-container Close_Function_Button" title="Đóng cửa sổ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 100%;flex: 1;overflow-y: scroll;overflow-x: unset;">
+                            <div id="lich-truc-cuoi-tuan-view"></div>
+                        </div>
+                    </div>
+                    <!-- <div class="Tools-Container Container_With_Close_Button" id="More-Document_container">
+                        <div style="position: absolute;top: 1rem;right: 1rem; display: flex;gap: 1.5rem;">
+                            <div id="loader-more-documents" class="loader hidden"></div>
+                            <div id="refresh-more-documents-container" class="Open-button refresh-in-container"
+                                title="Tải lại cửa sổ">
+                                <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 12C22 18 17.6095 22 12.1935 22C7.79192 22 4.24063 19.6651 3 16"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M2 12C2 6 6.3905 2 11.8065 2C16.2081 2 19.7594 4.33489 21 8"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M6.99999 17L3.00001 16L2 20" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M17 7L21 8L22 4" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="Open-button close-in-container Close_Function_Button" title="Đóng cửa sổ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="More-Document_container_subject">MORE DOCUMENTS</div>
+                        <div class="InputContainer" title="Nhập thông tin cần tìm kiếm">
+                            <input id="search-in-more-document-table" type="text"
+                                placeholder="Nhập thông tin cần tìm kiếm">
+                        </div>
+                        <div id="more-document-table"></div>
+                    </div> -->
+                    <div class="Tools-Container Container_With_Close_Button DisplayNoneST"
+                        id="More-Document_container_NEW" style="justify-content: start;">
+                        <div style="position: absolute;top: 1rem;right: 1rem; display: flex;gap: 1.5rem;">
+                            <div id="loader-more-documents_NEW" class="loader hidden" style="left: -5rem;"></div>
+                            <div id="refresh-more-documents-container_NEW" class="Open-button refresh-in-container"
+                                title="Tải lại cửa sổ">
+                                <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 12C22 18 17.6095 22 12.1935 22C7.79192 22 4.24063 19.6651 3 16"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M2 12C2 6 6.3905 2 11.8065 2C16.2081 2 19.7594 4.33489 21 8"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M6.99999 17L3.00001 16L2 20" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M17 7L21 8L22 4" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="Open-button close-in-container Close_Function_Button" title="Đóng cửa sổ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="More-Document_container_subject" style="margin-bottom: 5rem;">MORE DOCUMENTS NEW
+                            VERSION
+                        </div>
+                        <div id="dropdown-for-choose-main-new-tag" class="DisplayNone"></div>
+                        <div style="position: relative; width: 100%; height: 100%;">
+                            <div class="Part_More_Document All selected">
+                                <div class="flex gap10" style="justify-content: space-between;align-items: center;">
+                                    <label title="Favorite" class="Open-button Favorite_row"
+                                        style="width: 12rem;align-items: center;gap:1rem;height: 1rem;">
+                                        <input id="Checked-to-see-favorite-only" type="checkbox">
+                                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <g>
+                                                <g>
+                                                    <path
+                                                        d="M9.362,9.158c0,0-3.16,0.35-5.268,0.584c-0.19,0.023-0.358,0.15-0.421,0.343s0,0.394,0.14,0.521 
+                                                    c1.566,1.429,3.919,3.569,3.919,3.569c-0.002,0-0.646,3.113-1.074,5.19c-0.036,0.188,0.032,0.387,0.196,0.506 
+                                                    c0.163,0.119,0.373,0.121,0.538,0.028c1.844-1.048,4.606-2.624,4.606-2.624s2.763,1.576,4.604,2.625 
+                                                    c0.168,0.092,0.378,0.09,0.541-0.029c0.164-0.119,0.232-0.318,0.195-0.505c-0.428-2.078-1.071-5.191-1.071-5.191 
+                                                    s2.353-2.14,3.919-3.566c0.14-0.131,0.202-0.332,0.14-0.524s-0.23-0.319-0.42-0.341c-2.108-0.236-5.269-0.586-5.269-0.586 
+                                                    s-1.31-2.898-2.183-4.83c-0.082-0.173-0.254-0.294-0.456-0.294s-0.375,0.122-0.453,0.294C10.671,6.26,9.362,9.158,9.362,9.158z">
+                                                    </path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                        <span id="span-in-button-favorite"></span>
+                                    </label>
+                                    <div title="Tag" id="filter-tag-in-more-document-container"
+                                        style="position: relative;display: flex;flex-direction: column;align-items: center;">
+                                        <input id="filter-tag-in-more-document" type="checkbox"
+                                            style="position: absolute;opacity: 0;z-index: 1;height: 2rem;width: 2rem;">
+                                        <label for="filter-tag-in-more-document" class="Open-button"
+                                            style="height: 1rem;gap: 1rem;width: 10rem;position: relative;">
+                                            <div id="count-opened-tag" class="DisplayNone"
+                                                style="color:white;position: absolute;left:1.15rem;top:2.15rem;justify-content: center;align-items: center;text-align: center;background-color: orangered;padding: 0.5rem;border-radius: 50%;width: 1rem;height: 1rem;">
+                                                00</div>
+                                            <svg class="svg-hover" style="height: 2rem;" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <ellipse cx="12" cy="5" rx="9" ry="2" stroke="var(--colorlightblue)"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path
+                                                    d="M3 5C3 7.23094 6.87106 11.6739 8.85579 13.8052C9.57875 14.5816 10 15.596 10 16.6569V19C10 20.1046 10.8954 21 12 21V21C13.1046 21 14 20.1046 14 19V16.6569C14 15.596 14.4212 14.5816 15.1442 13.8052C17.1289 11.6739 21 7.23094 21 5"
+                                                    stroke="var(--colorlightblue)" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                            <span>Tag</span>
+                                        </label>
+                                        <div id="tag-in-more-document-containter">
+                                            <div
+                                                style="display: flex;flex-direction: column;width: 100%;gap: 1rem;justify-content: center;align-items: center;">
+                                                <div class="InputContainer" style="width: 95%;"
+                                                    title="Nhập tag cần tìm kiếm">
+                                                    <input id="search-tag-more-document-NEW" type="text"
+                                                        placeholder="Tìm tag (điều kiện đủ)"
+                                                        title="Tìm tag điều kiện đủ, tức là phải đủ cả 2 hoặc nhiều tag">
+                                                </div>
+                                                <div class="Open-button"
+                                                    style="width: auto;height: auto;min-width: unset;min-height: unset;"
+                                                    id="unchecked-all-tag-in-more-document">Unchecked All Tags</div>
+                                            </div>
+                                            <div id="tag-in-more-document">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="New-Lock-And-Input-Container">
+                                        <div class="New_Big_Input_Container">
+                                            <div class="New_Input_Container">
+                                                <input id="search-in-more-document-table_NEW" type="text"
+                                                    placeholder="Nhập thông tin cần tìm kiếm">
+                                                <div class="Paste_New_Button"></div>
+                                                <div class="Block_Input_Container"></div>
+                                                <div class="white-delete-icon" title="Bấm Esc"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div title="Add New Row" id="Add-new-row-into-More-Document-NEW" class="Open-button"
+                                        style="gap:1rem">
+                                        <span style="font-size: 4rem; line-height:0%;">+</span>
+                                        <span>Add New Row</span>
+                                    </div>
+                                </div>
+                                <div id="more-document-table_NEW"></div>
+                                <div id="More-Document_container_Edit_NEW">
+                                    <div class="PositionAbso flex Top1rem Right1rem gap15 JustContentEnd">
+                                        <div id="loader-updating-more-documents_NEW" class="loader hidden"></div>
+                                    </div>
+                                    <div class="FlexCenter Padding10 gap10 BorderBottom1per10rem Width100percent">
+                                        <div id="DeleteBtn_Editing_MoreDoc_NewVer" class="Open-button"
+                                            title="Yêu cầu xóa dòng này">Request DELETE<br>This Row
+                                        </div>
+                                        <div id="SaveBtn_Editing_MoreDoc_NewVer" class="Open-button"
+                                            title="Lưu yêu cầu thay đổi">Request SAVE<br>Changes
+                                        </div>
+                                        <div id="CloseBtn_Editing_MoreDoc_NewVer" class="Open-button"
+                                            title="Đóng cửa sổ mà không lưu lại">CLOSE<br>Without
+                                            Save
+                                        </div>
+                                    </div>
+                                    <div class="OverflowHiddenAuto gap10 BoxSizing Width100percent FlexOne FlexColumn">
+                                        <div class="FlexCenter">
+                                            <h1
+                                                class="BackgroundColorBlue WidthFit PaddingInline10 ColorWhite BorderRadius1rem Margin0">
+                                                REQUEST EDITING THIS ROW</h1>
+                                        </div>
+                                        <h2 style="height: 2rem;text-align: center;box-sizing: border-box;">ID Row:
+                                            <span id="id-of-row-more-document"></span>
+                                        </h2>
+                                        <div class="BoxSizing Width100percent FlexOne FlexColumn gap10">
+                                            <div class="HeightAuto BoxSizing Width100percent FlexColumn">
+                                                <h2 class="BoxSizing">◹ Title ◺</h2>
+                                                <div>
+                                                    <div class="flex gap10 MarginBot5">
+                                                        <hr class="hidden_visibility">
+                                                        <div class="flex gap10">
+                                                            <span>Style</span>
+                                                            <div id="N-Title" class="font-style-button" title="Normal">N
+                                                            </div>
+                                                            <div id="B-Title" class="font-style-button" title="Bold">
+                                                                <b>B</b>
+                                                            </div>
+                                                            <div id="I-Title" class="font-style-button" title="Italic">
+                                                                <i>I</i>
+                                                            </div>
+                                                            <div id="U-Title" class="font-style-button"
+                                                                title="Underline">
+                                                                <u>U</u>
+                                                            </div>
+                                                            <div id="S-Title" class="font-style-button"
+                                                                title="Strikethrough">
+                                                                <s>S</s>
+                                                            </div>
+                                                        </div>
+                                                        <hr class="hidden_visibility">
+                                                        <div class="flex gap10">
+                                                            <span>Color</span>
+                                                            <div id="black-Title"
+                                                                class="font-style-button color-button black-color"
+                                                                title="Default Color"></div>
+                                                            <div id="orangered-Title"
+                                                                class="font-style-button color-button orangered-color"
+                                                                title="Orange-Red"></div>
+                                                            <div id="lightblue-Title"
+                                                                class="font-style-button color-button lightblue-color"
+                                                                title="Blue">
+                                                            </div>
+                                                            <div id="green-Title"
+                                                                class="font-style-button color-button green-color"
+                                                                title="Green"></div>
+                                                            <div id="dark-pink-Title"
+                                                                class="font-style-button color-button dark-pink-color"
+                                                                title="Dark Pink"></div>
+                                                        </div>
+                                                        <hr class="hidden_visibility">
+                                                        <div class="flex gap10">
+                                                            <span>Symbol</span>
+                                                            <div id="arrow-Title" class="font-style-button"
+                                                                title="Right Arrow">➜</div>
+                                                            <div id="RightArrow-UpTail-Title" class="font-style-button"
+                                                                title="Right Arrow with Up Tail">➥</div>
+                                                            <div id="triangle-Title" class="font-style-button"
+                                                                title="Triangle">▶</div>
+                                                            <div id="circle-Title" class="font-style-button"
+                                                                title="Circle">
+                                                                𒊹</div>
+                                                            <div id="square-Title" class="font-style-button"
+                                                                title="Square">
+                                                                ⏹︎</div>
+                                                            <div id="check-Title" class="font-style-button"
+                                                                title="Check">✔️
+                                                            </div>
+                                                            <div id="cross-Title" class="font-style-button"
+                                                                title="Cross">❌
+                                                            </div>
+                                                        </div>
+                                                        <hr class="hidden_visibility">
+                                                    </div>
+                                                </div>
+                                                <div contenteditable="true" id="Title-Of-Row-More-Document"></div>
+                                            </div>
+                                            <div
+                                                style="height: 8rem;box-sizing: border-box;width: 100%;display: flex;flex-direction: column;">
+                                                <h2 style="box-sizing: border-box;">◹ Tag ◺</h2>
+                                                <div style="display: flex;gap:1rem">
+                                                    <div style="position: relative;width: 33%;">
+                                                        <div class="InputContainer" title="Nhập thông tin cần tìm kiếm">
+                                                            <input id="search-tag-in-more-document-table-new"
+                                                                type="text" placeholder="Nhập thông tin cần tìm kiếm">
+                                                        </div>
+                                                        <div id="dropdown-for-choose-new-tag"></div>
+                                                    </div>
+                                                    <div name="Tag-Of-Row-More-Document" id="Tag-Of-Row-More-Document"
+                                                        style="width: 66%;"></div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                style="height: auto;box-sizing: border-box;width: 100%;display: flex;flex-direction: column;">
+                                                <h2 style="box-sizing: border-box;">◹ Content ◺</h2>
+                                                <div>
+                                                    <div class="flex gap10" style="margin-bottom: 0.5rem;">
+                                                        <hr class="hidden_visibility">
+                                                        <div class="flex gap10">
+                                                            <span>Style</span>
+                                                            <div id="N-Content" class="font-style-button"
+                                                                title="Normal">N
+                                                            </div>
+                                                            <div id="B-Content" class="font-style-button" title="Bold">
+                                                                <b>B</b>
+                                                            </div>
+                                                            <div id="I-Content" class="font-style-button"
+                                                                title="Italic">
+                                                                <i>I</i>
+                                                            </div>
+                                                            <div id="U-Content" class="font-style-button"
+                                                                title="Underline">
+                                                                <u>U</u>
+                                                            </div>
+                                                            <div id="S-Content" class="font-style-button"
+                                                                title="Strikethrough">
+                                                                <s>S</s>
+                                                            </div>
+                                                        </div>
+                                                        <hr class="hidden_visibility">
+                                                        <div class="flex gap10">
+                                                            <span>Color</span>
+                                                            <div id="black-Content"
+                                                                class="font-style-button color-button black-color"
+                                                                title="Default Color"></div>
+                                                            <div id="orangered-Content"
+                                                                class="font-style-button color-button orangered-color"
+                                                                title="Orange-Red"></div>
+                                                            <div id="lightblue-Content"
+                                                                class="font-style-button color-button lightblue-color"
+                                                                title="Blue"></div>
+                                                            <div id="green-Content"
+                                                                class="font-style-button color-button green-color"
+                                                                title="Green"></div>
+                                                            <div id="dark-pink-Content"
+                                                                class="font-style-button color-button dark-pink-color"
+                                                                title="Dark Pink"></div>
+                                                        </div>
+                                                        <hr class="hidden_visibility">
+                                                        <div class="flex gap10">
+                                                            <span>Symbol</span>
+                                                            <div id="arrow-Content" class="font-style-button"
+                                                                title="Right Arrow">➜</div>
+                                                            <div id="RightArrow-UpTail-Content"
+                                                                class="font-style-button"
+                                                                title="Right Arrow with Up Tail">➥</div>
+                                                            <div id="triangle-Content" class="font-style-button"
+                                                                title="Triangle">▶</div>
+                                                            <div id="circle-Content" class="font-style-button"
+                                                                title="Circle">𒊹</div>
+                                                            <div id="square-Content" class="font-style-button"
+                                                                title="Square">⏹︎</div>
+                                                            <div id="check-Content" class="font-style-button"
+                                                                title="Check">
+                                                                ✔️</div>
+                                                            <div id="cross-Content" class="font-style-button"
+                                                                title="Cross">
+                                                                ❌</div>
+                                                        </div>
+                                                        <hr class="hidden_visibility">
+                                                    </div>
+                                                </div>
+                                                <div contenteditable="true" name="Content-Of-Row-More-Document"
+                                                    id="Content-Of-Row-More-Document"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div id="More-Document_container_Edit_NEW_add-new-row">
+                                    <div class="PositionAbso flex Top1rem Right1rem gap15 JustContentEnd">
+                                        <div id="loader-updating-more-documents_NEW_add-new-row" class="loader hidden">
+                                        </div>
+                                    </div>
+                                    <div class="FlexCenter Padding10 gap10 BorderBottom1per10rem Width100percent">
+                                        <div id="SaveBtn_RequestAddRow_MoreDocTable_NewVer" class="Open-button green"
+                                            title="Lưu yêu cầu">SAVE
+                                        </div>
+                                        <div id="CloseBtn_RequestAddRow_MoreDoc_NewVer" class="Open-button green"
+                                            title="Đóng cửa sổ">CLOSE
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="OverflowHiddenAuto gap10 Padding10 Width100percent HeightAuto FlexColumn">
+                                        <div class="FlexCenter">
+                                            <h1
+                                                class="BackgroundColorGreen WidthFit PaddingInline10 ColorWhite BorderRadius1rem Margin0">
+                                                REQUEST ADDING NEW ROW</h1>
+                                        </div>
+                                        <div class="BoxSizing Width100percent FlexOne FlexColumn gap10">
+                                            <div class="HeightAuto BoxSizing Width100percent FlexColumn">
+                                                <h2 class="BoxSizing green">◹ Title New Row ◺</h2>
+                                                <div>
+                                                    <div class="flex gap10 MarginBot5">
+                                                        <hr class="hidden_visibility">
+                                                        <div class="flex gap10">
+                                                            <span>Style</span>
+                                                            <div id="N-Title_add-new-row" class="font-style-button"
+                                                                title="Normal">N</div>
+                                                            <div id="B-Title_add-new-row" class="font-style-button"
+                                                                title="Bold"><b>B</b></div>
+                                                            <div id="I-Title_add-new-row" class="font-style-button"
+                                                                title="Italic"><i>I</i></div>
+                                                            <div id="U-Title_add-new-row" class="font-style-button"
+                                                                title="Underline"><u>U</u></div>
+                                                            <div id="S-Title_add-new-row" class="font-style-button"
+                                                                title="Strikethrough"><s>S</s></div>
+                                                        </div>
+                                                        <hr class="hidden_visibility">
+                                                        <div class="flex gap10">
+                                                            <span>Color</span>
+                                                            <div id="black-Title_add-new-row"
+                                                                class="font-style-button color-button black-color"
+                                                                title="Default Color"></div>
+                                                            <div id="orangered-Title_add-new-row"
+                                                                class="font-style-button color-button orangered-color"
+                                                                title="Orange-Red"></div>
+                                                            <div id="lightblue-Title_add-new-row"
+                                                                class="font-style-button color-button lightblue-color"
+                                                                title="Blue"></div>
+                                                            <div id="green-Title_add-new-row"
+                                                                class="font-style-button color-button green-color"
+                                                                title="Green"></div>
+                                                            <div id="dark-pink-Title_add-new-row"
+                                                                class="font-style-button color-button dark-pink-color"
+                                                                title="Dark Pink"></div>
+                                                        </div>
+                                                        <hr class="hidden_visibility">
+                                                        <div class="flex gap10">
+                                                            <span>Symbol</span>
+                                                            <div id="arrow-Title_add-new-row" class="font-style-button"
+                                                                title="Right Arrow">➜</div>
+                                                            <div id="RightArrow-UpTail-Title_add-new-row"
+                                                                class="font-style-button"
+                                                                title="Right Arrow with Up Tail">➥
+                                                            </div>
+                                                            <div id="triangle-Title_add-new-row"
+                                                                class="font-style-button" title="Triangle">▶</div>
+                                                            <div id="circle-Title_add-new-row" class="font-style-button"
+                                                                title="Circle">𒊹</div>
+                                                            <div id="square-Title_add-new-row" class="font-style-button"
+                                                                title="Square">⏹︎</div>
+                                                            <div id="check-Title_add-new-row" class="font-style-button"
+                                                                title="Check">✔️</div>
+                                                            <div id="cross-Title_add-new-row" class="font-style-button"
+                                                                title="Cross">❌</div>
+                                                        </div>
+                                                        <hr class="hidden_visibility">
+                                                    </div>
+                                                </div>
+                                                <div contenteditable="true" id="Title-Of-Row-More-Document_add-new-row">
+                                                </div>
+                                            </div>
+                                            <div
+                                                style="height: 8rem;box-sizing: border-box;width: 100%;display: flex;flex-direction: column;">
+                                                <h2 class="green" style="box-sizing: border-box;">◹ Tag New Row
+                                                    (recommended
+                                                    but not required) ◺</h2>
+                                                <div style="display: flex;gap:1rem">
+                                                    <div style="position: relative;width: 33%;">
+                                                        <div class="InputContainer green"
+                                                            title="Nhập thông tin cần tìm kiếm">
+                                                            <input
+                                                                id="search-tag-in-more-document-table-new_add-new-row"
+                                                                type="text" placeholder="Nhập thông tin cần tìm kiếm">
+                                                        </div>
+                                                        <div id="dropdown-for-choose-new-tag_add-new-row"></div>
+                                                    </div>
+                                                    <div name="Tag-Of-Row-More-Document"
+                                                        id="Tag-Of-Row-More-Document_add-new-row"
+                                                        style="width: 66%;border-color: green;"></div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                style="height: auto;box-sizing: border-box;width: 100%;display: flex;flex-direction: column;">
+                                                <h2 class="green" style="box-sizing: border-box;">◹ Content New Row
+                                                    (required) ◺</h2>
+                                                <div>
+                                                    <div class="flex gap10" style="margin-bottom: 0.5rem;">
+                                                        <hr class="hidden_visibility">
+                                                        <div class="flex gap10">
+                                                            <span>Style</span>
+                                                            <div id="N-Content_add-new-row" class="font-style-button"
+                                                                title="Normal">N</div>
+                                                            <div id="B-Content_add-new-row" class="font-style-button"
+                                                                title="Bold"><b>B</b></div>
+                                                            <div id="I-Content_add-new-row" class="font-style-button"
+                                                                title="Italic"><i>I</i></div>
+                                                            <div id="U-Content_add-new-row" class="font-style-button"
+                                                                title="Underline"><u>U</u></div>
+                                                            <div id="S-Content_add-new-row" class="font-style-button"
+                                                                title="Strikethrough"><s>S</s></div>
+                                                        </div>
+                                                        <hr class="hidden_visibility">
+                                                        <div class="flex gap10">
+                                                            <span>Color</span>
+                                                            <div id="black-Content_add-new-row"
+                                                                class="font-style-button color-button black-color"
+                                                                title="Default Color"></div>
+                                                            <div id="orangered-Content_add-new-row"
+                                                                class="font-style-button color-button orangered-color"
+                                                                title="Orange-Red"></div>
+                                                            <div id="lightblue-Content_add-new-row"
+                                                                class="font-style-button color-button lightblue-color"
+                                                                title="Blue"></div>
+                                                            <div id="green-Content_add-new-row"
+                                                                class="font-style-button color-button green-color"
+                                                                title="Green"></div>
+                                                            <div id="dark-pink-Content_add-new-row"
+                                                                class="font-style-button color-button dark-pink-color"
+                                                                title="Dark Pink"></div>
+                                                        </div>
+                                                        <hr class="hidden_visibility">
+                                                        <div class="flex gap10">
+                                                            <span>Symbol</span>
+                                                            <div id="arrow-Content_add-new-row"
+                                                                class="font-style-button" title="Right Arrow">➜</div>
+                                                            <div id="RightArrow-UpTail-Content_add-new-row"
+                                                                class="font-style-button"
+                                                                title="Right Arrow with Up Tail">➥
+                                                            </div>
+                                                            <div id="triangle-Content_add-new-row"
+                                                                class="font-style-button" title="Triangle">▶</div>
+                                                            <div id="circle-Content_add-new-row"
+                                                                class="font-style-button" title="Circle">𒊹</div>
+                                                            <div id="square-Content_add-new-row"
+                                                                class="font-style-button" title="Square">⏹︎</div>
+                                                            <div id="check-Content_add-new-row"
+                                                                class="font-style-button" title="Check">✔️</div>
+                                                            <div id="cross-Content_add-new-row"
+                                                                class="font-style-button" title="Cross">❌</div>
+                                                        </div>
+                                                        <hr class="hidden_visibility">
+                                                    </div>
+                                                </div>
+                                                <div style="border-color: green;" contenteditable="true"
+                                                    name="Content-Of-Row-More-Document"
+                                                    id="Content-Of-Row-More-Document_add-new-row"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+                            <div id="Approval-Part-More-Document"
+                                class="Part_More_Document Approval hidden_visibility NumbersRequest">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Có <span id="Numbers-Of-Request-In-More-Document-NEW"></span> request đang chờ
+                                        bạn xử lý</span>
+                                    <button id="Re-fetch-new-request-more-document-NEW" class="Open-button DisplayNone"
+                                        style="width: fit-content;height: auto;min-width: unset;min-height: unset;padding: 0.5rem"
+                                        title="Lấy các request mới">Re-fetch New Request</button>
+                                </div>
+                                <div class="div-container-with-overflow-y">
+                                    <details title="Các lưu ý khi dùng" open>
+                                        <summary>
+                                            <h2>Các lưu ý khi dùng:</h2>
+                                        </summary>
+                                        <div style="display: flex; gap: 2rem; line-height: 2; margin-top: 1rem;">
+                                            <div style="flex: 1;">
+                                                <b>A. Nguyên tắc về màu sắc:</b><br>
+                                                <span>1. Request Edit (Yêu cầu chỉnh sửa) sẽ có nền màu trắng</span><br>
+                                                <span>2. <mark
+                                                        style="background-color: rgba(154, 255, 193, 0.4);">Request Add
+                                                        New Row (Yêu cầu thêm dòng mới) sẽ có nền màu xanh lá
+                                                        cây</mark></span><br>
+                                                <span>3. Các Tag đã có sẵn sẽ có <button class="tag-More-Documents">nền
+                                                        cam chữ đen</button>; các Tag mới sẽ có <button
+                                                        class="tag-More-Documents green-background-tag">nền xanh lá chữ
+                                                        đen</button>; các Tag bị xoá sẽ có <button
+                                                        class="tag-More-Documents gray-background-tag">nền xám chữ đen
+                                                        có sọc ngang</button></span><br>
+                                                <span>4. Trong Title và Content, các chữ <mark>nền vàng chữ đen</mark>
+                                                    là nội dung mới</span>
+                                            </div>
+                                            <div style="flex: 1;">
+                                                <b>B. Cách sử dụng:</b><br>
+                                                <span>1. Bấm nút <button class="Open-button"
+                                                        style="width: fit-content;height: auto;min-width: unset;min-height: unset;padding: 0.5rem;user-select: none;pointer-events: none;display: inline;">Re-fetch
+                                                        New Request</button> để làm mới, lấy thêm các request
+                                                    mới.</span><br>
+                                                <span>2. Hãy <b style="color: var(--colorlightblue);">Push Refresh</b>
+                                                    <div id="Push-Refresh-All-User" class="Open-button column"
+                                                        style="width: 3rem;min-width: unset;min-height: unset;padding: 0.5rem;display: inline-flex;user-select: none;pointer-events: none">
+                                                        <svg class="svg-hover" viewBox="0 0 24 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M22 12C22 18 17.6095 22 12.1935 22C7.79192 22 4.24063 19.6651 3 16"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            <path
+                                                                d="M2 12C2 6 6.3905 2 11.8065 2C16.2081 2 19.7594 4.33489 21 8"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            <path d="M6.99999 17L3.00001 16L2 20" stroke="currentColor"
+                                                                stroke-width="2" stroke-linecap="round"
+                                                                stroke-linejoin="round"></path>
+                                                            <path d="M17 7L21 8L22 4" stroke="currentColor"
+                                                                stroke-width="2" stroke-linecap="round"
+                                                                stroke-linejoin="round"></path>
+                                                        </svg>
+                                                    </div> (nút nằm bên ngoài, ở Manager Tools) sau khi bạn xử lý xong
+                                                    để bắt buộc toàn bộ user cập nhật lên
+                                                </span><br>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </details>
+                                    <div id="Approval-Part-More-Document-NEW-container"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Tools-Container Container_With_Close_Button DisplayNoneST" id="Annoucements_container">
+                        <div style="position: absolute;top: 1rem;right: 1rem; display: flex;gap: 1.5rem;">
+                            <div id="loader-Annoucements_container" class="loader hidden" style="left: -5rem;"></div>
+                            <div id="refresh-annoucement-container" class="Open-button refresh-in-container"
+                                title="Tải lại cửa sổ">
+                                <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 12C22 18 17.6095 22 12.1935 22C7.79192 22 4.24063 19.6651 3 16"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M2 12C2 6 6.3905 2 11.8065 2C16.2081 2 19.7594 4.33489 21 8"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M6.99999 17L3.00001 16L2 20" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M17 7L21 8L22 4" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="Open-button close-in-container Close_Function_Button" title="Đóng cửa sổ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="Annoucements_container_subject">ANNOUCEMENTS</div>
+                        <div class="New-Lock-And-Input-Container">
+                            <div class="New_Big_Input_Container">
+                                <div class="New_Input_Container">
+                                    <input id="search-in-Annoucements-table" type="text"
+                                        placeholder="Nhập thông tin cần tìm kiếm">
+                                    <div class="Paste_New_Button"></div>
+                                    <div class="Block_Input_Container"></div>
+                                    <div class="white-delete-icon" title="Bấm Esc"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="Annoucements-table"></div>
+                    </div>
+                    <div class="Tools-Container Container_With_Close_Button DisplayNoneST" id="BoxEditPersonalSMS">
+                        <div class="flex jc-center gap10">
+                            <div id="save-button-for-BoxEditPersonalSMS" class="Open-button" title="Lưu chỉnh sửa">Save
+                            </div>
+                            <div id="close-button-for-BoxEditPersonalSMS" class="Open-button Close_Function_Button"
+                                title="Hủy chỉnh sửa">
+                                Close
+                            </div>
+                        </div>
+                        <div>
+                            <h2>Subject</h2>
+                            <h2>SMS Content</h2>
+                        </div>
+                        <div id="BoxEditPersonalSMSFromFetch"></div>
+                    </div>
+                    <div class="Tools-Container Container_With_Close_Button DisplayNoneST" id="Handy_Tools_Container"
+                        style="justify-content: start;">
+                        <div class="Converter_time_container_subject">HandyTools</div>
+                        <div style="position: absolute;top: 1rem;right: 1rem; display: flex;gap: 1.5rem;">
+                            <div class="Open-button close-in-container Close_Function_Button" title="Đóng cửa sổ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <div
+                            style="width: 100%;height: 100%;display: flex;flex-wrap: wrap; gap: 2rem; justify-content: space-between;">
+                            <details open>
+                                <summary>
+                                    <h2>
+                                        Tip Splitter
+                                    </h2>
+                                </summary>
+                                <div id="TipSplitterContainer">
+                                    <div>
+                                        <div>Staff Name (Not Required)</div>
+                                        <div>Service Price</div>
+                                        <div>Tips</div>
+                                    </div>
+                                    <div>
+                                        <div>Tab moves downward.<br>After the last input, it loops back to the first
+                                        </div>
+                                        <div>Total: <span id="totalprice"></span></div>
+                                        <div
+                                            style="display: flex;position: relative;justify-content: center;align-items: center;">
+                                            <span style="position: absolute;left: 1rem;">$</span>
+                                            <input class="date-input-in-timeconverter" style="padding-left: 2.6rem;"
+                                                min="0" max="100000" type="number" id="totaltip" placeholder="Total tip"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <input class="date-input-in-timeconverter" type="text" id="name1"
+                                            placeholder="Staff Name (Not required)" />
+                                        <div
+                                            style="display: flex;position: relative;justify-content: center;align-items: center;">
+                                            <span style="position: absolute;left: 1rem;">$</span>
+                                            <input class="date-input-in-timeconverter" style="padding-left: 2.6rem;"
+                                                min="0" max="10000" type="number" id="price1"
+                                                placeholder="Service amount" required>
+                                        </div>
+                                        <div id="tip1" class="buttontipcopy"></div>
+                                    </div>
+                                    <div>
+                                        <input class="date-input-in-timeconverter" type="text" id="name2"
+                                            placeholder="Staff Name (Not required)" />
+                                        <div
+                                            style="display: flex;position: relative;justify-content: center;align-items: center;">
+                                            <span style="position: absolute;left: 1rem;">$</span>
+                                            <input class="date-input-in-timeconverter" style="padding-left: 2.6rem;"
+                                                min="0" max="10000" type="number" id="price2"
+                                                placeholder="Service amount" required>
+                                        </div>
+                                        <div id="tip2" class="buttontipcopy"></div>
+                                    </div>
+                                    <div>
+                                        <input class="date-input-in-timeconverter" type="text" id="name3"
+                                            placeholder="Staff Name (Not required)" />
+                                        <div
+                                            style="display: flex;position: relative;justify-content: center;align-items: center;">
+                                            <span style="position: absolute;left: 1rem;">$</span>
+                                            <input class="date-input-in-timeconverter" style="padding-left: 2.6rem;"
+                                                min="0" max="10000" type="number" id="price3"
+                                                placeholder="Service amount" required>
+                                        </div>
+                                        <div id="tip3" class="buttontipcopy"></div>
+                                    </div>
+                                    <div>
+                                        <div id="add-row-in-TipSplitterContainer" class="Open-button"
+                                            style="text-align: center;justify-content: center;">Click to add row</div>
+                                        <div id="clear-all-data-in-TipSplitterContainer" class="Open-button"
+                                            style="text-align: center;justify-content: center;">Clear all data</div>
+                                    </div>
+                                    (*) At these Buttons, you can click to copy the numbers directly.
+                                </div>
+                            </details>
+                            <details open>
+                                <summary>
+                                    <h2>
+                                        Time Converter
+                                    </h2>
+                                </summary>
+                                <div style="height: auto;width: 100%;gap: 1rem;display: flex;flex-direction: column;">
+                                    <div class="son_of_Converter_time_container" title="Giờ hiện tại của tiệm">
+                                        <span style="width: 40%;">Giờ hiện tại của tiệm / Current store time:</span>
+                                        <span id="Current-store-time" class="DisplayNone"></span>
+                                        <div style="width: 60%;display: flex;justify-content: space-between;">
+                                            <input id="input-Current-store-time" type="date"
+                                                style="width: 0; height: 0;opacity: 0;position: absolute;">
+                                            <label class="date-input-in-timeconverter" for="input-Current-store-time"
+                                                style="user-select: auto;">Choose Date</label>
+                                            <div class="time_container">
+                                                <input id="Now-hour-time-in-store" type="number" maxlength="2" min="1"
+                                                    max="12" title="Giờ hiện tại của tiệm" placeholder="hh">
+                                                <select id="store-am-pm">
+                                                    <option value="AM">AM</option>
+                                                    <option value="PM">PM</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="son_of_Converter_time_container" title="Giờ hiện tại ở Texas">
+                                        <span style="width: 40%;">Giờ hiện tại ở Texas / Current Texas time:</span>
+                                        <span id="Now-in-TX" class="DisplayNone"></span>
+                                        <div style="width: 60%;display: flex;justify-content: space-between;">
+                                            <span id="Now-date-in-TX"
+                                                style="width: 25rem; display: flex;justify-content: center;align-items: center;text-align: center;"></span>
+                                            <span id="Now-time-in-TX"
+                                                style="width: 16rem; display: flex;justify-content: center;align-items: center;text-align: center;"></span>
+                                        </div>
+                                    </div>
+                                    <span
+                                        style="color: var(--colorlightblue);font-weight: bold;font-size: 1.2rem;padding-inline: 2rem;box-sizing: border-box;">Chênh
+                                        lệch: <span id="chech-lech-gio"></span></span>
+                                    <div class="son_of_Converter_time_container" title="Thời gian khách hàng chọn">
+                                        <div style="width: 40%;display: flex;flex-direction: column;">
+                                            <span>Thời gian khách hàng chọn / Time chosen by customer:</span>
+                                        </div>
+                                        <span id="Date-Time-chosen-by-customer" class="DisplayNone"></span>
+                                        <div style="width: 60%;display: flex;justify-content: space-between;">
+                                            <input id="input-Time-chosen-by-customer" type="date"
+                                                style="width: 0; height: 0;opacity: 0;position: absolute;">
+                                            <label class="date-input-in-timeconverter"
+                                                for="input-Time-chosen-by-customer">Choose
+                                                Date</label>
+                                            <div class="time_container">
+                                                <input id="hour-time-they-choose" type="number" maxlength="2" min="1"
+                                                    max="12" title="Giờ tiệm muốn hẹn" placeholder="hh">
+                                                <select id="customer-am-pm">
+                                                    <option value="AM">AM</option>
+                                                    <option value="PM">PM</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="son_of_Converter_time_container" title="Thời gian hẹn theo Texas"
+                                        style="background-color: var(--colorblue); color: white;">
+                                        <div style="width: 40%;display: flex;flex-direction: column;">
+                                            <span>Thời gian hẹn theo Texas / Appointment time in Texas time:</span>
+                                        </div>
+                                        <div style="width: 60%;display: flex;justify-content: space-between;">
+                                            <span id="date-right-appointments-in-TX"
+                                                style="width: 25rem; display: flex;justify-content: center;align-items: center;text-align: center;"></span>
+                                            <span id="time-right-appointments-in-TX"
+                                                style="width: 16rem; display: flex;justify-content: center;align-items: center;text-align: center;"></span>
+                                        </div>
+                                    </div>
+                                    <div class="Open-button" onclick="calculateAppointmentTime()">Calculating</div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                    <div class="Tools-Container Container_With_Close_Button DisplayNoneST" id="Bang_Thong-Bao_Container"
+                        style="justify-content: start;width: 50%;height: 75%;transform: translate(50%, 15%);">
+                        <div style="position: absolute;top: 1rem;right: 1rem; display: flex;gap: 1.5rem;">
+                            <div class="Open-button close-in-container Close_Function_Button" title="Đóng cửa sổ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="Annoucements_container_subject">THÔNG BÁO</div>
+                        <div style="text-align: left; font-size: 2.3rem !important;line-height: 2;width:100%">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                    </div>
+                </nav>
+
+                <div id="Update-Container"></div>
+
+            </div>
+            <div id="footer-main-container">
+                <div class="" id="fetchSMSFromManagers">
+                    <div class="columnB My-Personal-SMS">
+                        <div class="columngroupC" id="fetchSMSFromPersonal">
+                            <div class="columnC empty-SMS" id="AdddivWrapper"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="Call-Web3-Script.js"></script>
+    <script src="Web-Tools-3-Script.js"></script>
+</body>
+
+</html>
