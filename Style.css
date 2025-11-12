@@ -5279,7 +5279,7 @@ details:not([open]) .hidden-or-visible::after {
     line-height: 1.3rem;
     color: var(--colorblack);
     position: fixed;
-    z-index: 9999;
+    z-index: 1000001;
     transform: translateY(-100%);
     font-size: 1rem;
     max-width: 45rem;
