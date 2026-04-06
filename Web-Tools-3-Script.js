@@ -3262,12 +3262,13 @@ async function fetchInitMainInterface() {
         const response = await fetch(scriptURL);
         const result = await response.json();
 
-        const { profile, server, otherDocuments } = result;
+        const { profile, server, otherDocuments, miniAnnouncement } = result;
 
         // Gọi lại các hàm render cũ
         renderCheckIDInformation(profile);
         createLinksGetServer(server);
         createLinksGetOtherDocuments(otherDocuments);
+        loadMiniRunningAnnoucement(miniAnnouncement);
 
     } catch (error) {
         console.error('Error fetching init data:', error);
@@ -7134,71 +7135,128 @@ async function fetchAndDisplayDocumentsNEW() {
 }
 
 
-function loadMiniRunningAnnoucement() {
-    fetch("https://script.google.com/macros/s/AKfycbxy2wam-fhMZKGwB5LrJWTT-sCzpCytwZhUIcjBhmx9SojWSuAwVudAPCRx0CN7488/exec?action=getMiniRunningAnnoucement")
-        .then(response => response.json())
-        .then(data => {
-            const container = document.getElementById("Thanh-Thong-Bao-Container");
-            container.innerHTML = ""; // Xoá nội dung cũ
+function loadMiniRunningAnnoucement(data) {
+    const container = document.getElementById("Thanh-Thong-Bao-Container");
+    container.innerHTML = "";
 
-            if (!data || !Array.isArray(data.data) || data.data.length === 0) {
-                return;
-            }
+    if (!data || !Array.isArray(data) || data.length === 0) {
+        return;
+    }
 
-            const today = new Date().getDate(); // Lấy ngày hiện tại (1–31)
+    const today = new Date().getDate();
 
-            // Lọc các dòng phù hợp với ngày hiện tại
-            const filteredData = data.data.filter(row => {
-                const [, start, end] = row.map(Number); // Ép kiểu cho chắc chắn
-                if (isNaN(start) || isNaN(end)) return false;
+    const filteredData = data.filter(row => {
+        const [, start, end] = row.map(Number);
+        if (isNaN(start) || isNaN(end)) return false;
 
-                if (start <= end) {
-                    return today >= start && today <= end;
-                } else {
-                    // Trường hợp qua tháng: ví dụ 28 → 3
-                    return today >= start || today <= end;
-                }
-            });
+        if (start <= end) {
+            return today >= start && today <= end;
+        } else {
+            return today >= start || today <= end;
+        }
+    });
 
-            if (filteredData.length === 0) return;
+    if (filteredData.length === 0) return;
 
-            // Có dữ liệu thì hiển thị container
-            container.style.display = "flex";
+    container.style.display = "flex";
 
-            filteredData.forEach(row => {
-                const [title, start, end, content] = row;
+    filteredData.forEach(row => {
+        const [title, start, end, content] = row;
 
-                const itemDiv = document.createElement("div");
-                itemDiv.className = "Thong-Bao-item";
-                itemDiv.setAttribute("data-target", "Bang_Thong-Bao_Container");
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "Thong-Bao-item";
+        itemDiv.setAttribute("data-target", "Bang_Thong-Bao_Container");
 
-                const titleDiv = document.createElement("div");
-                titleDiv.textContent = title;
+        const titleDiv = document.createElement("div");
+        titleDiv.textContent = title;
 
-                const startSpan = document.createElement("span");
-                startSpan.textContent = start;
+        const startSpan = document.createElement("span");
+        startSpan.textContent = start;
 
-                const endSpan = document.createElement("span");
-                endSpan.textContent = end;
+        const endSpan = document.createElement("span");
+        endSpan.textContent = end;
 
-                const contentP = document.createElement("p");
-                contentP.textContent = content;
+        const contentP = document.createElement("p");
+        contentP.textContent = content;
 
-                itemDiv.appendChild(titleDiv);
-                itemDiv.appendChild(startSpan);
-                itemDiv.appendChild(endSpan);
-                itemDiv.appendChild(contentP);
+        itemDiv.appendChild(titleDiv);
+        itemDiv.appendChild(startSpan);
+        itemDiv.appendChild(endSpan);
+        itemDiv.appendChild(contentP);
 
-                container.appendChild(itemDiv);
-            });
+        container.appendChild(itemDiv);
+    });
 
-            create_repeated_message_string();
-            ClickVaoThongBao();
-        })
-        .catch(error => {
-            console.error("Lỗi khi tải thông báo:", error);
-        });
+    create_repeated_message_string();
+    ClickVaoThongBao();
 }
+
+
+// function loadMiniRunningAnnoucement() {
+//     fetch("https://script.google.com/macros/s/AKfycbxy2wam-fhMZKGwB5LrJWTT-sCzpCytwZhUIcjBhmx9SojWSuAwVudAPCRx0CN7488/exec?action=getMiniRunningAnnoucement")
+//         .then(response => response.json())
+//         .then(data => {
+//             const container = document.getElementById("Thanh-Thong-Bao-Container");
+//             container.innerHTML = ""; // Xoá nội dung cũ
+
+//             if (!data || !Array.isArray(data.data) || data.data.length === 0) {
+//                 return;
+//             }
+
+//             const today = new Date().getDate(); // Lấy ngày hiện tại (1–31)
+
+//             // Lọc các dòng phù hợp với ngày hiện tại
+//             const filteredData = data.data.filter(row => {
+//                 const [, start, end] = row.map(Number); // Ép kiểu cho chắc chắn
+//                 if (isNaN(start) || isNaN(end)) return false;
+
+//                 if (start <= end) {
+//                     return today >= start && today <= end;
+//                 } else {
+//                     // Trường hợp qua tháng: ví dụ 28 → 3
+//                     return today >= start || today <= end;
+//                 }
+//             });
+
+//             if (filteredData.length === 0) return;
+
+//             // Có dữ liệu thì hiển thị container
+//             container.style.display = "flex";
+
+//             filteredData.forEach(row => {
+//                 const [title, start, end, content] = row;
+
+//                 const itemDiv = document.createElement("div");
+//                 itemDiv.className = "Thong-Bao-item";
+//                 itemDiv.setAttribute("data-target", "Bang_Thong-Bao_Container");
+
+//                 const titleDiv = document.createElement("div");
+//                 titleDiv.textContent = title;
+
+//                 const startSpan = document.createElement("span");
+//                 startSpan.textContent = start;
+
+//                 const endSpan = document.createElement("span");
+//                 endSpan.textContent = end;
+
+//                 const contentP = document.createElement("p");
+//                 contentP.textContent = content;
+
+//                 itemDiv.appendChild(titleDiv);
+//                 itemDiv.appendChild(startSpan);
+//                 itemDiv.appendChild(endSpan);
+//                 itemDiv.appendChild(contentP);
+
+//                 container.appendChild(itemDiv);
+//             });
+
+//             create_repeated_message_string();
+//             ClickVaoThongBao();
+//         })
+//         .catch(error => {
+//             console.error("Lỗi khi tải thông báo:", error);
+//         });
+// }
 
 
 
