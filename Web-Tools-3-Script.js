@@ -1,4 +1,3 @@
-// Kiểm tra Brownser đã cho phép Permission Đọc ClipBoard và Mở nhiều cửa sổ
 function checkPermissions() {
     navigator.permissions.query({ name: 'clipboard-read' }).then(function (result) {
         try {
