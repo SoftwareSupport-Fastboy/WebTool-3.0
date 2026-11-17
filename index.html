@@ -1059,147 +1059,7 @@
                             </div>
                         </details>
                     </div>
-                    <div id="Admin-Show-Container">
-                        <details class="details-in-body-main-container">
-                            <summary>
-                                <span>
-                                    <h2>Admin Tools</h2>
-                                    <span class="hidden-or-visible"></span>
-                                </span>
-                            </summary>
-                            <div id="Nhom-tools" class="similarclass nhom4">
-                                <!-- <div id="ChatGPTClass">
-                                    <div id="logo-chat-gpt">
-                                        <svg viewBox='0 0 320 320' xmlns='http://www.w3.org/2000/svg'>
-                                            <path fill="white"
-                                                d='m297.06 130.97c7.26-21.79 4.76-45.66-6.85-65.48-17.46-30.4-52.56-46.04-86.84-38.68-15.25-17.18-37.16-26.95-60.13-26.81-35.04-.08-66.13 22.48-76.91 55.82-22.51 4.61-41.94 18.7-53.31 38.67-17.59 30.32-13.58 68.54 9.92 94.54-7.26 21.79-4.76 45.66 6.85 65.48 17.46 30.4 52.56 46.04 86.84 38.68 15.24 17.18 37.16 26.95 60.13 26.8 35.06.09 66.16-22.49 76.94-55.86 22.51-4.61 41.94-18.7 53.31-38.67 17.57-30.32 13.55-68.51-9.94-94.51zm-120.28 168.11c-14.03.02-27.62-4.89-38.39-13.88.49-.26 1.34-.73 1.89-1.07l63.72-36.8c3.26-1.85 5.26-5.32 5.24-9.07v-89.83l26.93 15.55c.29.14.48.42.52.74v74.39c-.04 33.08-26.83 59.9-59.91 59.97zm-128.84-55.03c-7.03-12.14-9.56-26.37-7.15-40.18.47.28 1.3.79 1.89 1.13l63.72 36.8c3.23 1.89 7.23 1.89 10.47 0l77.79-44.92v31.1c.02.32-.13.63-.38.83l-64.41 37.19c-28.69 16.52-65.33 6.7-81.92-21.95zm-16.77-139.09c7-12.16 18.05-21.46 31.21-26.29 0 .55-.03 1.52-.03 2.2v73.61c-.02 3.74 1.98 7.21 5.23 9.06l77.79 44.91-26.93 15.55c-.27.18-.61.21-.91.08l-64.42-37.22c-28.63-16.58-38.45-53.21-21.95-81.89zm221.26 51.49-77.79-44.92 26.93-15.54c.27-.18.61-.21.91-.08l64.42 37.19c28.68 16.57 38.51 53.26 21.94 81.94-7.01 12.14-18.05 21.44-31.2 26.28v-75.81c.03-3.74-1.96-7.2-5.2-9.06zm26.8-40.34c-.47-.29-1.3-.79-1.89-1.13l-63.72-36.8c-3.23-1.89-7.23-1.89-10.47 0l-77.79 44.92v-31.1c-.02-.32.13-.63.38-.83l64.41-37.16c28.69-16.55 65.37-6.7 81.91 22 6.99 12.12 9.52 26.31 7.15 40.1zm-168.51 55.43-26.94-15.55c-.29-.14-.48-.42-.52-.74v-74.39c.02-33.12 26.89-59.96 60.01-59.94 14.01 0 27.57 4.92 38.34 13.88-.49.26-1.33.73-1.89 1.07l-63.72 36.8c-3.26 1.85-5.26 5.31-5.24 9.06l-.04 89.79zm14.63-31.54 34.65-20.01 34.65 20v40.01l-34.65 20-34.65-20z' />
-                                        </svg>
-                                    </div>
-                                    <div id="ChatGPTClass-container">
-                                        <details>
-                                            <summary>
-                                                <h2>Ask Open AI</h2>
-                                            </summary>
-                                            <span>Phần này chỉ cho phép hỏi một câu mỗi lần. Không lưu trữ các câu hỏi
-                                                hoặc
-                                                câu
-                                                trả
-                                                lời
-                                                trước đó. Nếu câu hỏi phức tạp, bạn có thể vào trang web <a
-                                                    href="chatgpt.com" target="_blank">chatgpt.com</a> để được hỗ trợ
-                                                thêm.</span>
-                                        </details>
-                                        <div>
-                                            <span style="margin-bottom: 1rem;">
-                                                <h3>Your Question: </h3><span id="your-question-for-chat-gpt"></span>
-                                            </span>
-                                            <span>
-                                                <h3>Open AI answers: </h3><span id="chat-gpt-answer"></span>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <select id="select-for-asking-open-AI">
-                                                <option selected disabled>Prompt</option>
-                                                <option id="option1">Bạn có thể làm gì?</option>
-                                                <option id="option2">Soạn tin nhắn</option>
-                                                <option id="option3">Làm ngắn mẫu tin nhắn</option>
-                                            </select>
-                                            <div>
-                                                <input id="ask-more-for-open-ai" type="text" placeholder="...">
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <textarea id="write-your-question-to-ask-GPT"
-                                                placeholder="Câu hỏi của bạn là gì? Nhập nội dung ở đây..."></textarea>
-                                            <div style="margin-inline:0.5rem">
-                                                <div class="green-add-icon" id="save-button-Chat-GPT"
-                                                    title="Thêm vào (Enter)">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <a class="Open-button column gap5" title="Web-Tools Google Sheets"
-                                    href="https://docs.google.com/spreadsheets/d/1K-QzJTeqntlYhuWB83707_lkiNWRTKrP2kTJzzys58Q/edit?gid=0#gid=0"
-                                    target="_blank">
-                                    <svg class="svg-hover" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M2 6C2 6 3.5 4 7 4C10.5 4 12 6 12 6V20C12 20 10.5 19 7 19C3.5 19 2 20 2 20V6Z"
-                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path
-                                            d="M12 6C12 6 13.5 4 17 4C20.5 4 22 6 22 6V20C22 20 20.5 19 17 19C13.5 19 12 20 12 20V6Z"
-                                            stroke="var(--colorlightblue)" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                    </svg>
-                                    Web-Tools Google Sheets
-                                </a>
-                                <a class="Open-button column gap10" title="GitHub Software"
-                                    href="https://github.com/SoftwareSupport-Fastboy/" target="_blank">
-                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_100_4)">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5808 20.2773 21.0498 21.7438 19.0074C23.2103 16.9651 23.9994 14.5143 24 12C24 5.37 18.63 0 12 0Z"
-                                                fill="var(--colorlightblue)" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_100_4">
-                                                <rect width="24" height="24" fill="var(--colorlightblue)" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    GitHub
-                                </a>
-                                <a class="Open-button column gap5" title="Google Script"
-                                    href="https://script.google.com/u/2/home/projects/1U8Wtn7eVAc_U2c8AjZhRgY-nmJvS_jEB24n54fljXDw5Uz1T43mf6bPG/edit"
-                                    target="_blank">
-                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <defs>
-                                            <mask id="cutout">
-                                                <rect x="0.75" y="16" width="18" height="5" fill="white" rx="2.5" />
-                                                <circle cx="16.5" cy="18.5" r="1.5" fill="black" />
-                                                <circle cx="3.5" cy="18.5" r="1.5" fill="black" />
-                                            </mask>
-                                        </defs>
-                                        <rect x="0.75" y="16" width="18" height="5" fill="red" rx="2.5"
-                                            mask="url(#cutout)" />
-                                        <rect x="0.75" y="16" width="18" height="5" fill="#FBBC04" rx="2.5"
-                                            mask="url(#cutout)" transform="rotate(36.6, 16.5, 18.5)" />
-                                        <rect x="0.75" y="16" width="18" height="5" fill="#34A853" rx="2.5"
-                                            mask="url(#cutout)" transform="rotate(73.3, 16.5, 18.5)" />
-                                        <rect x="0.75" y="16" width="18" height="5" fill="#4285F4" rx="2.5"
-                                            mask="url(#cutout)" transform="rotate(110, 16.5, 18.5)" />
-                                    </svg>
-                                    Google Script
-                                </a>
-                                <a class="Open-button column gap5" title="Google Site ChangeLog"
-                                    href="https://sites.google.com/d/112R42hy9wf3Z3vJwvil1NUL68BR_9dw7/p/1cjIVDuP5idYyMmYBhdocKqURAb5vn_3I/edit"
-                                    target="_blank">
-                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 88 88">
-                                        <path
-                                            d="M0 0 C5.47538181 -1.008748 10.95636704 -1.19894382 16.5144043 -1.37988281 C18.34822456 -1.4586054 20.18081582 -1.58020304 22.00854492 -1.74902344 C33.08448674 -2.75804549 41.05991435 -1.06627625 49.92593384 5.93521118 C58.46119392 13.71464335 63.24352414 21.08372788 64.01689148 32.76043701 C64.24757935 39.16970462 63.95775811 45.5388243 63.55853271 51.93505859 C63.35460109 55.62495602 63.2869094 59.3175473 63.20117188 63.01171875 C63.05181174 68.38399173 62.85942571 73.75127913 62.56030273 79.11767578 C62.50140366 80.18462677 62.44250458 81.25157776 62.38182068 82.3508606 C62 85 62 85 60 88 C57.49511719 88.3742218 57.49511719 88.3742218 54.296875 88.37231445 C53.10223633 88.37854324 51.90759766 88.38477203 50.67675781 88.39118958 C49.38092773 88.38197983 48.08509766 88.37277008 46.75 88.36328125 C45.4124349 88.36276276 44.07486903 88.36328002 42.73730469 88.36479187 C39.93282712 88.3647021 37.12863674 88.35426333 34.32421875 88.33618164 C30.72593122 88.31349395 27.12806348 88.31294971 23.52972412 88.31969929 C20.76737728 88.32303774 18.00512649 88.31641159 15.24279785 88.30657005 C13.2696207 88.30083825 11.29642718 88.30215527 9.32324219 88.30354309 C7.53128418 88.28924507 7.53128418 88.28924507 5.703125 88.2746582 C4.64770508 88.27005081 3.59228516 88.26544342 2.50488281 88.26069641 C0 88 0 88 -2 86 C-2.19843897 83.36579539 -2.27274987 80.83672642 -2.25878906 78.20141602 C-2.2622937 77.39639648 -2.26579834 76.59137695 -2.26940918 75.76196289 C-2.27823414 73.09252375 -2.27237415 70.42334823 -2.265625 67.75390625 C-2.26697156 65.90307057 -2.26891202 64.05223523 -2.27142334 62.20140076 C-2.27437575 58.3183964 -2.27007372 54.43548393 -2.26074219 50.55249023 C-2.24935553 45.57103173 -2.2559014 40.58978891 -2.26788712 35.60833836 C-2.27510935 31.78482942 -2.27281597 27.96137172 -2.26763153 24.13786125 C-2.26629563 22.30101432 -2.26794067 20.46416277 -2.27259064 18.62732124 C-2.27766095 16.06074811 -2.26993821 13.4945255 -2.25878906 10.92797852 C-2.26283752 10.16579514 -2.26688599 9.40361176 -2.27105713 8.61833191 C-2.24080895 4.86599086 -2.13575321 3.20362982 0 0 Z "
-                                            fill="#4657B5" transform="translate(18,4)" />
-                                        <path
-                                            d="M0 0 C8.58 0 17.16 0 26 0 C26 5.61 26 11.22 26 17 C17.42 17 8.84 17 0 17 C0 11.39 0 5.78 0 0 Z "
-                                            fill="#FFFFFF" transform="translate(30,48)" />
-                                        <path
-                                            d="M0 0 C7.88864358 6.76169449 7.88864358 6.76169449 10.96484375 9.83203125 C11.61904297 10.48494141 12.27324219 11.13785156 12.94726562 11.81054688 C13.60404297 12.47119141 14.26082031 13.13183594 14.9375 13.8125 C15.62134766 14.49248047 16.30519531 15.17246094 17.00976562 15.87304688 C17.65494141 16.51951172 18.30011719 17.16597656 18.96484375 17.83203125 C19.5487085 18.41702393 20.13257324 19.0020166 20.73413086 19.60473633 C22 21 22 21 22 22 C14.74 22 7.48 22 0 22 C0 14.74 0 7.48 0 0 Z "
-                                            fill="#354287" transform="translate(58,4)" />
-                                        <path
-                                            d="M0 0 C11.88 0 23.76 0 36 0 C36 1.65 36 3.3 36 5 C24.12 5 12.24 5 0 5 C0 3.35 0 1.7 0 0 Z "
-                                            fill="#FFFFFF" transform="translate(30,38)" />
-                                        <path
-                                            d="M0 0 C1.65 0 3.3 0 5 0 C5 5.61 5 11.22 5 17 C3.35 17 1.7 17 0 17 C0 11.39 0 5.78 0 0 Z "
-                                            fill="#FFFFFF" transform="translate(61,48)" />
-                                    </svg>
-                                    Google Site Change Log
-                                </a>
-                            </div>
-                        </details>
-                    </div>
-                    <div id="Thêm vào mà chưa có ý tưởng gì" class="hidden_visibility Height100percent">
-                    </div>
+
                 </div>
 
                 <nav class="right-tools-background">
@@ -1954,23 +1814,26 @@
                     </div>
                     <div class="Tools-Container Container_With_Close_Button DisplayNoneST" id="Annoucements_container">
                         <div class="Annoucements_container_subject">Lịch Onboard 3.0</div>
-                        <div style="position: absolute;top: 1rem;right: 1rem; display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="position: absolute;top: 1rem;right: 1rem; display: flex; align-items: center; gap: 1rem;">
                             <div id="loader-Annoucements_container" class="loader hidden" style="left: -4rem;"></div>
                             <div id="passcode-gobooking-btn" class="Open-button gobooking-passcode-btn"
                                 title="Bấm để copy & cập nhật Passcode">
                                 Passcode: ...
                             </div>
-                            <a id="takemethere-gobooking-btn" class="Open-button refresh-in-container takemethere-in-container"
+                            <a id="takemethere-gobooking-btn"
+                                class="Open-button refresh-in-container takemethere-in-container"
                                 href="https://go-booking.gocheckin.net/?token=qJGEcWlaw79d-R8FnHGNXfztfCJh0Ul-ftFmLt7y&id=fastboyorder&domain=https://gci-cloud-do-nyc1-001.gci.fast-boy.net"
                                 target="_blank" rel="noopener noreferrer"
                                 title="Take Me There (Mở Lịch Onboard 3.0 ở tab mới)">
                                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11"
+                                    <path
+                                        d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11"
                                         stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
                                         stroke-linejoin="round" />
-                                    <path d="M15 3H21V9" stroke="currentColor" stroke-width="2.2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M15 3H21V9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
                                     <path d="M10 14L21 3" stroke="currentColor" stroke-width="2.2"
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>

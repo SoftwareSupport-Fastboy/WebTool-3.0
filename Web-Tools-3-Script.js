@@ -1409,7 +1409,7 @@ function fetchGoBookingPasscode() {
 
 document.getElementById("passcode-gobooking-btn")?.addEventListener("click", function () {
     if (currentGoBookingPasscode) {
-        navigator.clipboard?.writeText(currentGoBookingPasscode).catch(() => {});
+        navigator.clipboard?.writeText(currentGoBookingPasscode).catch(() => { });
         StatusUpdateBox("Lịch Onboard 3.0", `Đã copy Passcode: <b style="color:orange">${currentGoBookingPasscode}</b>`, "green");
     }
     fetchGoBookingPasscode();
@@ -4024,7 +4024,6 @@ document.getElementById('logoutButton').addEventListener('click', function () {
     document.getElementById('Background_Loader_If_Remember_Login').classList.add('hidden_visibility');
     // document.getElementById('b4-To-do-list-content').style.display = 'flex';
     // document.getElementById('ChatGPTClass').style.display = 'flex';
-    document.getElementById('Admin-Show-Container').style.display = 'none';
     document.getElementById('Manager-Show-Container').style.display = 'none';
     document.getElementById('edit-user-infomation').style.display = 'flex';
     document.getElementById('save-user-infomation').style.display = 'none';
@@ -5182,8 +5181,6 @@ function checkRoleAndDisplay() {
     const role = document.getElementById('displayRole').textContent.trim();
 
     // Lấy các phần tử cần hiển thị/ẩn
-    // const ChatGPTClass = document.getElementById('ChatGPTClass');
-    const AdminContainer = document.getElementById('Admin-Show-Container');
     const ManagerContainer = document.getElementById('Manager-Show-Container');
     const ApprovalPartMD = document.getElementById('Approval-Part-More-Document');
     const RefetchnewrequestmoredocumentNEW = document.getElementById('Re-fetch-new-request-more-document-NEW');
@@ -5193,28 +5190,20 @@ function checkRoleAndDisplay() {
 
     // Kiểm tra giá trị của displayRole và thay đổi display cho các phần tử
     if (role === 'Admin') {
-        // ChatGPTClass.style.display = 'flex';
-        AdminContainer.style.display = 'flex';
         ManagerContainer.style.display = 'flex';
         RefetchnewrequestmoredocumentNEW.style.display = 'flex';
         ApprovalPartMD.classList.remove('hidden_visibility');
 
     } else if (role === 'Manager') {
-        // ChatGPTClass.style.display = 'none';
-        AdminContainer.style.display = 'none';
         ManagerContainer.style.display = 'flex';
         RefetchnewrequestmoredocumentNEW.style.display = 'flex';
         ApprovalPartMD.classList.remove('hidden_visibility');
 
     } else if (role === 'User') {
-        // ChatGPTClass.style.display = 'none';
-        AdminContainer.style.display = 'none';
         ManagerContainer.style.display = 'none';
         RefetchnewrequestmoredocumentNEW.style.display = 'none';
 
     } else {
-        // ChatGPTClass.style.display = 'none';
-        AdminContainer.style.display = 'none';
         ManagerContainer.style.display = 'none';
         RefetchnewrequestmoredocumentNEW.style.display = 'none';
 
