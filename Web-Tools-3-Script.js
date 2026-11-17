@@ -976,6 +976,7 @@ function SwitchIntoDarkMode() {
     const themeSwitchCheckbox = document.querySelector('.theme-switch__checkbox');
     const sunMoonIcon = document.getElementById('Sun-Moon_icon_ID');
     const iframeOnboard = document.getElementById('iframe-onboard');
+    const iframeGoBooking = document.getElementById('iframe-gobooking');
     function updateDarkModeUI() {
         const enabled = localStorage.getItem('darkMode') === 'enabled';
         if (enabled) {
@@ -983,11 +984,13 @@ function SwitchIntoDarkMode() {
             if (themeSwitchCheckbox) themeSwitchCheckbox.checked = true;
             if (sunMoonIcon) sunMoonIcon.className = 'moon-and-shadow-icon';
             if (iframeOnboard) iframeOnboard.style.filter = 'invert(100%) brightness(2)';
+            if (iframeGoBooking) iframeGoBooking.style.filter = 'invert(100%) brightness(2)';
         } else {
             root.classList.remove('dark-mode');
             if (themeSwitchCheckbox) themeSwitchCheckbox.checked = false;
             if (sunMoonIcon) sunMoonIcon.className = 'sun-and-glow-icon';
             if (iframeOnboard) iframeOnboard.style.filter = '';
+            if (iframeGoBooking) iframeGoBooking.style.filter = '';
         }
     }
     if (themeSwitchCheckbox) {
@@ -1079,178 +1082,235 @@ document.getElementById("refresh-onboard").addEventListener("click", function ()
 
 
 
-document.getElementById('sua-ten-sheet').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-        e.preventDefault(); // tránh submit form nếu có
-        document.getElementById('updateA1Btn').click();
+const LICH_TRUC_API_BASE = 'https://script.google.com/macros/s/AKfycbz9fVNN96Cu2Gu6hWtERMHXmwYeIOC8AEEDB8AMhzqZGye6w2orDtB4KU48YcLVmcrHdw/exec';
+const LICH_TRUC_SELECTED_SHEET_KEY = 'webtool3_lich_truc_selected_sheet';
+let lichTrucSheetsList = [];
+let currentLichTrucSheetName = '';
+let activeLichTrucReqId = 0;
+
+function pickDefaultLichTrucSheet(sheets) {
+    if (!Array.isArray(sheets) || sheets.length === 0) return '11.2026';
+
+    const saved = localStorage.getItem(LICH_TRUC_SELECTED_SHEET_KEY);
+    if (saved && sheets.some(s => s.rawSheetName === saved)) {
+        return saved;
     }
-});
 
+    const now = new Date();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const yyyy = now.getFullYear();
+    const target = `${mm}.${yyyy}`;
 
-document.getElementById('updateA1Btn').addEventListener('click', function () {
-    var sheetName = document.getElementById('sua-ten-sheet').value;
-    var loaderupdatelichtruc = document.getElementById('loader-update-lichtruc');
-    var updateidlichtruc = document.getElementById('update-id-lichtruc');
+    const matchNow = sheets.find(s => s.sheetName === target);
+    if (matchNow) {
+        return matchNow.rawSheetName;
+    }
+
+    const top3 = sheets.slice(0, 3);
+    const official = top3.find(s => !s.sheetName.toUpperCase().startsWith('ĐK'));
+    if (official) {
+        return official.rawSheetName;
+    }
+
+    return sheets[0].rawSheetName;
+}
+
+function renderLichTrucSheetSelect() {
+    const selectEl = document.getElementById('sua-ten-sheet');
+    if (!selectEl || lichTrucSheetsList.length === 0) return;
+
+    selectEl.innerHTML = lichTrucSheetsList
+        .map(s => {
+            const selected = s.rawSheetName === currentLichTrucSheetName ? 'selected' : '';
+            const safeRaw = String(s.rawSheetName).replace(/"/g, '&quot;');
+            return `<option value="${safeRaw}" ${selected}>📅 Tháng ${s.sheetName}</option>`;
+        })
+        .join('');
+}
+
+function renderLichTrucTableAndChamCong(data) {
     const targetView = document.getElementById('lich-truc-cuoi-tuan-view');
+    if (!targetView) return;
 
-    if (!sheetName) {
-        StatusUpdateBox("Lịch Trực Cuối Tuần", "Vui lòng nhập đầy đủ thông tin.", "red");
+    ChamCongLichTruc(data);
+
+    if (!data || data.length === 0) {
+        targetView.innerHTML = "<p>Không có dữ liệu.</p>";
         return;
     }
 
-    updateidlichtruc.classList.add('hidden');
-    loaderupdatelichtruc.classList.remove('hidden');
-    targetView.innerHTML = "<div class='Height100percent Width100percent FlexCenter ColorOrangered'>Loading...</div>";
+    let table = '<table border="0" cellpadding="5" cellspacing="0">';
+    table += '<thead style="z-index:10;"><tr>';
+    for (let i = 0; i < data[0].length; i++) {
+        if (i === 0) {
+            table += `<th>${data[0][i]}</th>`;
+        } else {
+            table += '<th>' +
+                '<div style="display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 1rem">' +
+                '<div style="display: flex; gap: 10px;"><div class="sort-icon" title="Sắp xếp theo thứ tự trước sau"></div><div class="white-delete-icon" title="Xoá cột"></div></div>' +
+                '<span>' + data[0][i] + '</span>' +
+                '</div>' +
+                '</th>';
+        }
+    }
+    table += '</tr></thead>';
 
-    var scriptURL = 'https://script.google.com/macros/s/AKfycbwAsat4W2VRwVB1niazCDyNRTTd9EXagnC68BcwSYl7EhXZKqFBXSwiUG07ZKoXqh36iQ/exec';
-
-    fetch(scriptURL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ sheetName }).toString()
-    })
-        .then(res => res.text())
-        .then(() => {
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    fetch(
-                        'https://script.google.com/macros/s/AKfycbxy2wam-fhMZKGwB5LrJWTT-sCzpCytwZhUIcjBhmx9SojWSuAwVudAPCRx0CN7488/exec?action=getLichTrucCopy',
-                        { method: 'GET' }
-                    )
-                        .then(resolve)
-                        .catch(reject);
-                }, 1000); // 1 giây
-            });
-        })
-
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+    table += '<tbody>';
+    for (let i = 1; i < data.length; i++) {
+        table += '<tr>';
+        for (let j = 0; j < data[i].length; j++) {
+            if (j === 0) {
+                table += '<td style="padding: 0; margin: 0;">' +
+                    '<div style="display: flex; align-items: center; justify-content: space-between;">' +
+                    '<div class="white-delete-icon" title="Xoá hàng"></div>' +
+                    '<div class="orange-move-icon-2" title="Di chuyển hàng"></div>' +
+                    '<span style="flex: 1;">' + data[i][j] + '</span>' +
+                    '</div>' +
+                    '</td>';
+            } else {
+                table += `<td>${data[i][j]}</td>`;
             }
-            return response.json();
-        })
-        .then(data => {
+        }
+        table += '</tr>';
+    }
+    table += '</tbody></table>';
 
-            ChamCongLichTruc(data);
+    targetView.innerHTML = table;
 
-            if (!data || data.length === 0) {
-                targetView.innerHTML = "<p>Không có dữ liệu.</p>";
-                return;
+    const tbody = targetView.querySelector('tbody');
+    if (tbody) {
+        tbody.querySelectorAll('td').forEach(td => {
+            const text = td.textContent.trim();
+            const lowerText = text.toLowerCase();
+            if (lowerText.includes("lịch trực")) {
+                td.closest('tr')?.classList.add('th-inside-tbody');
             }
-
-            let table = '<table border="0" cellpadding="5" cellspacing="0">';
-            table += '<thead style="z-index:10;"><tr>';
-
-            for (let i = 0; i < data[0].length; i++) {
-                if (i === 0) {
-                    table += `<th>${data[0][i]}</th>`;
-                } else {
-                    table += `
-                <th>
-                    <div style="display:flex;flex-direction:column;align-items:center;gap:1rem">
-                        <div style="display: flex; gap: 10px;"><div class="sort-icon" title="Sắp xếp theo thứ tự trước sau"></div><div class="white-delete-icon" title="Xoá cột"></div></div>
-                        <span>${data[0][i]}</span>
-                    </div>
-                </th>`;
-                }
+            if (lowerText.includes("software support")) {
+                td.closest('tr')?.remove();
             }
-
-            table += '</tr></thead><tbody>';
-
-            for (let i = 1; i < data.length; i++) {
-                table += '<tr>';
-                for (let j = 0; j < data[i].length; j++) {
-                    if (j === 0) {
-                        table += `
-                    <td style="padding:0">
-                        <div style="display:flex;align-items:center;gap:.5rem">
-                            <div class="white-delete-icon"></div>
-                            <div class="orange-move-icon-2"></div>
-                            <span style="flex:1">${data[i][j]}</span>
-                        </div>
-                    </td>`;
-                    } else {
-                        table += `<td>${data[i][j]}</td>`;
-                    }
-                }
-                table += '</tr>';
+            if (text === 'x' || text === 'X') {
+                td.textContent = '';
             }
-
-            table += '</tbody></table>';
-            targetView.innerHTML = table;
-
-            const tbody = targetView.querySelector('tbody');
-
-            tbody.querySelectorAll('td').forEach(td => {
-                const text = td.textContent.trim().toLowerCase();
-                if (text.includes("lịch trực")) {
-                    td.closest('tr').classList.add('th-inside-tbody');
-                }
-                if (text.includes("software support")) {
-                    td.closest('tr')?.remove();
-                }
-                if (text === 'x' || text === 'X') {
-                    td.textContent = '';
-                }
-            });
-
-            tbody.querySelectorAll('tr').forEach(tr => {
-                const firstTd = tr.querySelector('td:first-child');
-                if (!firstTd) return;
-
-                if (firstTd.textContent.trim().toLowerCase().includes('long bui')) {
-                    tr.querySelectorAll('td').forEach(td => {
-                        td.style.backgroundColor = 'orange';
-                    });
-                }
-            });
-
-            targetView.querySelectorAll('.th-inside-tbody').forEach(tr => {
-                tr.querySelectorAll('.white-delete-icon, .orange-move-icon-2').forEach(el => el.remove());
-            });
-
-            (function removeTongColumn() {
-                const tableEl = targetView.querySelector('table');
-                if (!tableEl) return;
-
-                const ths = tableEl.querySelectorAll('thead th');
-                let index = -1;
-
-                ths.forEach((th, i) => {
-                    const span = th.querySelector('span');
-                    if (span && span.textContent.toLowerCase().includes("tổng")) {
-                        index = i;
-                    }
-                });
-
-                if (index === -1) return;
-
-                ths[index].remove();
-                tableEl.querySelectorAll('tbody tr').forEach(tr => {
-                    tr.children[index]?.remove();
-                });
-            })();
-
-            addDeleteIconFunctions();
-            addMoveIconFunctions();
-
-        })
-        .catch(error => {
-            console.error(error);
-            StatusUpdateBox("Lịch Trực Cuối Tuần", "Đã có lỗi xảy ra.", "red");
-            targetView.innerHTML = `<p style="color:red">${error.message}</p>`;
-        })
-        .finally(() => {
-            loaderupdatelichtruc.classList.add('hidden');
-            updateidlichtruc.classList.remove('hidden');
-            StatusUpdateBox("Lịch Trực Cuối Tuần", "Đã đổi tháng trực thành công", "green");
         });
+
+        tbody.querySelectorAll('tr').forEach(tr => {
+            const firstTd = tr.querySelector('td:first-child');
+            if (!firstTd) return;
+
+            if (firstTd.textContent.trim().toLowerCase().includes('long bui')) {
+                tr.querySelectorAll('td').forEach(td => {
+                    td.style.backgroundColor = 'orange';
+                });
+            }
+        });
+    }
+
+    targetView.querySelectorAll('.th-inside-tbody').forEach(tr => {
+        const firstTd = tr.querySelector('td:first-child');
+        if (firstTd) {
+            firstTd.querySelector('.white-delete-icon')?.remove();
+            firstTd.querySelector('.orange-move-icon-2')?.remove();
+        }
+    });
+
+    (function removeTongColumn() {
+        const tableElement = targetView.querySelector('table');
+        if (!tableElement) return;
+
+        const thList = tableElement.querySelectorAll('thead th');
+        let columnIndexToRemove = -1;
+
+        thList.forEach((th, index) => {
+            const span = th.querySelector('span');
+            if (span) {
+                const text = span.textContent.trim().toLowerCase();
+                if (text.includes("tổng")) {
+                    columnIndexToRemove = index;
+                }
+            }
+        });
+
+        if (columnIndexToRemove === -1) return;
+
+        thList[columnIndexToRemove].remove();
+
+        const allRows = tableElement.querySelectorAll('tbody tr');
+        allRows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            if (cells[columnIndexToRemove]) {
+                cells[columnIndexToRemove].remove();
+            }
+        });
+    })();
+
+    currentSortedColumn = -1;
+    addDeleteIconFunctions();
+    addMoveIconFunctions();
+}
+
+async function loadLichTrucBySheetName(rawSheetName, options = {}) {
+    if (!rawSheetName) return;
+    const { showStatus = false, statusMessage = '', useRefreshLoader = false } = options;
+
+    const reqId = ++activeLichTrucReqId;
+    currentLichTrucSheetName = rawSheetName;
+    localStorage.setItem(LICH_TRUC_SELECTED_SHEET_KEY, rawSheetName);
+    renderLichTrucSheetSelect();
+
+    const targetView = document.getElementById('lich-truc-cuoi-tuan-view');
+    const activeLoader = document.getElementById('loader-lichtruc');
+
+    if (activeLoader) activeLoader.classList.remove('hidden');
+    if (targetView) {
+        targetView.innerHTML = "<div class='Height100percent Width100percent FlexCenter ColorOrangered'>Loading...</div>";
+    }
+
+    try {
+        const response = await fetch(`${LICH_TRUC_API_BASE}?sheet=${encodeURIComponent(rawSheetName)}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const json = await response.json();
+        if (reqId !== activeLichTrucReqId) return;
+
+        const rows = Array.isArray(json)
+            ? json
+            : (json && Array.isArray(json.data) ? json.data : []);
+
+        renderLichTrucTableAndChamCong(rows);
+
+        if (showStatus) {
+            StatusUpdateBox(
+                "Lịch Trực Cuối Tuần",
+                statusMessage || `Đã đổi sang tháng ${rawSheetName.trim()} thành công`,
+                "green"
+            );
+        }
+    } catch (error) {
+        if (reqId !== activeLichTrucReqId) return;
+        console.error("❌ Lỗi khi tải dữ liệu Lịch Trực:", error);
+        if (showStatus) {
+            StatusUpdateBox("Lịch Trực Cuối Tuần", "Lỗi khi tải dữ liệu", "red");
+        }
+        if (targetView) {
+            targetView.innerHTML = `<p style="color: red;">Lỗi khi tải dữ liệu: ${error.message}</p>`;
+        }
+    } finally {
+        if (reqId === activeLichTrucReqId && activeLoader) {
+            activeLoader.classList.add('hidden');
+        }
+    }
+}
+
+document.getElementById('sua-ten-sheet')?.addEventListener('change', function () {
+    const selectedSheet = this.value;
+    if (!selectedSheet) return;
+    loadLichTrucBySheetName(selectedSheet, {
+        showStatus: true,
+        statusMessage: "Đã đổi tháng trực thành công",
+        useRefreshLoader: false
+    });
 });
-
-
-
-
-
 
 
 // Nút Show All
@@ -1270,175 +1330,307 @@ document.getElementById('Show-all-in-lichtruc-container').addEventListener('clic
 
 
 // Nút refresh Lịch Trực Cuối Tuần
-function refreshLichTruc() {
-    const targetView = document.getElementById('lich-truc-cuoi-tuan-view');
+async function refreshLichTruc() {
     const loaderlichtruc = document.getElementById('loader-lichtruc');
+    if (loaderlichtruc) loaderlichtruc.classList.remove('hidden');
 
-    loaderlichtruc.classList.remove('hidden');
-    targetView.innerHTML = "<div class='Height100percent Width100percent FlexCenter ColorOrangered'>Loading...</div>";
-
-    fetch('https://script.google.com/macros/s/AKfycbxy2wam-fhMZKGwB5LrJWTT-sCzpCytwZhUIcjBhmx9SojWSuAwVudAPCRx0CN7488/exec?action=getLichTrucCopy', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+    try {
+        const res = await fetch(LICH_TRUC_API_BASE);
+        if (res.ok) {
+            const json = await res.json();
+            const list = Array.isArray(json) ? json : (json.value || json.data || []);
+            if (list.length > 0) {
+                lichTrucSheetsList = list.map(s => ({
+                    sheetId: s.sheetId,
+                    sheetName: String(s.sheetName || '').trim(),
+                    rawSheetName: String(s.sheetName || ''),
+                    isHidden: Boolean(s.isHidden)
+                }));
+            }
         }
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
+    } catch (err) {
+        console.warn('Không thể làm mới danh sách sheet:', err);
+    }
 
-            ChamCongLichTruc(data);
+    if (!currentLichTrucSheetName || (lichTrucSheetsList.length > 0 && !lichTrucSheetsList.some(s => s.rawSheetName === currentLichTrucSheetName))) {
+        currentLichTrucSheetName = pickDefaultLichTrucSheet(lichTrucSheetsList);
+    }
 
-            if (!data || data.length === 0) {
-                targetView.innerHTML = "<p>Không có dữ liệu.</p>";
-                return;
-            }
-
-            let table = '<table border="0" cellpadding="5" cellspacing="0">';
-            table += '<thead style="z-index:10;"><tr>';
-            for (let i = 0; i < data[0].length; i++) {
-                if (i === 0) {
-                    table += `<th>${data[0][i]}</th>`;
-                } else {
-                    table += '<th>' +
-                        '<div style="display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 1rem">' +
-                        '<div style="display: flex; gap: 10px;"><div class="sort-icon" title="Sắp xếp theo thứ tự trước sau"></div><div class="white-delete-icon" title="Xoá cột"></div></div>' +
-                        '<span>' + data[0][i] + '</span>' +
-                        '</div>' +
-                        '</th>';
-                }
-            }
-            table += '</tr></thead>';
-
-            table += '<tbody>';
-            for (let i = 1; i < data.length; i++) {
-                table += '<tr>';
-                for (let j = 0; j < data[i].length; j++) {
-                    if (j === 0) {
-                        table += '<td style="padding: 0; margin: 0;">' +
-                            '<div style="display: flex; align-items: center; justify-content: space-between;">' +
-                            '<div class="white-delete-icon" title="Xoá hàng"></div>' +
-                            '<div class="orange-move-icon-2" title="Di chuyển hàng"></div>' +
-                            '<span style="flex: 1;">' + data[i][j] + '</span>' +
-                            '</div>' +
-                            '</td>';
-                    } else {
-                        table += `<td>${data[i][j]}</td>`;
-                    }
-                }
-                table += '</tr>';
-            }
-            table += '</tbody></table>';
-
-            targetView.innerHTML = table;
-
-            const tbody = document.querySelector('#lich-truc-cuoi-tuan-view tbody');
-
-            tbody.querySelectorAll('td').forEach(td => {
-                const text = td.textContent.trim().toLowerCase();
-                if (text.includes("lịch trực")) {
-                    td.closest('tr').classList.add('th-inside-tbody');
-                }
-            });
-
-            tbody.querySelectorAll('td').forEach(td => {
-                const text = td.textContent.trim().toLowerCase();
-                if (text.includes("software support")) {
-                    const trToRemove = td.closest('tr');
-                    if (trToRemove) {
-                        trToRemove.remove();
-                    }
-                }
-            });
-
-            tbody.querySelectorAll('td').forEach(td => {
-                const text = td.textContent.trim();
-                if (text === 'x' || text === 'X') {
-                    td.textContent = '';
-                }
-            });
-
-            tbody.querySelectorAll('tr').forEach(tr => {
-                const firstTd = tr.querySelector('td:first-child');
-                if (!firstTd) return;
-
-                if (firstTd.textContent.trim().toLowerCase().includes('long bui')) {
-                    tr.querySelectorAll('td').forEach(td => {
-                        td.style.backgroundColor = 'orange';
-                    });
-                }
-            });
-
-            document.querySelectorAll('#lich-truc-cuoi-tuan-view .th-inside-tbody').forEach(tr => {
-                const firstTd = tr.querySelector('td:first-child');
-                if (firstTd) {
-                    const deleteIcon = firstTd.querySelector('.white-delete-icon');
-                    if (deleteIcon) deleteIcon.remove();
-
-                    const moveIcon = firstTd.querySelector('.orange-move-icon-2');
-                    if (moveIcon) moveIcon.remove();
-                }
-            });
-
-            (function () {
-                const tableElement = document.querySelector('#lich-truc-cuoi-tuan-view table');
-                if (!tableElement) return;
-
-                const thList = tableElement.querySelectorAll('thead th');
-                let columnIndexToRemove = -1;
-
-                thList.forEach((th, index) => {
-                    const span = th.querySelector('span');
-                    if (span) {
-                        const text = span.textContent.trim().toLowerCase();
-                        if (text.includes("tổng")) {
-                            columnIndexToRemove = index;
-                        }
-                    }
-                });
-
-                if (columnIndexToRemove === -1) return;
-
-                thList[columnIndexToRemove].remove();
-
-                const allRows = tableElement.querySelectorAll('tbody tr');
-                allRows.forEach(row => {
-                    const cells = row.querySelectorAll('td');
-                    if (cells[columnIndexToRemove]) {
-                        cells[columnIndexToRemove].remove();
-                    }
-                });
-            })();
-
-            addDeleteIconFunctions();
-            addMoveIconFunctions();
-
-        })
-        .catch(error => {
-            console.error("❌ Lỗi khi tải dữ liệu:", error);
-            StatusUpdateBox("Lịch Trực Cuối Tuần", "Lỗi khi tải dữ liệu", "red");
-            targetView.innerHTML = `<p style="color: red;">Lỗi khi tải dữ liệu: ${error.message}</p>`;
-        })
-        .finally(() => {
-            loaderlichtruc.classList.add('hidden');
-            StatusUpdateBox("Lịch Trực Cuối Tuần", "Đã cập nhật xong", "green");
-        });
+    renderLichTrucSheetSelect();
+    await loadLichTrucBySheetName(currentLichTrucSheetName, {
+        showStatus: true,
+        statusMessage: "Đã cập nhật xong",
+        useRefreshLoader: true
+    });
 }
 
 
 
-// Nút refresh Annoucements
-document.getElementById("refresh-annoucement-container").addEventListener("click", async function () {
+// Cầu nối (GapMiniApp Bridge) & Custom CSS Injector cho iframe Go Booking
+const GO_BOOKING_ORIGIN = "https://go-booking.gocheckin.net";
+const GO_BOOKING_FALLBACK_URL = "https://go-booking.gocheckin.net/?token=qJGEcWlaw79d-R8FnHGNXfztfCJh0Ul-ftFmLt7y&id=fastboyorder&domain=https://gci-cloud-do-nyc1-001.gci.fast-boy.net";
+const GO_BOOKING_AUTH_DATA = {
+    token: "qJGEcWlaw79d-R8FnHGNXfztfCJh0Ul-ftFmLt7y",
+    gClientId: "fastboyorder",
+    domain: "https://gci-cloud-do-nyc1-001.gci.fast-boy.net"
+};
+
+let currentGoBookingPasscode = "";
+
+function setGoBookingPasscodeUI(passcode) {
+    if (passcode === undefined || passcode === null || String(passcode).trim() === "") return;
+    currentGoBookingPasscode = String(passcode).trim();
+    const btn = document.getElementById("passcode-gobooking-btn");
+    if (btn) {
+        btn.textContent = `Passcode: ${currentGoBookingPasscode}`;
+    }
+}
+
+function fetchGoBookingPasscode() {
+    const clientId = GO_BOOKING_AUTH_DATA.gClientId;
+    fetch("https://tool-pos.fast-boy.net/api/user-info?clientId=" + encodeURIComponent(clientId))
+        .then(function (r) {
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            return r.json();
+        })
+        .then(function (arr) {
+            if (!Array.isArray(arr)) return;
+            var item = arr.find(function (x) {
+                return x.result && x.result.data && Object.prototype.hasOwnProperty.call(x.result.data, "turn_passcode");
+            });
+            if (item && item.result.data.turn_passcode !== undefined) {
+                setGoBookingPasscodeUI(item.result.data.turn_passcode);
+            }
+        })
+        .catch(function (e) {
+            console.warn("Không lấy được passcode từ tool-pos API (sẽ dùng dữ liệu từ Go Booking):", e.message);
+        });
+}
+
+document.getElementById("passcode-gobooking-btn")?.addEventListener("click", function () {
+    if (currentGoBookingPasscode) {
+        navigator.clipboard?.writeText(currentGoBookingPasscode).catch(() => {});
+        StatusUpdateBox("Lịch Onboard 3.0", `Đã copy Passcode: <b style="color:orange">${currentGoBookingPasscode}</b>`, "green");
+    }
+    fetchGoBookingPasscode();
+});
+
+window.addEventListener("message", function (event) {
+    const iframe = document.getElementById("iframe-gobooking");
+    const isFromGoBooking =
+        (iframe && event.source === iframe.contentWindow) ||
+        (event.origin && event.origin.includes("gocheckin.net"));
+    if (!isFromGoBooking) return;
+
+    const msg = event.data;
+    if (!msg || typeof msg !== "object") return;
+
+    if (msg.type === "GO_BOOKING_PASSCODE" && msg.passcode) {
+        setGoBookingPasscodeUI(msg.passcode);
+        return;
+    }
+
+    if (!msg.action || !msg.id) return;
+
+    if (msg.action === "getAccessToken") {
+        event.source?.postMessage({
+            type: "execSuccessCallback",
+            id: msg.id,
+            data: GO_BOOKING_AUTH_DATA
+        }, "*");
+        return;
+    }
+
+    if (msg.action === "copyToClipboard" && msg.param?.text) {
+        navigator.clipboard?.writeText(msg.param.text).catch(() => { });
+    }
+
+    event.source?.postMessage({
+        type: "execSuccessCallback",
+        id: msg.id,
+        data: true
+    }, "*");
+});
+
+async function loadGoBookingIframe() {
+    const iframe = document.getElementById("iframe-gobooking");
+    if (!iframe) return;
+
+    try {
+        const res = await fetch(`${GO_BOOKING_ORIGIN}/`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        let html = await res.text();
+
+        // Chuyển các đường dẫn tương đối gốc (/assets/..., /favicon...) sang domain đầy đủ
+        html = html
+            .replace(/<link[^>]*rel=["']manifest["'][^>]*>/gi, "")
+            .replace(/\b(href|src)=["']\/(?!\/)/gi, `$1="${GO_BOOKING_ORIGIN}/`);
+
+        const injectedHeadContent = `
+<base href="${GO_BOOKING_ORIGIN}/">
+<script>
+(function() {
+    var ORIGIN = "${GO_BOOKING_ORIGIN}";
+    var AUTH = ${JSON.stringify(GO_BOOKING_AUTH_DATA)};
+
+    // 1. Đảm bảo localStorage hoạt động ngay cả trong about:srcdoc / file://
+    try {
+        window.localStorage.setItem("__gb_test__", "1");
+        window.localStorage.removeItem("__gb_test__");
+    } catch (e) {
+        var mem = {};
+        var fakeStorage = {
+            getItem: function(k) { return Object.prototype.hasOwnProperty.call(mem, k) ? mem[k] : null; },
+            setItem: function(k, v) { mem[k] = String(v); },
+            removeItem: function(k) { delete mem[k]; },
+            clear: function() { mem = {}; }
+        };
+        try {
+            Object.defineProperty(window, "localStorage", { value: fakeStorage, configurable: true });
+        } catch (err) {}
+    }
+
+    try {
+        window.localStorage.setItem("id", AUTH.gClientId);
+        window.localStorage.setItem("accessToken", AUTH.token);
+        window.localStorage.setItem("domain", AUTH.domain);
+    } catch (e) {}
+
+    // 2. Chuyển mọi đường dẫn /assets/... động của Vite sang domain gốc
+    function patchUrlProp(Proto, prop) {
+        var desc = Object.getOwnPropertyDescriptor(Proto, prop);
+        if (!desc || !desc.set) return;
+        Object.defineProperty(Proto, prop, {
+            get: desc.get,
+            set: function(val) {
+                if (typeof val === "string" && val.charAt(0) === "/" && val.charAt(1) !== "/") {
+                    val = ORIGIN + val;
+                }
+                return desc.set.call(this, val);
+            },
+            configurable: true,
+            enumerable: true
+        });
+    }
+    patchUrlProp(HTMLLinkElement.prototype, "href");
+    patchUrlProp(HTMLScriptElement.prototype, "src");
+    patchUrlProp(HTMLImageElement.prototype, "src");
+
+    var origSetAttr = Element.prototype.setAttribute;
+    Element.prototype.setAttribute = function(name, value) {
+        if ((name === "href" || name === "src") && typeof value === "string" && value.charAt(0) === "/" && value.charAt(1) !== "/") {
+            value = ORIGIN + value;
+        }
+        return origSetAttr.call(this, name, value);
+    };
+
+    // 3. Shim History API để Vue Router không bị lỗi SecurityError trong srcdoc
+    var _histState = { back: null, current: "/", forward: null, position: 0, replaced: true, scroll: null };
+    try {
+        Object.defineProperty(History.prototype, "state", {
+            get: function() { return _histState; },
+            configurable: true
+        });
+        History.prototype.replaceState = function(state) { _histState = state; };
+        History.prototype.pushState = function(state) { _histState = state; };
+    } catch (e) {}
+
+    // 4. Đảm bảo Vue Router điều hướng thẳng vào trang chủ lịch hẹn ("home") & gửi turn_passcode ra ngoài
+    var routerTimer = setInterval(function() {
+        var appEl = document.getElementById("app");
+        var gp = appEl && appEl.__vue_app__ && appEl.__vue_app__.config && appEl.__vue_app__.config.globalProperties;
+        var router = gp && gp.$router;
+        if (router) {
+            clearInterval(routerTimer);
+            var curName = router.currentRoute && router.currentRoute.value && router.currentRoute.value.name;
+            if (curName !== "home") {
+                router.replace({ name: "home" }).catch(function() {});
+            }
+        }
+    }, 50);
+
+    var passcodeTimer = setInterval(function() {
+        var appEl = document.getElementById("app");
+        var gp = appEl && appEl.__vue_app__ && appEl.__vue_app__.config && appEl.__vue_app__.config.globalProperties;
+        var pinia = gp && gp.$pinia;
+        var ksStore = pinia && pinia._s && pinia._s.get("keyStorage");
+        var code = ksStore && ksStore.keyStorage && ksStore.keyStorage.turn_passcode;
+        if (code !== undefined && code !== null && String(code).trim() !== "") {
+            clearInterval(passcodeTimer);
+            window.parent.postMessage({ type: "GO_BOOKING_PASSCODE", passcode: String(code) }, "*");
+        }
+    }, 300);
+})();
+<\/script>
+<style id="webtool-gobooking-custom-style">
+    /* Ẩn hoàn toàn dấu chấm trạng thái trước tên nhân viên */
+    .staff-availability-dot {
+        display: none !important;
+    }
+
+    /* Thu gọn khoảng đệm thừa ở ô tiêu đề nhân viên để hiển thị rõ tên */
+    .business-calendar table.fc-scrollgrid thead tr .fc-col-header-cell-cushion,
+    .business-calendar .staff-inline thead tr .fc-col-header-cell-cushion {
+        padding: 3px 1px !important;
+    }
+
+    .calendar-staff-header {
+        border-radius: 0.5rem !important;
+    }
+
+    .calendar-staff-header > div {
+        padding: 4px 2px 2px 2px !important;
+        gap: 1px !important;
+    }
+
+    .calendar-staff-header p {
+        gap: 0 !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        text-align: center !important;
+        justify-content: center !important;
+        font-size: 11.5px !important;
+        line-height: 1.15 !important;
+        word-break: break-word !important;
+        width: 100% !important;
+    }
+
+    .calendar-staff-header p > span.truncate {
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        display: block !important;
+        text-align: center !important;
+        width: 100% !important;
+        font-size: 10px !important;
+    }
+</style>
+`;
+
+        html = html.replace(/<head[^>]*>/i, match => match + injectedHeadContent);
+        iframe.removeAttribute("src");
+        iframe.srcdoc = html;
+    } catch (err) {
+        console.warn("Fallback sang URL trực tiếp cho Go Booking:", err);
+        iframe.removeAttribute("srcdoc");
+        iframe.src = GO_BOOKING_FALLBACK_URL;
+    }
+}
+
+loadGoBookingIframe();
+fetchGoBookingPasscode();
+
+// Nút refresh Go Booking (thay cho Annoucements cũ)
+document.getElementById("refresh-annoucement-container")?.addEventListener("click", async function () {
     const loader = document.getElementById('loader-Annoucements_container');
-    loader.classList.remove('hidden');
-    document.getElementById('Annoucements-table').innerHTML = '<div class="Height100percent Width100percent FlexCenter ColorOrangered">Loading...</div>';
-    await fetchAndDisplayAnnoucements();
-    loader.classList.add('hidden');
-    StatusUpdateBox("Annoucements", "Đã cập nhật xong", "green");
+    if (loader) loader.classList.remove('hidden');
+    fetchGoBookingPasscode();
+    await loadGoBookingIframe();
+    setTimeout(function () {
+        if (loader) loader.classList.add('hidden');
+        StatusUpdateBox("Lịch Onboard 3.0", "Cập nhật thành công", "green");
+    }, 1500);
 });
 
 
@@ -2080,7 +2272,7 @@ function clearInputAndSpan() {
 //     searchContent('moreDocuments');
 // });
 
-document.getElementById('search-in-Annoucements-table').addEventListener('input', function () {
+document.getElementById('search-in-Annoucements-table')?.addEventListener('input', function () {
     searchContent('announcements');
 });
 
@@ -2881,164 +3073,54 @@ if ('serviceWorker' in navigator) {
 
 
 // Hiển thị Lịch trực cuối tuần
-function loadLichTrucCopy() {
-    fetch('https://script.google.com/macros/s/AKfycbxy2wam-fhMZKGwB5LrJWTT-sCzpCytwZhUIcjBhmx9SojWSuAwVudAPCRx0CN7488/exec?action=getLichTrucCopy', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+async function loadLichTrucCopy() {
+    try {
+        const res = await fetch(LICH_TRUC_API_BASE);
+        if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
         }
-    })
-        .then(response => response.json()) // Dữ liệu trả về sẽ là JSON
-        .then(data => {
-            // Tạo bảng từ dữ liệu
-            ChamCongLichTruc(data);
+        const json = await res.json();
+        const list = Array.isArray(json) ? json : (json.value || json.data || []);
 
-            var table = '<table border="0" cellpadding="5" cellspacing="0">';
+        if (list.length > 0) {
+            lichTrucSheetsList = list.map(s => ({
+                sheetId: s.sheetId,
+                sheetName: String(s.sheetName || '').trim(),
+                rawSheetName: String(s.sheetName || ''),
+                isHidden: Boolean(s.isHidden)
+            }));
+        }
 
-            // Tạo tiêu đề bảng (dòng đầu tiên là tiêu đề cột)
-            table += '<thead style="z-index:10;"><tr>';
-            if (data.length > 0) {
-                for (var i = 0; i < data[0].length; i++) {
-                    if (i === 0) {
-                        table += '<th>' + data[0][i] + '</th>';
-                    } else {
-                        table += '<th>' +
-                            '<div style="display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 1rem">' +
-                            '<div style="display: flex; gap: 10px;"><div class="sort-icon" title="Sắp xếp theo thứ tự trước sau"></div><div class="white-delete-icon" title="Xoá cột"></div></div>' +
-                            '<span>' + data[0][i] + '</span>' +
-                            '</div>' +
-                            '</th>';
-                    }
-                }
-                table += '</tr></thead>';
-            }
+        if (!currentLichTrucSheetName || !lichTrucSheetsList.some(s => s.rawSheetName === currentLichTrucSheetName)) {
+            currentLichTrucSheetName = pickDefaultLichTrucSheet(lichTrucSheetsList);
+        }
 
-            // Tạo nội dung bảng
-            table += '<tbody>';
-            for (var i = 1; i < data.length; i++) {
-                table += '<tr>';
-                for (var j = 0; j < data[i].length; j++) {
-                    if (j === 0) {
-                        table += '<td style="padding: 0; margin: 0;">' +
-                            '<div style="display: flex; align-items: center; justify-content: space-between;">' +
-                            '<div class="white-delete-icon" title="Xoá hàng"></div>' +
-                            '<div class="orange-move-icon-2" title="Di chuyển hàng"></div>' +
-                            '<span style="flex: 1;">' + data[i][j] + '</span>' +
-                            '</div>' +
-                            '</td>';
-                    } else {
-                        table += '<td>' + data[i][j] + '</td>';
-                    }
-                }
-                table += '</tr>';
-            }
-
-            table += '</tbody>';
-            table += '</table>';
-
-            // Hiển thị bảng trong div
-            document.getElementById('lich-truc-cuoi-tuan-view').innerHTML = table;
-
-            const tbody = document.querySelector('#lich-truc-cuoi-tuan-view tbody');
-
-            tbody.querySelectorAll('td').forEach(td => {
-                const text = td.textContent.trim().toLowerCase();
-                if (text.includes("lịch trực")) {
-                    td.closest('tr').classList.add('th-inside-tbody');
-                }
-            });
-
-            tbody.querySelectorAll('td').forEach(td => {
-                const text = td.textContent.trim().toLowerCase();
-                if (text.includes("software support")) {
-                    const trToRemove = td.closest('tr');
-                    if (trToRemove) {
-                        trToRemove.remove();
-                    }
-                }
-            });
-
-            tbody.querySelectorAll('td').forEach(td => {
-                const text = td.textContent.trim();
-                if (text === 'x' || text === 'X') {
-                    td.textContent = '';
-                }
-            });
-
-            tbody.querySelectorAll('tr').forEach(tr => {
-                const firstTd = tr.querySelector('td:first-child');
-                if (!firstTd) return;
-
-                if (firstTd.textContent.trim().toLowerCase().includes('long bui')) {
-                    tr.querySelectorAll('td').forEach(td => {
-                        td.style.backgroundColor = 'orange';
-                    });
-                }
-            });
-
-            document.querySelectorAll('#lich-truc-cuoi-tuan-view .th-inside-tbody').forEach(tr => {
-                const firstTd = tr.querySelector('td:first-child');
-                if (firstTd) {
-                    const deleteIcon = firstTd.querySelector('.white-delete-icon');
-                    if (deleteIcon) deleteIcon.remove();
-
-                    const moveIcon = firstTd.querySelector('.orange-move-icon-2');
-                    if (moveIcon) moveIcon.remove();
-                }
-            });
-
-
-            (function () {
-                const tableElement = document.querySelector('#lich-truc-cuoi-tuan-view table');
-                if (!tableElement) return;
-
-                const thList = tableElement.querySelectorAll('thead th');
-                let columnIndexToRemove = -1;
-
-                thList.forEach((th, index) => {
-                    const span = th.querySelector('span');
-                    if (span) {
-                        const text = span.textContent.trim().toLowerCase();
-                        if (text.includes("tổng")) {
-                            columnIndexToRemove = index;
-                        }
-                    }
-                });
-
-                if (columnIndexToRemove === -1) return;
-
-                thList[columnIndexToRemove].remove();
-
-                const allRows = tableElement.querySelectorAll('tbody tr');
-                allRows.forEach(row => {
-                    const cells = row.querySelectorAll('td');
-                    if (cells[columnIndexToRemove]) {
-                        cells[columnIndexToRemove].remove();
-                    }
-                });
-            })();
-
-            // Thêm chức năng
-            addDeleteIconFunctions();
-            addMoveIconFunctions();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('lich-truc-cuoi-tuan-view').innerHTML = 'Lỗi khi tải dữ liệu.';
+        renderLichTrucSheetSelect();
+        await loadLichTrucBySheetName(currentLichTrucSheetName, {
+            showStatus: false,
+            useRefreshLoader: false
         });
+    } catch (error) {
+        console.error('Error in loadLichTrucCopy:', error);
+        const targetView = document.getElementById('lich-truc-cuoi-tuan-view');
+        if (targetView) {
+            targetView.innerHTML = 'Lỗi khi tải dữ liệu.';
+        }
+    }
 }
 
 
 let currentSortedColumn = -1;
 
 function addDeleteIconFunctions() {
-    // Gắn data-index cho các th
-    document.querySelectorAll('thead th').forEach((th, index) => {
+    // Gắn data-index cho các th trong bảng Lịch trực
+    document.querySelectorAll('#lich-truc-cuoi-tuan-view thead th').forEach((th, index) => {
         th.setAttribute('data-index', index);
     });
 
     // Lưu thứ tự ban đầu của các hàng (chỉ lưu 1 lần)
     const tbody = document.querySelector('#lich-truc-cuoi-tuan-view tbody');
+    if (!tbody) return;
     tbody.querySelectorAll('tr').forEach((tr, index) => {
         if (!tr.dataset.originalIndex) {
             tr.dataset.originalIndex = index;
@@ -3076,7 +3158,7 @@ function addDeleteIconFunctions() {
                 const firstLine = text.split('\n')[0].trim();
 
                 // Lấy giờ bắt đầu
-                const match = firstLine.match(/^(\d{1,2}):(\d{2})(AM|PM)/i);
+                const match = firstLine.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)/i);
                 if (!match) return Infinity;
 
                 let hour = parseInt(match[1], 10);
@@ -3600,7 +3682,7 @@ function convertUrlsToLinks(text) {
 
 
 
-fetchAndDisplayAnnoucements();
+// fetchAndDisplayAnnoucements();
 
 async function fetchAndDisplayAnnoucements() {
     try {

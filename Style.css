@@ -2129,7 +2129,7 @@ tr.dragging td {
 }
 
 #first-body-main-container>.Annoucements-Icon::after {
-    content: "AN";
+    content: "LO3";
 }
 
 #first-body-main-container>.MD-Icon:hover:after {
@@ -2145,7 +2145,7 @@ tr.dragging td {
 }
 
 #first-body-main-container>.Annoucements-Icon:hover:after {
-    content: "Announce-ments";
+    content: "Lịch Onboard 3.0";
 }
 
 #second-body-main-container {
@@ -2960,6 +2960,38 @@ select> :first-child {
     background-color: green;
 }
 
+.gobooking-passcode-btn {
+    min-width: auto;
+    min-height: 3.4rem;
+    height: 3.4rem;
+    padding: 0 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 0.8rem;
+    white-space: nowrap;
+    transform: none;
+    box-shadow: 0.2rem 0.2rem 0 orangered;
+}
+
+.gobooking-passcode-btn:hover {
+    background-color: orangered;
+    color: white;
+}
+
+.takemethere-in-container,
+.takemethere-in-container:hover {
+    background-color: var(--colorblue);
+    color: white;
+    min-width: 4.5rem;
+    min-height: 4.5rem;
+    height: 4.5rem;
+    width: 4.5rem;
+}
+
+.takemethere-in-container:hover {
+    background-color: orangered;
+}
+
 
 #clock-container {
     /* padding: 0.3rem !important; */
@@ -3568,7 +3600,7 @@ select> :first-child {
 .confirm-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.45);
+    background: rgba(0, 0, 0, .45);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -5278,6 +5310,105 @@ select> :first-child {
     color: var(--colorblack);
     z-index: 1;
     font-size: 1.3rem;
+}
+
+.lich-truc-select-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 19rem;
+}
+
+.lich-truc-select-label {
+    font-size: 1.1rem;
+    color: var(--colorblack);
+    background-color: var(--colorwhite);
+    border: 0.2rem solid orangered;
+    border-radius: 0.5rem;
+    padding: 0 0.6rem;
+    position: absolute;
+    top: -0.9rem;
+    left: 0.8rem;
+    z-index: 3;
+    line-height: 1.5rem;
+    pointer-events: none;
+}
+
+.dark-mode .lich-truc-select-label {
+    background-color: #1e1e1e;
+    color: white;
+}
+
+.lich-truc-select-box {
+    position: relative;
+    width: 100%;
+    height: var(--heightOpenButton, 4rem);
+    display: flex;
+    align-items: center;
+    background-color: var(--colorwhite);
+    border: 0.2rem solid var(--colorblue);
+    border-radius: 0.8rem;
+    box-shadow: 0.3rem 0.3rem 0 rgba(0, 0, 0, 0.18);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lich-truc-select-box:hover,
+.lich-truc-select-box:focus-within {
+    border-color: orangered;
+    box-shadow: 0.3rem 0.3rem 0 rgba(255, 69, 0, 0.35);
+}
+
+#sua-ten-sheet {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    padding: 0.4rem 3.6rem 0 1rem;
+    color: var(--colorblack);
+    font-size: 1.35rem;
+    font-weight: bold;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+}
+
+#sua-ten-sheet>option,
+#sua-ten-sheet> :first-child {
+    background-color: var(--colorwhite);
+    color: var(--colorblack);
+    font-weight: 600;
+    text-align: left;
+    padding: 0.5rem 1rem;
+}
+
+.lich-truc-select-arrow {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--colorblue);
+    color: white;
+    border-left: 0.15rem solid var(--colorblue);
+    pointer-events: none;
+    z-index: 1;
+    transition: background-color 0.2s ease;
+}
+
+.lich-truc-select-box:hover .lich-truc-select-arrow,
+.lich-truc-select-box:focus-within .lich-truc-select-arrow {
+    background-color: orangered;
+    border-left-color: orangered;
 }
 
 .New_Input_Container .white-delete-icon {
