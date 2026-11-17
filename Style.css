@@ -1779,9 +1779,83 @@ tr.dragging td {
     height: 80%;
 }
 
-#header-main-container> :nth-child(2) {
-    height: 100%;
-    aspect-ratio: 1;
+#Setting-Header-Container {
+    padding: 0 !important;
+    margin-left: 1rem;
+    flex-shrink: 0;
+}
+
+#website-title-wrap {
+    flex: 1;
+    justify-content: center;
+}
+
+.setting-header-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 1.2rem;
+    border: 0.2rem solid var(--colorblue);
+    background-color: var(--colorwhite);
+    color: var(--colorblack);
+    font-size: 1.4rem;
+    font-weight: bold;
+    box-shadow: 0.3rem 0.3rem 0 orangered;
+    transition: var(--transition-all-500ms);
+    white-space: nowrap;
+}
+
+.setting-header-btn:hover {
+    background-color: var(--colorblue);
+    color: white;
+}
+
+.setting-header-btn svg {
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+}
+
+.setting-dropdown-panel {
+    min-width: 22rem;
+    padding: 1.2rem !important;
+    border: 0.2rem solid var(--colorblue);
+}
+
+.setting-darkmode-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 1rem;
+    border: 0.1rem solid var(--colorblack);
+    border-radius: 1rem;
+    background-color: var(--colorwhite);
+    box-shadow: 0.4rem 0.4rem 0 orangered;
+}
+
+.setting-darkmode-label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: var(--colorlightblue);
+    white-space: nowrap;
+}
+
+.setting-darkmode-label #Sun-Moon_icon_ID {
+    width: 2.2rem;
+    height: 2.2rem;
+    flex-shrink: 0;
+}
+
+.setting-darkmode-row .theme-switch {
+    --toggle-size: 1.15rem;
+    width: auto !important;
+    height: auto !important;
+    flex-shrink: 0;
 }
 
 #header-main-container label:not(#Find-Customers label) {
@@ -2994,13 +3068,15 @@ select> :first-child {
 
 
 #clock-container {
-    /* padding: 0.3rem !important; */
     padding: 0 !important;
-    /* box-sizing: border-box !important; */
+    flex: 1;
+    max-width: 44rem;
+    min-width: 32rem;
+    margin-left: 1.5rem;
 }
 
 .clocks {
-    width: auto;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -3017,14 +3093,17 @@ select> :first-child {
 .houston_card,
 .HCM_card,
 .Victoria_card {
-    width: 12rem;
-    height: 80%;
-    border-radius: 1.5rem;
+    flex: 1;
+    min-width: 15rem;
+    height: 85%;
+    padding: 0.2rem 1rem;
+    border-radius: 1.2rem;
     border: 0.2rem solid var(--colorblack);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 0.15rem;
     color: var(--colorblack);
     background-color: var(--colorwhite);
     text-align: center;
@@ -3033,21 +3112,30 @@ select> :first-child {
     box-sizing: border-box;
 }
 
+.classforclocks .houston_card,
+.classforclocks .HCM_card,
+.classforclocks .Victoria_card {
+    width: 15rem;
+    flex: unset;
+}
+
 .time-text {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
+    line-height: 1.15;
     padding: 0;
     margin: 0;
-    font-weight: 600;
-    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    font-weight: 700;
+    white-space: nowrap;
 }
 
 .day-text,
 .location-text {
     font-size: 1.2rem;
+    line-height: 1.15;
     padding: 0;
     margin: 0;
-    font-weight: 500;
-    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 #Popup_Request_Permission {
