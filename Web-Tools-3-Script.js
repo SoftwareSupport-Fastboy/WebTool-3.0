@@ -2384,14 +2384,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     container.addEventListener("mouseover", function (event) {
-        isOverExcludedElement = event.target.closest(".My_To-Do-List_content, .My_Note_content") !== null;
+        isOverExcludedElement = event.target.closest('.My_To-Do-List_content, .My_Note_content, [name="Check_ID_Admin"]') !== null;
     });
 
     container.addEventListener("mouseout", function (event) {
-        isOverExcludedElement = event.target.closest(".My_To-Do-List_content, .My_Note_content") !== null;
+        isOverExcludedElement = event.target.closest('.My_To-Do-List_content, .My_Note_content, [name="Check_ID_Admin"]') !== null;
     });
 
     document.addEventListener("wheel", function (event) {
+        if (event.target.closest('[name="Check_ID_Admin"]')) return;
         if (isMouseInside && !isOverExcludedElement) {
             event.preventDefault();
             const scrollAmount = event.deltaY > 0 ? 100 : -100;
