@@ -908,6 +908,7 @@ iframe#webtool2 {
     gap: 1rem;
     width: 100%;
     flex-shrink: 0;
+    height: 3rem;
 }
 
 .onboard-subtab-btn {
