@@ -1069,15 +1069,57 @@ function startChecking() {
 
 
 
-// Reload iframe bằng cách gán lại src
-document.getElementById("refresh-onboard").addEventListener("click", function () {
-    document.getElementById('loader-Onboard_container').classList.remove('hidden');
-    let iframe = document.getElementById("iframe-onboard");
-    iframe.src = iframe.src;
-    setTimeout(function () {
-        document.getElementById('loader-Onboard_container').classList.add('hidden');
-        StatusUpdateBox("Lịch Onboard", "Cập nhật thành công", "green");
-    }, 2000);
+const ONBOARD_ACTIVE_SUBTAB_KEY = 'webtool3_onboard_active_subtab';
+let activeOnboardSubtab = localStorage.getItem(ONBOARD_ACTIVE_SUBTAB_KEY) === 'v3' ? 'v3' : 'v2';
+
+function setActiveOnboardSubtab(tab) {
+    activeOnboardSubtab = tab === 'v3' ? 'v3' : 'v2';
+    try {
+        localStorage.setItem(ONBOARD_ACTIVE_SUBTAB_KEY, activeOnboardSubtab);
+    } catch (e) { }
+
+    document.querySelectorAll('#onboard-subtabs-bar .onboard-subtab-btn').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.onboardTab === activeOnboardSubtab);
+    });
+
+    const panelV2 = document.getElementById('onboard-panel-v2');
+    const panelV3 = document.getElementById('onboard-panel-v3');
+    const passcodeBtn = document.getElementById('passcode-gobooking-btn');
+    const takeMeThereBtn = document.getElementById('takemethere-gobooking-btn');
+
+    if (panelV2) panelV2.classList.toggle('DisplayNoneST', activeOnboardSubtab !== 'v2');
+    if (panelV3) panelV3.classList.toggle('DisplayNoneST', activeOnboardSubtab !== 'v3');
+    if (passcodeBtn) passcodeBtn.classList.toggle('DisplayNoneST', activeOnboardSubtab !== 'v3');
+    if (takeMeThereBtn) takeMeThereBtn.classList.toggle('DisplayNoneST', activeOnboardSubtab !== 'v3');
+}
+
+document.querySelectorAll('#onboard-subtabs-bar .onboard-subtab-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        setActiveOnboardSubtab(btn.dataset.onboardTab);
+    });
+});
+setActiveOnboardSubtab(activeOnboardSubtab);
+
+// Reload iframe theo tab con đang mở (Lịch Onboard 2.0 hoặc 3.0)
+document.getElementById("refresh-onboard")?.addEventListener("click", async function () {
+    const loader = document.getElementById('loader-Onboard_container');
+    if (loader) loader.classList.remove('hidden');
+
+    if (activeOnboardSubtab === 'v3') {
+        fetchGoBookingPasscode();
+        await loadGoBookingIframe();
+        setTimeout(function () {
+            if (loader) loader.classList.add('hidden');
+            StatusUpdateBox("Lịch Onboard 3.0", "Cập nhật thành công", "green");
+        }, 1500);
+    } else {
+        let iframe = document.getElementById("iframe-onboard");
+        if (iframe) iframe.src = iframe.src;
+        setTimeout(function () {
+            if (loader) loader.classList.add('hidden');
+            StatusUpdateBox("Lịch Onboard 2.0", "Cập nhật thành công", "green");
+        }, 2000);
+    }
 });
 
 
@@ -1620,18 +1662,6 @@ async function loadGoBookingIframe() {
 
 loadGoBookingIframe();
 fetchGoBookingPasscode();
-
-// Nút refresh Go Booking (thay cho Annoucements cũ)
-document.getElementById("refresh-annoucement-container")?.addEventListener("click", async function () {
-    const loader = document.getElementById('loader-Annoucements_container');
-    if (loader) loader.classList.remove('hidden');
-    fetchGoBookingPasscode();
-    await loadGoBookingIframe();
-    setTimeout(function () {
-        if (loader) loader.classList.add('hidden');
-        StatusUpdateBox("Lịch Onboard 3.0", "Cập nhật thành công", "green");
-    }, 1500);
-});
 
 
 

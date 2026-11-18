@@ -461,21 +461,8 @@
                         </svg>
                     </div>
                     <div class="Onboard-Icon" id="Onboard-calendar_ID" data-target="Onboard_container"
-                        title="Lịch Onboard">
+                        title="LỊCH ONBOARD">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-                            <rect x="2" y="4" width="20" height="18" rx="4" stroke="currentcolor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M8 2V6" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M16 2V6" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M2 10H22" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <div class="Annoucements-Icon" id="announcement_ID" data-target="Annoucements_container"
-                        title="Lịch Onboard 3.0">
-                        <svg class="svg-hover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
                             <rect x="2" y="4" width="20" height="18" rx="4" stroke="currentcolor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M8 2V6" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
@@ -1048,11 +1035,37 @@
 
                 <nav class="right-tools-background">
                     <div class="Tools-Container Container_With_Close_Button DisplayNoneST" id="Onboard_container">
-                        <div class="Onboard_container_subject">
-                            LỊCH ONBOARD
+                        <div class="onboard-subtabs-bar" id="onboard-subtabs-bar">
+                            <button type="button" class="Open-button onboard-subtab-btn active"
+                                data-onboard-tab="v2">Lịch Onboard 2.0</button>
+                            <button type="button" class="Open-button onboard-subtab-btn" data-onboard-tab="v3">Lịch
+                                Onboard 3.0</button>
                         </div>
-                        <div style="position: absolute;top: 1rem;right: 1rem; display: flex;gap: 1.5rem;">
-                            <div id="loader-Onboard_container" class="loader hidden" style="right: 17rem;"></div>
+
+                        <div
+                            style="position: absolute;top: 1rem;right: 1rem; display: flex; align-items: center; gap: 1rem;">
+                            <div id="loader-Onboard_container" class="loader hidden" style="left: -4rem;"></div>
+                            <div id="passcode-gobooking-btn" class="Open-button gobooking-passcode-btn DisplayNoneST"
+                                title="Bấm để copy & cập nhật Passcode">
+                                Passcode: ...
+                            </div>
+                            <a id="takemethere-gobooking-btn"
+                                class="Open-button refresh-in-container takemethere-in-container DisplayNoneST"
+                                href="https://go-booking.gocheckin.net/?token=qJGEcWlaw79d-R8FnHGNXfztfCJh0Ul-ftFmLt7y&id=fastboyorder&domain=https://gci-cloud-do-nyc1-001.gci.fast-boy.net"
+                                target="_blank" rel="noopener noreferrer"
+                                title="Take Me There (Mở Lịch Onboard 3.0 ở tab mới)">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11"
+                                        stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M15 3H21V9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M10 14L21 3" stroke="currentColor" stroke-width="2.2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
                             <div id="refresh-onboard" class="Open-button refresh-in-container" title="Tải lại cửa sổ">
                                 <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -1077,10 +1090,18 @@
                                 </svg>
                             </div>
                         </div>
-                        <iframe id="iframe-onboard" style="width: 100%;height: 100%;border: none;padding: 0;margin: 0;"
-                            src="https://apps.gocheckin.net/pages/login?id=fastboyorder&token=qJGEcWlaw79d-R8FnHGNXfztfCJh0Ul-ftFmLt7y&insight_id=136"
-                            frameborder="0">
-                        </iframe>
+                        <div id="onboard-panel-v2" class="onboard-subtab-panel">
+                            <iframe id="iframe-onboard"
+                                style="width: 100%;height: 100%;border: none;padding: 0;margin: 0;"
+                                src="https://apps.gocheckin.net/pages/login?id=fastboyorder&token=qJGEcWlaw79d-R8FnHGNXfztfCJh0Ul-ftFmLt7y&insight_id=136"
+                                frameborder="0">
+                            </iframe>
+                        </div>
+                        <div id="onboard-panel-v3" class="onboard-subtab-panel DisplayNoneST">
+                            <iframe id="iframe-gobooking"
+                                style="width: 100%;height: 100%;border: none;padding: 0;margin: 0;" frameborder="0">
+                            </iframe>
+                        </div>
                     </div>
                     <div class="Tools-Container Container_With_Close_Button DisplayNoneST"
                         id="lichtruccuoituan_container">
@@ -1795,61 +1816,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="Tools-Container Container_With_Close_Button DisplayNoneST" id="Annoucements_container">
-                        <div class="Annoucements_container_subject">Lịch Onboard 3.0</div>
-                        <div
-                            style="position: absolute;top: 1rem;right: 1rem; display: flex; align-items: center; gap: 1rem;">
-                            <div id="loader-Annoucements_container" class="loader hidden" style="left: -4rem;"></div>
-                            <div id="passcode-gobooking-btn" class="Open-button gobooking-passcode-btn"
-                                title="Bấm để copy & cập nhật Passcode">
-                                Passcode: ...
-                            </div>
-                            <a id="takemethere-gobooking-btn"
-                                class="Open-button refresh-in-container takemethere-in-container"
-                                href="https://go-booking.gocheckin.net/?token=qJGEcWlaw79d-R8FnHGNXfztfCJh0Ul-ftFmLt7y&id=fastboyorder&domain=https://gci-cloud-do-nyc1-001.gci.fast-boy.net"
-                                target="_blank" rel="noopener noreferrer"
-                                title="Take Me There (Mở Lịch Onboard 3.0 ở tab mới)">
-                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11"
-                                        stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M15 3H21V9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M10 14L21 3" stroke="currentColor" stroke-width="2.2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                            <div id="refresh-annoucement-container" class="Open-button refresh-in-container"
-                                title="Tải lại cửa sổ">
-                                <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M22 12C22 18 17.6095 22 12.1935 22C7.79192 22 4.24063 19.6651 3 16"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M2 12C2 6 6.3905 2 11.8065 2C16.2081 2 19.7594 4.33489 21 8"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M6.99999 17L3.00001 16L2 20" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M17 7L21 8L22 4" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </div>
-                            <div class="Open-button close-in-container Close_Function_Button" title="Đóng cửa sổ">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                            </div>
-                        </div>
-                        <iframe id="iframe-gobooking"
-                            style="width: 100%;height: 100%;border: none;padding: 0;margin: 0;" frameborder="0">
-                        </iframe>
                     </div>
                     <div class="Tools-Container Container_With_Close_Button DisplayNoneST" id="BoxEditPersonalSMS">
                         <div class="flex jc-center gap10">
